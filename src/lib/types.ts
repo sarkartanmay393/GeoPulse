@@ -45,3 +45,8 @@ export interface ITableRow {
   overall_score?: number;
   overall_explanation?: string;
 }
+
+export type TFormValues = {
+  country1: string;
+  country2: string;
+}
