@@ -104,9 +104,9 @@ export default function HomePage() {
   };
 
   return (
-    <main className="flex h-screen flex-col items-center justify-start p-6 gap-8 transition">
+    <main className="relative flex h-screen flex-col items-center justify-start p-6 gap-8 transition overflow-hidden">
       <Header />
-      <div className="mt-4 p-4 max-w-2xl h-fit flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 hover:bg-gray-100 transition">
+      <div className="mt-4 p-4 max-w-2xl h-fit flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 transition">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
             <CountrySelectComponent form={form} />
@@ -138,7 +138,10 @@ export default function HomePage() {
           </form>
         </Form>
       </div>
-      <OutputArea output={output} />
+      <div className="p-4 h-full flex flex-col items-center justify-start rounded-sm transition">
+        <h2 className="text-xl font-semibold mb-4">Output</h2>
+        <OutputArea output={output} />
+      </div>
       <TsxBadge />
     </main>
   );
