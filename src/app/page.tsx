@@ -23,7 +23,7 @@ const FormSchema = z.object({
 });
 
 export default function HomePage() {
-  const toast = useToast();
+  const { toast} = useToast();
   const [output, setOutput] = useState<ITableRow | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -38,9 +38,7 @@ export default function HomePage() {
       toast({
         title: "Please select both countries.",
         description: "Please select both countries.",
-        status: "error",
         duration: 2000,
-        isClosable: true,
       });
       return;
     }
@@ -94,9 +92,7 @@ export default function HomePage() {
       toast({
         title: "Error occurred while handling measurement.",
         description: error?.message ?? "---",
-        status: "error",
         duration: 4000,
-        isClosable: true,
       });
     } finally {
       setIsSubmitting(false);
