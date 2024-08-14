@@ -1,6 +1,7 @@
 import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import { Toaster } from "~/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "GeoPulse",
@@ -13,8 +14,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="w-full h-full p-4">
+      <body className="">
         {children}
+        <Toaster />
       </body>
     </html>
   );

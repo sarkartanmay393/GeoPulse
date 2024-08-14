@@ -12,6 +12,10 @@ import { Form } from "~/components/ui/form";
 import Spinner from "~/components/Spinner";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
+import Header from "~/components/Header";
+import { useToast } from "~/components/ui/use-toast";
+import OutputArea from "~/components/OutputArea";
+import TsxBadge from "~/components/TsxBadge";
 
 const FormSchema = z.object({
   country1: z.string().min(1),
@@ -19,6 +23,7 @@ const FormSchema = z.object({
 });
 
 export default function HomePage() {
+  const toast = useToast();
   const [output, setOutput] = useState<ITableRow | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -30,7 +35,13 @@ export default function HomePage() {
     const supabase = createClient();
 
     if (!values.country1 || !values.country2) {
-      alert("Please select both countries.");
+      toast({
+        title: "Please select both countries.",
+        description: "Please select both countries.",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
       return;
     }
 
@@ -80,41 +91,55 @@ export default function HomePage() {
       }
     } catch (error: any) {
       console.error("Error:", error);
-      alert(error?.message ?? "An error occurred");
+      toast({
+        title: "Error occurred while handling measurement.",
+        description: error?.message ?? "---",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="w-full max-w-lg">
-        <h1 className="text-2xl font-bold text-center mb-6">GeoPulse</h1>
+    <main className="flex h-screen flex-col items-center justify-start p-6 gap-8 transition">
+      <Header />
+      <div className="mt-4 p-4 max-w-2xl h-fit flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 hover:bg-gray-100 transition">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
             <CountrySelectComponent form={form} />
-            <Button
-              type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <Spinner />
-              ) : (
-                "Measure"
-              )}
-            </Button>
+            <div className="flex flex-col md:flex-row gap-2 items-center justify-center">
+              <Button
+                size='sm'
+                type="submit"
+                className="w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <Spinner />
+                ) : (
+                  "Measure"
+                )}
+              </Button>
+              <Button
+                size='sm'
+                type="reset"
+                className="w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                onClick={() => {
+                  form.reset();
+                  setOutput(null);
+                }}
+              >
+                Reset
+              </Button>
+            </div>
           </form>
         </Form>
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-4">Output</h2>
-          <div className="bg-gray-800 p-4 rounded-md">
-            <pre className="whitespace-pre-wrap break-words">
-              {output ? JSON.stringify(output, null, 2) : "Results will appear here after submission."}
-            </pre>
-          </div>
-        </div>
       </div>
+      <OutputArea output={output} />
+      <TsxBadge />
     </main>
   );
 }

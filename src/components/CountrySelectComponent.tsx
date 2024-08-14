@@ -21,31 +21,43 @@ import {
 import useGetCountries from "~/hooks/useGetCountries";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "~/components/ui/form";
 import { TCountryOption } from "~/lib/types";
+import { UseFormReturn } from "react-hook-form";
 
+type TProps = {
+    form: UseFormReturn<{
+        country1: string;
+        country2: string;
+    }, any, undefined>;
+}
 
-export default function CountrySelectComponent({ form }: any) {
-    const { formattedCountries: countries } = useGetCountries();
-    const v1 = form.watch("country1");
-    const v2 = form.watch("country2");
-    const filteredCountries = countries.filter((c: TCountryOption) => c.value !== v1 || c.value !== v2);
+export default function CountrySelectComponent({ form }: TProps) {
+    const { formattedCountries } = useGetCountries();
 
     return (
-        <div className="flex gap-4">
-            <Combobox form={form} options={filteredCountries} name="country1" label="Select a country" />
-            <Combobox form={form} options={filteredCountries} name="country2" label="Select another country" />
+        <div className="w-full flex items-center justify-between gap-4 flex-col md:flex-row">
+            <Combobox form={form} options={formattedCountries} name="country1" label="Select a country" />
+            <Combobox form={form} options={formattedCountries} name="country2" label="Select another country" />
         </div>
     );
 }
 
+const getOthersName = (name: string) => {
+    return name === "country1" ? "country2" : "country1";
+}
+
 const Combobox = ({ name, label, options, form }: any) => {
     const [open, setOpen] = React.useState(false);
+    const watchedOtherValue = form.watch(getOthersName(name));
+    const filteredCountries = React.useMemo(() => {
+        return options.filter((c: TCountryOption) => c.value !== watchedOtherValue);
+    }, [watchedOtherValue]);
 
     return (
         <FormField
             control={form.control}
             name={name}
             render={({ field }) => (
-                <FormItem>
+                <FormItem className="w-full">
                     <FormLabel>{label}</FormLabel>
                     <Popover open={open} onOpenChange={setOpen}>
                         <PopoverTrigger asChild>
@@ -55,13 +67,13 @@ const Combobox = ({ name, label, options, form }: any) => {
                                     role="combobox"
                                     aria-expanded={open}
                                     className={cn(
-                                        "w-[200px] justify-between",
+                                        "w-full justify-between",
                                         field.value ? "" : "cursor-not-allowed",
                                         !field.value && "text-muted-foreground"
                                     )}
                                 >
                                     {field.value
-                                        ? options.find((o: any) => o.value === field.value)?.label
+                                        ? filteredCountries.find((o: any) => o.value === field.value)?.label
                                         : "Select country..."}
                                     <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                 </Button>
@@ -73,7 +85,7 @@ const Combobox = ({ name, label, options, form }: any) => {
                                 <CommandList>
                                     <CommandEmpty>No country found.</CommandEmpty>
                                     <CommandGroup>
-                                        {options.map((o) => (
+                                        {filteredCountries.map((o: any) => (
                                             <CommandItem
                                                 key={o.value}
                                                 value={o.value}
