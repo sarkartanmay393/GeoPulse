@@ -32,7 +32,16 @@ export default function HomePage() {
   });
 
   const handleSubmit = async (values: z.infer<typeof FormSchema>) => {
+    'use client';
     const supabase = createClient();
+    if (!supabase) {
+      toast({
+        title: "Failed to connect to Supabase.",
+        description: "Please check your internet connection.",
+        duration: 2000,
+      });
+      return;
+    }
 
     if (!values.country1 || !values.country2) {
       toast({
@@ -42,6 +51,11 @@ export default function HomePage() {
       });
       return;
     }
+
+    toast({
+      description: "Generating data...",
+      duration: 2000,
+    });
 
     setIsSubmitting(true);
     setOutput(null);
