@@ -1,29 +1,35 @@
-# Create T3 App
+# GeoPulse
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+GeoScore provides real-time, ai data-driven insights into the geopolitical relationships between countries. By analyzing diplomatic, economic, military, political, cultural, and historical factors, GeoScore offers a comprehensive view of global interactions, helping users understand and visualize the complexities of international relations. Ideal for geopolitical enthusiasts, policymakers, and financial analysts, GeoScore is your go-to tool for staying informed about the global landscape.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- Get Score based on few pre-defined factors
+- Read how the score is calculated
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+<!-- ## Demo
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+![GeoPulse Demo](demo.gif) -->
 
-## Learn More
+## Installation
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+1. Clone the repository:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+   ```bash
+   git clone https://github.com/sarkartanmay393/GeoPulse.git
+   cd GeoPulse
+   ```
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+2. Install the dependencies:
 
-## How do I deploy this?
+   ```bash
+   npm install
+   ```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any bugs or features.
+
+## Contact
+
+For any inquiries, please contact [sarkartanmay393@pm.me]. 
