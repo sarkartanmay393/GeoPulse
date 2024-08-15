@@ -1,7 +1,9 @@
 import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import { Toaster } from "~/components/ui/toaster"
+import { Toaster } from "~/components/ui/toaster";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "GeoPulse",
@@ -17,6 +19,8 @@ export default function RootLayout({
       <body className="relative scrollbar-thin scroll-smooth">
         {children}
         <Toaster />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
