@@ -1,6 +1,6 @@
 "use client"
 
-import { TrendingUp } from "lucide-react";
+// import { TrendingUp } from "lucide-react";
 import {
     Label,
     PolarGrid,
@@ -9,14 +9,14 @@ import {
     RadialBarChart,
 } from "recharts";
 
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "./ui/card";
+// import {
+//     Card,
+//     CardContent,
+//     CardDescription,
+//     CardFooter,
+//     CardHeader,
+//     CardTitle,
+// } from "./ui/card";
 import { ChartConfig, ChartContainer } from "./ui/chart";
 
 const chartConfig = {

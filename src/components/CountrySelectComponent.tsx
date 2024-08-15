@@ -32,9 +32,10 @@ type TProps = {
 
 export default function CountrySelectComponent({ form }: TProps) {
     const { formattedCountries } = useGetCountries();
+    form.setFocus("country1");
 
     return (
-        <div className="w-full flex items-center justify-between gap-4 flex-col md:flex-row">
+        <div className="flex items-center justify-between gap-4 flex-col md:flex-row">
             <Combobox form={form} options={formattedCountries} name="country1" label="Select a country" />
             <Combobox form={form} options={formattedCountries} name="country2" label="Select another country" />
         </div>
@@ -57,7 +58,7 @@ const Combobox = ({ name, label, options, form }: any) => {
             control={form.control}
             name={name}
             render={({ field }) => (
-                <FormItem className="w-full">
+                <FormItem className="w-[300px]">
                     <FormLabel>{label}</FormLabel>
                     <Popover open={open} onOpenChange={setOpen}>
                         <PopoverTrigger asChild>
@@ -67,7 +68,7 @@ const Combobox = ({ name, label, options, form }: any) => {
                                     role="combobox"
                                     aria-expanded={open}
                                     className={cn(
-                                        "w-full justify-between",
+                                        "w-[300px] justify-between text-wrap",
                                         field.value ? "" : "cursor-not-allowed",
                                         !field.value && "text-muted-foreground"
                                     )}
@@ -79,7 +80,7 @@ const Combobox = ({ name, label, options, form }: any) => {
                                 </Button>
                             </FormControl>
                         </PopoverTrigger>
-                        <PopoverContent className="w-[200px] p-0">
+                        <PopoverContent className="w-[300px] p-0">
                             <Command>
                                 <CommandInput placeholder="Search framework..." className="h-9" />
                                 <CommandList>

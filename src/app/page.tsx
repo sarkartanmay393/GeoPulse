@@ -52,11 +52,6 @@ export default function HomePage() {
       return;
     }
 
-    toast({
-      description: "Generating data...",
-      duration: 2000,
-    });
-
     setIsSubmitting(true);
     setOutput(null);
 
@@ -64,6 +59,11 @@ export default function HomePage() {
     const generatedId = generateCountryPairId(countries[0] ?? '', countries[1] ?? '');
 
     try {
+      const { dismiss } = toast({
+        description: "Fetching cached data...",
+        duration: 1000,
+      });
+
       const { data: existingData, error } = await supabase
         .from('geo_pulses')
         .select('*')
@@ -80,6 +80,13 @@ export default function HomePage() {
       if (existingData && new Date(existingData.last_updated) > oneWeekAgo) {
         setOutput(existingData);
       } else {
+        dismiss();
+        toast({
+          title: "Generating data...",
+          description: "This may take a minute...",
+          duration: 2000,
+        });
+
         const response = await fetch("/api/generate", {
           method: "POST",
           headers: {
@@ -114,43 +121,45 @@ export default function HomePage() {
   };
 
   return (
-    <main className="relative flex h-screen flex-col items-center justify-start p-6 gap-8 transition overflow-hidden">
-      <Header />
-      <div className="mt-4 p-4 max-w-2xl h-fit flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 transition">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
-            <CountrySelectComponent form={form} />
-            <div className="flex flex-col md:flex-row gap-2 items-center justify-center">
-              <Button
-                size='sm'
-                type="submit"
-                className="w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <Spinner />
-                ) : (
-                  "Measure"
-                )}
-              </Button>
-              <Button
-                size='sm'
-                type="reset"
-                className="w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-                onClick={() => {
-                  form.reset();
-                  setOutput(null);
-                }}
-              >
-                Reset
-              </Button>
-            </div>
-          </form>
-        </Form>
-      </div>
-      <div className="p-4 h-full flex flex-col items-center justify-start rounded-sm transition">
-        <h2 className="text-xl font-semibold mb-4">Output</h2>
-        <OutputArea output={output} />
+    <main className="relative flex w-screen h-screen flex-col items-center justify-start p-6 transition overflow-hidden">
+      <div className="max-w-2xl space-y-8 ">
+        <Header />
+        <div className="mt-4 p-4 h-fit flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 transition">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+              <CountrySelectComponent form={form} />
+              <div className="flex flex-col md:flex-row gap-2 items-center justify-center">
+                <Button
+                  size='sm'
+                  type="submit"
+                  className="w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <Spinner />
+                  ) : (
+                    "Measure"
+                  )}
+                </Button>
+                <Button
+                  size='sm'
+                  type="reset"
+                  className="w-[120px] bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                  onClick={() => {
+                    form.reset();
+                    setOutput(null);
+                  }}
+                >
+                  Reset
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </div>
+        <div className="p-4 flex flex-col items-center justify-start rounded-sm transition">
+          <h2 className="text-xl font-semibold mb-4">Output</h2>
+          <OutputArea output={output} />
+        </div>
       </div>
       <TsxBadge />
     </main>

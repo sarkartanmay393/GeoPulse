@@ -38,14 +38,17 @@ export default function OutputArea({ output }: TProps) {
     };
 
     return (
-        <div className="max-w-2xl min-w-xl overflow-y-scroll max-h-96 bg-gray-800 p-4 rounded-md">
-            {Object.keys(Factors).map((factor) => (
+        <div className="w-full max-w-2xl p-8 shadow-sm border-[1px] border-solid border-gray-100 rounded-md">
+            {output ? Object.keys(Factors).map((factor) => (
                 <OutputAccordion
                     key={factor}
                     title={factor}
+                    score={Factors[factor as keyof typeof Factors].score}
                     explanation={Factors[factor as keyof typeof Factors].explanation ?? ""}
                 />
-            ))}
+            )) : <div className="flex flex-col items-center justify-center">
+                <p>No data found.</p>
+                </div>}
         </div>
     );
 }
