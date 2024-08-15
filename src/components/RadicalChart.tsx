@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 // import { TrendingUp } from "lucide-react";
 import {
@@ -33,7 +33,7 @@ type TProps = {
     score?: number;
 };
 
-export function RadicalChart({ score }: TProps) {
+export function RadicalChart({ score = 200 }: TProps) {
     const chartData = [
         { browser: "safari", score: score ?? 200, fill: "var(--color-safari)" },
     ];
@@ -57,7 +57,7 @@ export function RadicalChart({ score }: TProps) {
                     className="first:fill-muted last:fill-background"
                     polarRadius={[86, 74]}
                 />
-                <RadialBar dataKey="visitors" background cornerRadius={10} />
+                <RadialBar dataKey="score" background cornerRadius={10} />
                 <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
                     <Label
                         content={({ viewBox }) => {

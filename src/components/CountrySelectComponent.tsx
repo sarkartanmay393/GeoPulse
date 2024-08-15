@@ -73,7 +73,8 @@ const Combobox = ({ name, label, options, form }: any) => {
                                         !field.value && "text-muted-foreground"
                                     )}
                                 >
-                                    {field.value
+                                   {field.value
+                                        && filteredCountries.find((o: any) => o.value === field.value)?.flag} {field.value
                                         ? filteredCountries.find((o: any) => o.value === field.value)?.label
                                         : "Select country..."}
                                     <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -95,7 +96,7 @@ const Combobox = ({ name, label, options, form }: any) => {
                                                     setOpen(false)
                                                 }}
                                             >
-                                                {o.label}
+                                                {o.flag} {o.label}
                                                 <CheckIcon
                                                     className={cn(
                                                         "ml-auto h-4 w-4",

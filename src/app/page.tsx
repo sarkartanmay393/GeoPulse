@@ -23,7 +23,7 @@ const FormSchema = z.object({
 });
 
 export default function HomePage() {
-  const { toast} = useToast();
+  const { toast } = useToast();
   const [output, setOutput] = useState<ITableRow | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -121,10 +121,10 @@ export default function HomePage() {
   };
 
   return (
-    <main className="relative flex w-screen h-screen flex-col items-center justify-start p-6 transition overflow-hidden">
-      <div className="max-w-2xl space-y-8 ">
+    <main className="flex w-screen flex-col items-center justify-start p-6 transition">
+      <div className="max-w-2xl space-y-8">
         <Header />
-        <div className="mt-4 p-4 h-fit flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 transition">
+        <div className="mt-6 p-4 flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 transition">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
               <CountrySelectComponent form={form} />
