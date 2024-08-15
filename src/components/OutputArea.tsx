@@ -13,7 +13,7 @@ export default function OutputArea({ output }: TProps) {
                 <OutputAccordion output={output} />
              : (
                 <div className="flex flex-col items-center justify-center">
-                    <p>No data found.</p>
+                    <p className="text-sm text-gray-500">Result will appear here.</p>
                 </div>
             )}
         </div>

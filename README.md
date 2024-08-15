@@ -1,5 +1,7 @@
 # GeoPulse
 
+<img src="/public/logo.jpeg" alt="GeoPulse" width="128" height="128">
+
 GeoScore provides real-time, ai data-driven insights into the geopolitical relationships between countries. By analyzing diplomatic, economic, military, political, cultural, and historical factors, GeoScore offers a comprehensive view of global interactions, helping users understand and visualize the complexities of international relations. Ideal for geopolitical enthusiasts, policymakers, and financial analysts, GeoScore is your go-to tool for staying informed about the global landscape.
 
 ## Features
