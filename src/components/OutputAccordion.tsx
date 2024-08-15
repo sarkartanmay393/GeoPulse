@@ -4,7 +4,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "~/components/ui/accordion";
-import { RadicalChart } from "./RadicalChart";
+import CircularPercentage from "./CircularPercentage";
 import { cn } from "~/lib/utils";
 import { ITableRow } from "~/lib/types";
 import {
@@ -14,6 +14,7 @@ import {
     TooltipTrigger,
 } from "~/components/ui/tooltip";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 
 type TProps = {
     output: ITableRow | null;
@@ -58,22 +59,29 @@ export default function OutputAccordion({ output }: TProps) {
         }
     };
 
+    const [accordionValue, setAccordionValue] = useState<string>("Overall Score");
+
     return (
         <TooltipProvider>
-            <Accordion type="single" defaultValue="Overall Score" collapsible className="w-full max-w-2xl space-y-4">
+            <Accordion value={accordionValue} onValueChange={setAccordionValue} type="single" defaultValue="Overall Score" collapsible className="w-full max-w-2xl space-y-4">
                 {Object.keys(Factors).map((factor) => (
-                    <AccordionItem key={factor} value={factor} className="border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 transition">
-                        <AccordionTrigger className="p-4 hover:no-underline flex items-center justify-between gap-2 text-lg font-normal leading-none no-underline">
-                            <h3>{factor}</h3>
-                            <Tooltip disableHoverableContent>
-                                <TooltipTrigger>
-                                    <InfoCircledIcon className="w-3.5 h-3.5 text-gray-400 hover:text-gray-500 transition" />
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{Factors[factor as keyof typeof Factors].info}</p>
-                                </TooltipContent>
-                            </Tooltip>
-                            <RadicalChart score={Factors[factor as keyof typeof Factors].score} />
+                    <AccordionItem key={factor} value={factor} className={cn(
+                        "border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 transition", 
+                        accordionValue === factor ? "bg-gray-50" : ""
+                    )} >
+                        <AccordionTrigger className="p-4 hover:no-underline flex items-center justify-between gap-4 leading-none no-underline">
+                            <div className="w-full flex items-center justify-start gap-2">
+                                <h3 className="text-lg font-medium">{factor}</h3>
+                                <Tooltip disableHoverableContent>
+                                    <TooltipTrigger>
+                                        <InfoCircledIcon className="w-3.5 h-3.5 text-gray-400 hover:text-gray-500 transition" />
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>{Factors[factor as keyof typeof Factors].info}</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </div>
+                            <CircularPercentage percentage={10*(Factors[factor as keyof typeof Factors].score ?? 0)} />
                         </AccordionTrigger>
                         <AccordionContent className="font-[300] text-sm p-4 bg-gray-50">
                             {Factors[factor as keyof typeof Factors].explanation}
