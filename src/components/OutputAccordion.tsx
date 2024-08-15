@@ -15,6 +15,7 @@ import {
 } from "~/components/ui/tooltip";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
+import { RadicalChart } from "./RadicalChart";
 
 type TProps = {
     output: ITableRow | null;
@@ -61,12 +62,21 @@ export default function OutputAccordion({ output }: TProps) {
 
     const [accordionValue, setAccordionValue] = useState<string>("Overall Score");
 
+    const chartData = [
+        { keyFactor: "Diplomatic Relations", score: (output?.diplomatic_relations_score ?? 0) * 10 },
+        { keyFactor: "Economic Ties", score: (output?.economic_ties_score ?? 0) * 10 },
+        { keyFactor: "Military Relations", score: (output?.military_relations_score ?? 0) * 10 },
+        { keyFactor: "Political Alignments", score: (output?.political_alignments_score ?? 0) * 10 },
+        { keyFactor: "Cultural and Social Ties", score: (output?.cultural_social_ties_score ?? 0) * 10 },
+        { keyFactor: "Historical Context", score: (output?.historical_context_score ?? 0) * 10 },
+    ];
+
     return (
         <TooltipProvider>
             <Accordion value={accordionValue} onValueChange={setAccordionValue} type="single" defaultValue="Overall Score" collapsible className="w-full max-w-2xl space-y-4">
                 {Object.keys(Factors).map((factor) => (
                     <AccordionItem key={factor} value={factor} className={cn(
-                        "border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 transition", 
+                        "border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 transition",
                         accordionValue === factor ? "bg-gray-50" : ""
                     )} >
                         <AccordionTrigger className="p-4 hover:no-underline flex items-center justify-between gap-4 leading-none no-underline">
@@ -81,10 +91,11 @@ export default function OutputAccordion({ output }: TProps) {
                                     </TooltipContent>
                                 </Tooltip>
                             </div>
-                            <CircularPercentage percentage={10*(Factors[factor as keyof typeof Factors].score ?? 0)} />
+                            <CircularPercentage percentage={10 * (Factors[factor as keyof typeof Factors].score ?? 0)} />
                         </AccordionTrigger>
-                        <AccordionContent className="font-[300] text-sm p-4 bg-gray-50">
+                        <AccordionContent className="font-[400] text-sm p-4 bg-gray-50 text-gray-600 flex flex-col gap-4">
                             {Factors[factor as keyof typeof Factors].explanation}
+                            {factor === 'Overall Score' ? <RadicalChart chartData={chartData} /> : null}
                         </AccordionContent>
                     </AccordionItem>
                 ))}
