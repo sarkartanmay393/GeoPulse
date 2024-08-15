@@ -73,18 +73,19 @@ export default function OutputAccordion({ output }: TProps) {
 
     return (
         <TooltipProvider>
-            <Accordion value={accordionValue} onValueChange={setAccordionValue} type="single" defaultValue="Overall Score" collapsible className="w-full max-w-2xl space-y-4">
+            <Accordion value={accordionValue} onValueChange={setAccordionValue} type="single" defaultValue="Overall Score" collapsible className="w-full max-w-2xl space-y-2">
                 {Object.keys(Factors).map((factor) => (
                     <AccordionItem key={factor} value={factor} className={cn(
                         "border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 transition",
-                        accordionValue === factor ? "bg-gray-50" : ""
+                        accordionValue === factor ? "bg-gray-50" : "",
+                        'Overall Score' === factor ? "bg-gray-50" : ""
                     )} >
                         <AccordionTrigger className="p-4 hover:no-underline flex items-center justify-between gap-4 leading-none no-underline">
                             <div className="w-full flex items-center justify-start gap-2">
-                                <h3 className="text-lg font-medium">{factor}</h3>
+                                <h3 className="text-[14px] sm:text-lg font-medium">{factor}</h3>
                                 <Tooltip disableHoverableContent>
                                     <TooltipTrigger>
-                                        <InfoCircledIcon className="w-3.5 h-3.5 text-gray-400 hover:text-gray-500 transition" />
+                                        <InfoCircledIcon className="w-4 h-4 text-gray-400 hover:text-gray-500 transition" />
                                     </TooltipTrigger>
                                     <TooltipContent>
                                         <p>{Factors[factor as keyof typeof Factors].info}</p>

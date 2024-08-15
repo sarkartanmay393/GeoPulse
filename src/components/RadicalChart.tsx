@@ -42,15 +42,15 @@ export function RadicalChart({ chartData }: TProps) {
             <CardContent className="pb-0">
                 <ChartContainer
                     config={chartConfig}
-                    className="mx-auto max-h-[250px]"
+                    className="mx-auto w-full max-h-[250px] h-[180px] sm:h-[225px]"
                 >
-                    <RadarChart data={chartData} outerRadius={90}>
+                    <RadarChart data={chartData} outerRadius={90} className="">
                         <ChartTooltip
                             cursor={false}
-                            content={<ChartTooltipContent hideLabel />}
+                            content={<ChartTooltipContent />}
                         />
                         <PolarGrid gridType="circle" />
-                        <PolarAngleAxis dataKey="keyFactor" />
+                        <PolarAngleAxis dataKey="keyFactor" tick={window.innerWidth < 600 ? false : true} />
                         <PolarRadiusAxis className="opacity-35" angle={30} domain={[0, 100]} />
                         <Radar
                             dataKey="score"
@@ -64,8 +64,8 @@ export function RadicalChart({ chartData }: TProps) {
                     </RadarChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col text-sm mt-2">
-                <div className="flex items-center leading-none text-xs text-muted-foreground">
+            <CardFooter className="flex-col text-sm">
+                <div className="flex items-center leading-none text-xs text-muted-foreground pt-2">
                     Data updated every week
                 </div>
             </CardFooter>

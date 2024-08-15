@@ -8,7 +8,7 @@ type TProps = {
 
 export default function OutputArea({ output }: TProps) {
     return (
-        <div className={cn("w-screen max-w-full p-6 shadow-sm border-[1px] border-solid border-gray-100 rounded-md", output && "mb-8")}> 
+        <div className={cn("w-screen max-w-full p-2 sm:p-4 md:p-6 shadow-sm border-[1px] border-solid border-gray-100 rounded-md", output && "mb-8")}> 
             {output ?
                 <OutputAccordion output={output} />
              : (

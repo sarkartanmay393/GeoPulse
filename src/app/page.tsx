@@ -121,8 +121,8 @@ export default function HomePage() {
   };
 
   return (
-    <main className="flex w-screen flex-col items-center justify-start p-6 transition">
-      <div className="max-w-2xl space-y-8">
+    <main className="flex min-h-screen w-screen flex-col items-center justify-start p-6 transition">
+      <div className="max-w-2xl space-y-8 h-full w-full">
         <Header />
         <div className="mt-6 p-4 flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 transition">
           <Form {...form}>
@@ -156,7 +156,7 @@ export default function HomePage() {
             </form>
           </Form>
         </div>
-        <div className="p-4 flex flex-col items-center justify-start rounded-sm transition">
+        <div className="flex flex-col items-center justify-start rounded-sm transition">
           <h2 className="text-xl font-semibold mb-4">Output</h2>
           <OutputArea output={output} />
         </div>
