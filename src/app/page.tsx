@@ -140,6 +140,7 @@ export default function HomePage() {
         report_corrected: false,
       });
       await correctWrongReport(reportId);
+      await handleSubmit(form.getValues());
     } catch (error: any) {
       console.error("Error:", error);
       toast({

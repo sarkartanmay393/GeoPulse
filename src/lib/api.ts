@@ -65,25 +65,32 @@ export async function correctWrongReport(reportId: any) {
         throw new Error('Report already corrected');
     }
 
-    const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            country1: data.country1,
-            country2: data.country2,
-        }),
-    });
+    const { error: deleteError } = await supabase.from('geo_pulses').delete().eq('id', data.pulse_id);
 
-    if (!response.ok) {
-        throw new Error("Failed to generate data");
+    if (deleteError) {
+        console.error('Error deleting row:', deleteError.message);
+        throw new Error('Failed to delete row');
     }
 
-    const generatedData: IGeopoliticalAnalysis = await response.json();
-    const geoPulseTableFormat = geopoliticalAnalysisToTableRow(generatedData, data.pulse_id, [data.country1, data.country2]);
+    // const response = await fetch("/api/generate", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //         country1: data.country1,
+    //         country2: data.country2,
+    //     }),
+    // });
 
-    await insertGeoPulse(geoPulseTableFormat, data.pulse_id, true);
+    // if (!response.ok) {
+    //     throw new Error("Failed to generate data");
+    // }
+
+    // const generatedData: IGeopoliticalAnalysis = await response.json();
+    // const geoPulseTableFormat = geopoliticalAnalysisToTableRow(generatedData, data.pulse_id, [data.country1, data.country2]);
+
+    // await insertGeoPulse(geoPulseTableFormat, data.pulse_id, true);
 
     const { error } = await supabase
         .from('report-wrong-reports')
