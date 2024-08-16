@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { Button } from "../components/ui/button";
-import { IGeopoliticalAnalysis, ITableRow, TFormValues } from "~/lib/types";
+import { IGeopoliticalAnalysis, ITableRow } from "~/lib/types";
 import { geopoliticalAnalysisToTableRow, generateCountryPairId, cn } from "~/lib/utils";
-import { insertGeoPulse, insertWrongReport, correctWrongReport } from "~/lib/api";
+import { insertGeoPulse, insertWrongReport } from "~/lib/api";
 import { createClient } from "~/lib/supabase/client";
 import CountrySelectComponent from "~/components/CountrySelectComponent";
 import { useForm } from "react-hook-form";
@@ -131,14 +131,14 @@ export default function HomePage() {
         description: "Please wait while we process your request...",
         duration: 4000,
       });
-      const { reportId } = await insertWrongReport({
+      await insertWrongReport({
         created_at: new Date().toUTCString(),
         country1: form.getValues("country1"),
         country2: form.getValues("country2"),
         pulse_id: generateCountryPairId(form.getValues("country1") ?? '', form.getValues("country2") ?? ''),
         report_corrected: false,
       });
-      await correctWrongReport(reportId);
+      // await correctWrongReport(reportId);
       // await handleSubmit(form.getValues());
       setOutput(null);
       toast({

@@ -45,62 +45,79 @@ export async function insertWrongReport(row: TWrongReport) {
         throw new Error('Failed to insert row');
     }
 
-    return { reportId: data?.[0]?.id };
-}
-
-export async function correctWrongReport(reportId: any) {
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
-
-    const { data } = await supabase
-        .from('report-wrong-reports')
-        .select('*')
-        .eq('id', reportId).maybeSingle();
-
-    if (!data) {
-        throw new Error('Report not found');
-    }
-
-    if (data.report_corrected) {
-        throw new Error('Report already corrected');
-    }
-
-    const { error: deleteError } = await supabase.from('geo_pulses').delete().eq('id', data.pulse_id);
+    const { error: deleteError } = await supabase.from('geo_pulses').delete().eq('id', row.pulse_id);
 
     if (deleteError) {
         console.error('Error deleting row:', deleteError.message);
         throw new Error('Failed to delete row');
     }
 
-    // const response = await fetch("/api/generate", {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //         country1: data.country1,
-    //         country2: data.country2,
-    //     }),
-    // });
-
-    // if (!response.ok) {
-    //     throw new Error("Failed to generate data");
-    // }
-
-    // const generatedData: IGeopoliticalAnalysis = await response.json();
-    // const geoPulseTableFormat = geopoliticalAnalysisToTableRow(generatedData, data.pulse_id, [data.country1, data.country2]);
-
-    // await insertGeoPulse(geoPulseTableFormat, data.pulse_id, true);
-
-    const { error } = await supabase
+    const { error: reportUpdateError } = await supabase
         .from('report-wrong-reports')
         .update({ report_corrected: true })
-        .eq('id', reportId);
+        .eq('id', data?.[0]?.id);
 
-    if (error) {
-        console.error('Error updating row:', error.message);
+    if (reportUpdateError) {
+        console.error('Error updating row:', reportUpdateError.message);
         throw new Error('Failed to update row');
     }
 
     return true;
 }
+
+// export async function correctWrongReport(reportId: any) {
+//     const cookieStore = cookies();
+//     const supabase = createClient(cookieStore);
+
+//     const { data } = await supabase
+//         .from('report-wrong-reports')
+//         .select('*')
+//         .eq('id', reportId).maybeSingle();
+
+//     if (!data) {
+//         throw new Error('Report not found');
+//     }
+
+//     if (data.report_corrected) {
+//         throw new Error('Report already corrected');
+//     }
+
+//     const { error: deleteError } = await supabase.from('geo_pulses').delete().eq('id', data.pulse_id);
+
+//     if (deleteError) {
+//         console.error('Error deleting row:', deleteError.message);
+//         throw new Error('Failed to delete row');
+//     }
+
+//     // const response = await fetch("/api/generate", {
+//     //     method: "POST",
+//     //     headers: {
+//     //         "Content-Type": "application/json",
+//     //     },
+//     //     body: JSON.stringify({
+//     //         country1: data.country1,
+//     //         country2: data.country2,
+//     //     }),
+//     // });
+
+//     // if (!response.ok) {
+//     //     throw new Error("Failed to generate data");
+//     // }
+
+//     // const generatedData: IGeopoliticalAnalysis = await response.json();
+//     // const geoPulseTableFormat = geopoliticalAnalysisToTableRow(generatedData, data.pulse_id, [data.country1, data.country2]);
+
+//     // await insertGeoPulse(geoPulseTableFormat, data.pulse_id, true);
+
+//     const { error } = await supabase
+//         .from('report-wrong-reports')
+//         .update({ report_corrected: true })
+//         .eq('id', reportId);
+
+//     if (error) {
+//         console.error('Error updating row:', error.message);
+//         throw new Error('Failed to update row');
+//     }
+
+//     return true;
+// }
