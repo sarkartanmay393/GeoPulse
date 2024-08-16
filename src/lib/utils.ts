@@ -75,3 +75,14 @@ export function generateCountryPairId(country1: string, country2: string): strin
 // export function reverseCountryPairId(uniqueId: string): string[] {
 //   return uniqueId.split('_').map(country => country.toUpperCase());
 // }
+
+export function hasMoreThanOneDecimalPlaces(number: number): boolean {
+  const numStr = number.toString();
+  const parts = numStr.split(".");
+
+  if (parts.length === 2 && (parts?.[1]?.length ?? 0) > 1) {
+      return true;
+  }
+
+  return false;
+}

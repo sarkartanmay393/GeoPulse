@@ -83,8 +83,8 @@ export default function HomePage() {
         dismiss();
         toast({
           title: "Generating data...",
-          description: "This may take a minute...",
-          duration: 2000,
+          description: "This may take a minute or two...",
+          duration: 4000,
         });
 
         const response = await fetch("/api/generate", {
