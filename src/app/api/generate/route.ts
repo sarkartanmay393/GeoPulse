@@ -70,8 +70,11 @@ export async function POST(req: Request) {
          - Score: Provide a score out of 100, where 0 indicates a problematic historical relationship and 100 indicates a strong, cooperative history.
          - Explanation: Briefly explain why this score was assigned, citing specific historical events or legacies.
 
-      Overall Geopolitical Relationship Score: Calculate the average score across all six factors and provide a final score out of 100. Summarize the overall state of the relationship, highlighting key strengths and areas of tension.
-      Scoring must be done in a way that is objective and unbiased, and should not be influenced by personal opinions or biases. The score should be based on the analysis provided, and not on any external factors or opinions.
+      Overall Geopolitical Relationship Score: Calculate the average score across all six factors. Ensure that the overall score is consistent with the individual factor scores and reflects the general relationship between the two countries.
+         - Score: Provide a final score out of 100, where 0 indicates a very weak overall relationship and 100 indicates a very strong relationship.
+         - Explanation: Briefly summarize why this score was assigned, ensuring that it is an average and well-balanced reflection of the individual scores provided above.
+
+      Scoring must be objective and based solely on the analysis and data provided, without being influenced by personal opinions or external factors.
     `,
   });
 

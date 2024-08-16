@@ -50,3 +50,12 @@ export type TFormValues = {
   country1: string;
   country2: string;
 }
+
+export type TWrongReport = {
+  id?: string;
+  created_at: string;
+  country1: string;
+  country2: string;
+  pulse_id: string;
+  report_corrected: boolean
+}

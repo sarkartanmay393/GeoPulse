@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { IGeopoliticalAnalysis, ITableRow, TFormValues } from "~/lib/types";
-import { geopoliticalAnalysisToTableRow, generateCountryPairId } from "~/lib/utils";
-import { insertGeoPulse } from "~/lib/api";
+import { geopoliticalAnalysisToTableRow, generateCountryPairId, cn } from "~/lib/utils";
+import { insertGeoPulse, insertWrongReport, correctWrongReport } from "~/lib/api";
 import { createClient } from "~/lib/supabase/client";
 import CountrySelectComponent from "~/components/CountrySelectComponent";
 import { useForm } from "react-hook-form";
@@ -16,6 +16,8 @@ import Header from "~/components/Header";
 import { useToast } from "~/components/ui/use-toast";
 import OutputArea from "~/components/OutputArea";
 import TsxBadge from "~/components/TsxBadge";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { RocketIcon } from "@radix-ui/react-icons";
 
 const FormSchema = z.object({
   country1: z.string().min(1),
@@ -26,6 +28,7 @@ export default function HomePage() {
   const { toast } = useToast();
   const [output, setOutput] = useState<ITableRow | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isReporting, setIsReporting] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: { country1: "", country2: "" }
@@ -120,6 +123,35 @@ export default function HomePage() {
     }
   };
 
+  const handleReport = async () => {
+    try {
+      setIsReporting(true);
+      setOutput(null);
+      toast({
+        title: "Reporting a wrong score...",
+        description: "Please wait while we process your request...",
+        duration: 4000,
+      });
+      const { reportId } = await insertWrongReport({
+        created_at: new Date().toUTCString(),
+        country1: form.getValues("country1"),
+        country2: form.getValues("country2"),
+        pulse_id: generateCountryPairId(form.getValues("country1") ?? '', form.getValues("country2") ?? ''),
+        report_corrected: false,
+      });
+      await correctWrongReport(reportId);
+    } catch (error: any) {
+      console.error("Error:", error);
+      toast({
+        title: "Error occurred while reporting.",
+        description: error?.message ?? "---",
+        duration: 2000,
+      });
+    } finally {
+      setIsReporting(false);
+    }
+  };
+
   return (
     <main className="flex min-h-screen w-screen flex-col items-center justify-start p-6 transition">
       <div className="max-w-2xl space-y-8 h-full w-full">
@@ -128,7 +160,7 @@ export default function HomePage() {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
               <CountrySelectComponent form={form} />
-              <div className="flex flex-col md:flex-row gap-2 items-center justify-center">
+              <div className="flex flex-col md:flex-row gap-2 items-center justify-center transition">
                 <Button
                   size='sm'
                   type="submit"
@@ -158,6 +190,26 @@ export default function HomePage() {
         </div>
         <div className="flex flex-col items-center justify-start rounded-sm transition">
           <h2 className="text-xl font-semibold mb-4">Output</h2>
+          <Alert className={output ? "mb-4" : "hidden"}>
+            <RocketIcon className="h-4 w-4" />
+            <AlertTitle>Heads up!</AlertTitle>
+            <AlertDescription className="flex gap-2 justify-between items-center">
+              <p className="text-sm w-[70%]">We noticed few mistake in the data. <span className="font-medium">If it seems wrong to you</span>, Please report those mistakes to us.</p>
+              <Button
+                  size='sm'
+                  type="button"
+                  disabled={isReporting}
+                  className={cn("bg-red-500 text-white py-2 rounded-md hover:bg-red-200 transition")}
+                  onClick={handleReport}
+                >
+                  {isReporting ? (
+                    <Spinner />
+                  ) : (
+                    "Report Wrong Score"
+                  )}
+                </Button>
+            </AlertDescription>
+          </Alert>
           <OutputArea output={output} />
         </div>
       </div>
