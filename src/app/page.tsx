@@ -126,7 +126,6 @@ export default function HomePage() {
   const handleReport = async () => {
     try {
       setIsReporting(true);
-      setOutput(null);
       toast({
         title: "Reporting a wrong score...",
         description: "Please wait while we process your request...",
@@ -140,7 +139,13 @@ export default function HomePage() {
         report_corrected: false,
       });
       await correctWrongReport(reportId);
-      await handleSubmit(form.getValues());
+      // await handleSubmit(form.getValues());
+      setOutput(null);
+      toast({
+        title: "Reported!",
+        description: "Thank you for reporting! Now Press Measure to see the generate new data.",
+        duration: 3000,
+      });
     } catch (error: any) {
       console.error("Error:", error);
       toast({
