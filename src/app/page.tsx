@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { IGeopoliticalAnalysis, ITableRow } from "~/lib/types";
 import { geopoliticalAnalysisToTableRow, generateCountryPairId, cn } from "~/lib/utils";
-import { insertGeoPulse, insertWrongReport } from "~/lib/api";
+import { insertGeoPulse } from "~/lib/api";
+import { insertWrongReport } from "~/lib/clientApi";
 import { createClient } from "~/lib/supabase/client";
 import CountrySelectComponent from "~/components/CountrySelectComponent";
 import { useForm } from "react-hook-form";
@@ -143,9 +144,10 @@ export default function HomePage() {
       setOutput(null);
       toast({
         title: "Reported!",
-        description: "Thank you for reporting! Now Press Measure to see the generate new data.",
+        description: "Thank you for reporting!",
         duration: 3000,
       });
+      document.getElementById("measure-button")?.click();
     } catch (error: any) {
       console.error("Error:", error);
       toast({
@@ -169,6 +171,7 @@ export default function HomePage() {
               <div className="flex flex-col md:flex-row gap-2 items-center justify-center transition">
                 <Button
                   size='sm'
+                  id="measure-button"
                   type="submit"
                   className="w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
                   disabled={isSubmitting}
