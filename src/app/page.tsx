@@ -166,6 +166,7 @@ export default function HomePage() {
       showProgress: true,
       steps: [
         { element: '#header', popover: { title: 'Welcome to GeoPulse', description: 'This tour will guide you through the app.' } },
+        { element: '#productHuntBadge', popover: { title: 'We are launched ', description: 'You can visit our product hunt page and upvote us.' } },
         { element: '#tour_step_1', popover: { title: `An example won't hurt` , description: 'Lets start with a asian pair.' } },
         {
           element: '#tour_step_2', popover: {
@@ -198,10 +199,8 @@ export default function HomePage() {
           element: '#tour_step_4', popover: {
             title: 'Report will be shown here', description: 'Please wait while we process your request...',
             onNextClick: () => {
-              setTimeout(() => {
-                driverObj.moveNext();
-                localStorage.setItem("firstTimers", "false");
-              }, 1000);
+              driverObj.moveNext();
+              localStorage.setItem("firstTimers", "false");
             },
           }
         },
