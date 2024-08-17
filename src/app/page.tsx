@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { IGeopoliticalAnalysis, ITableRow } from "~/lib/types";
 import { geopoliticalAnalysisToTableRow, generateCountryPairId, cn } from "~/lib/utils";
@@ -19,6 +19,8 @@ import OutputArea from "~/components/OutputArea";
 import TsxBadge from "~/components/TsxBadge";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { RocketIcon } from "@radix-ui/react-icons";
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 
 const FormSchema = z.object({
   country1: z.string().min(1),
@@ -139,8 +141,6 @@ export default function HomePage() {
         pulse_id: generateCountryPairId(form.getValues("country1") ?? '', form.getValues("country2") ?? ''),
         report_corrected: false,
       });
-      // await correctWrongReport(reportId);
-      // await handleSubmit(form.getValues());
       setOutput(null);
       toast({
         title: "Reported!",
@@ -160,11 +160,72 @@ export default function HomePage() {
     }
   };
 
+  const startTour = async () => {
+    const driverObj = driver({
+      animate: true,
+      showProgress: true,
+      steps: [
+        { element: '#header', popover: { title: 'Welcome to GeoPulse', description: 'This tour will guide you through the app.' } },
+        { element: '#tour_step_1', popover: { title: `An example won't hurt` , description: 'Lets start with a asian pair.' } },
+        {
+          element: '#tour_step_2', popover: {
+            title: 'Select a country', description: 'Select first country to compare.',
+            onNextClick: () => {
+              form.setValue("country1", "India");
+              driverObj.moveNext();
+            },
+          }
+        },
+        {
+          element: '#tour_step_3', popover: {
+            title: 'Select another country', description: 'Select second country to compare.',
+            onNextClick: () => {
+              form.setValue("country2", "China");
+              driverObj.moveNext();
+            },
+          }
+        },
+        {
+          element: '#measure-button', popover: {
+            title: 'Measure', description: 'Click the "Measure" button to get the score.',
+            onNextClick: () => {
+              document.getElementById("measure-button")?.click();
+              driverObj.moveNext();
+            },
+          }
+        },
+        {
+          element: '#tour_step_4', popover: {
+            title: 'Report will be shown here', description: 'Please wait while we process your request...',
+            onNextClick: () => {
+              setTimeout(() => {
+                driverObj.moveNext();
+                localStorage.setItem("firstTimers", "false");
+              }, 1000);
+            },
+          }
+        },
+      ],
+      onCloseClick: () => {
+        localStorage.setItem("firstTimers", "false");
+      }
+    });
+
+    driverObj.drive();
+  }
+
+  useEffect(() => {
+    const firstTimers = localStorage.getItem("firstTimers");
+    if (!firstTimers) {
+      startTour();
+    }
+  }, []);
+
   return (
     <main className="flex min-h-screen w-screen flex-col items-center justify-start p-6 transition">
       <div className="max-w-2xl space-y-8 h-full w-full">
         <Header />
-        <div className="mt-6 p-4 flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 transition">
+        <div id="tour_step_1" className="mt-6 p-4 flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 transition">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
               <CountrySelectComponent form={form} />
@@ -198,25 +259,25 @@ export default function HomePage() {
           </Form>
         </div>
         <div className="flex flex-col items-center justify-start rounded-sm transition">
-          <h2 className="text-xl font-semibold mb-4">Output</h2>
+          <h2 id="tour_step_4" className="text-xl font-semibold mb-4">Output</h2>
           <Alert className={output ? "mb-4" : "hidden"}>
             <RocketIcon className="h-4 w-4" />
             <AlertTitle>Heads up!</AlertTitle>
             <AlertDescription className="flex gap-2 justify-between items-center">
               <p className="text-sm w-[70%]">We noticed few mistake in the data. <span className="font-medium">If it seems wrong to you</span>, Please report those mistakes to us.</p>
               <Button
-                  size='sm'
-                  type="button"
-                  disabled={isReporting}
-                  className={cn("bg-red-500 text-white py-2 rounded-md hover:bg-red-200 transition")}
-                  onClick={handleReport}
-                >
-                  {isReporting ? (
-                    <Spinner />
-                  ) : (
-                    "Report Wrong Score"
-                  )}
-                </Button>
+                size='sm'
+                type="button"
+                disabled={isReporting}
+                className={cn("bg-red-500 text-white py-2 rounded-md hover:bg-red-200 transition")}
+                onClick={handleReport}
+              >
+                {isReporting ? (
+                  <Spinner />
+                ) : (
+                  "Report Wrong Score"
+                )}
+              </Button>
             </AlertDescription>
           </Alert>
           <OutputArea output={output} />

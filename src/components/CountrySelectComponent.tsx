@@ -64,6 +64,7 @@ const Combobox = ({ name, label, options, form }: any) => {
                         <PopoverTrigger asChild>
                             <FormControl>
                                 <Button
+                                    id={name === "country1" ? "tour_step_2" : "tour_step_3"}
                                     variant="outline"
                                     role="combobox"
                                     aria-expanded={open}
