@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { IGeopoliticalAnalysis, ITableRow } from "~/lib/types";
-import { geopoliticalAnalysisToTableRow, generateCountryPairId, cn } from "~/lib/utils";
+import { geopoliticalAnalysisToTableRow, generateCountryPairId } from "~/lib/utils";
 import { insertGeoPulse } from "~/lib/api";
 import { insertWrongReport } from "~/lib/clientApi";
 import { createClient } from "~/lib/supabase/client";
@@ -17,8 +17,8 @@ import Header from "~/components/Header";
 import { useToast } from "~/components/ui/use-toast";
 import OutputArea from "~/components/OutputArea";
 import TsxBadge from "~/components/TsxBadge";
-import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
-import { RocketIcon } from "@radix-ui/react-icons";
+import FeedbackCard from "~/components/FeedbackCard";
+import ReportCard from "~/components/ReportCard";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 
@@ -205,6 +205,9 @@ export default function HomePage() {
           }
         },
       ],
+      onDestroyed: () => {
+        localStorage.setItem("firstTimers", "false");
+      },
       onCloseClick: () => {
         localStorage.setItem("firstTimers", "false");
       }
@@ -260,26 +263,8 @@ export default function HomePage() {
         <div className="flex flex-col items-center justify-start rounded-sm transition">
           <h2 id="tour_step_4" className="text-xl font-semibold mb-4">Output</h2>
           <OutputArea output={output} />
-          <Alert className={output ? "mb-4" : "hidden"}>
-            <RocketIcon className="h-4 w-4" />
-            <AlertTitle>Heads up!</AlertTitle>
-            <AlertDescription className="flex gap-2 justify-between items-center">
-              <p className="text-sm w-[70%]">We noticed few mistake in the data. <span className="font-medium">If it seems wrong to you</span>, Please report those mistakes to us.</p>
-              <Button
-                size='sm'
-                type="button"
-                disabled={isReporting}
-                className={cn("bg-red-500 text-white py-2 rounded-md hover:bg-red-200 transition")}
-                onClick={handleReport}
-              >
-                {isReporting ? (
-                  <Spinner />
-                ) : (
-                  "Report Wrong Score"
-                )}
-              </Button>
-            </AlertDescription>
-          </Alert>
+          <ReportCard output={output} isReporting={isReporting} handleReport={handleReport} />
+          <FeedbackCard />
         </div>
       </div>
       <TsxBadge />
