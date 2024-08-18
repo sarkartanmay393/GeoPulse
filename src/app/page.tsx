@@ -1,13 +1,9 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { IGeopoliticalAnalysis, ITableRow } from "~/lib/types";
-import {
-  geopoliticalAnalysisToTableRow,
-  generateCountryPairId,
-  cn,
-} from "~/lib/utils";
+import { geopoliticalAnalysisToTableRow, generateCountryPairId, cn } from "~/lib/utils";
 import { insertGeoPulse } from "~/lib/api";
 import { insertWrongReport } from "~/lib/clientApi";
 import { createClient } from "~/lib/supabase/client";
@@ -16,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { Form } from "~/components/ui/form";
 import Spinner from "~/components/Spinner";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod"
 import Header from "~/components/Header";
 import { useToast } from "~/components/ui/use-toast";
 import OutputArea from "~/components/OutputArea";
@@ -38,11 +34,11 @@ export default function HomePage() {
   const [isReporting, setIsReporting] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: { country1: "", country2: "" },
+    defaultValues: { country1: "", country2: "" }
   });
 
   const handleSubmit = async (values: z.infer<typeof FormSchema>) => {
-    "use client";
+    'use client';
     const supabase = createClient();
     if (!supabase) {
       toast({
@@ -66,10 +62,7 @@ export default function HomePage() {
     setOutput(null);
 
     const countries = [values.country1, values.country2].sort();
-    const generatedId = generateCountryPairId(
-      countries[0] ?? "",
-      countries[1] ?? "",
-    );
+    const generatedId = generateCountryPairId(countries[0] ?? '', countries[1] ?? '');
 
     try {
       const { dismiss } = toast({
@@ -78,15 +71,13 @@ export default function HomePage() {
       });
 
       const { data: existingData, error } = await supabase
-        .from("geo_pulses")
-        .select("*")
-        .eq("id", generatedId)
+        .from('geo_pulses')
+        .select('*')
+        .eq('id', generatedId)
         .maybeSingle();
 
       if (error) {
-        throw new Error(
-          error?.message ?? "Failed to fetch data from the database",
-        );
+        throw new Error(error?.message ?? "Failed to fetch data from the database");
       }
 
       const oneWeekAgo = new Date();
@@ -118,18 +109,10 @@ export default function HomePage() {
         }
 
         const generatedData: IGeopoliticalAnalysis = await response.json();
-        const geoPulseTableFormat = geopoliticalAnalysisToTableRow(
-          generatedData,
-          generatedId,
-          countries,
-        );
+        const geoPulseTableFormat = geopoliticalAnalysisToTableRow(generatedData, generatedId, countries);
 
         setOutput(geoPulseTableFormat);
-        await insertGeoPulse(
-          geoPulseTableFormat,
-          generatedId,
-          Object.keys(existingData ?? {}).length > 0 ? true : false,
-        );
+        await insertGeoPulse(geoPulseTableFormat, generatedId, Object.keys(existingData ?? {}).length > 0 ? true : false);
       }
     } catch (error: any) {
       console.error("Error:", error);
@@ -155,10 +138,7 @@ export default function HomePage() {
         created_at: new Date().toUTCString(),
         country1: form.getValues("country1"),
         country2: form.getValues("country2"),
-        pulse_id: generateCountryPairId(
-          form.getValues("country1") ?? "",
-          form.getValues("country2") ?? "",
-        ),
+        pulse_id: generateCountryPairId(form.getValues("country1") ?? '', form.getValues("country2") ?? ''),
         report_corrected: false,
       });
       setOutput(null);
@@ -185,79 +165,53 @@ export default function HomePage() {
       animate: true,
       showProgress: true,
       steps: [
+        { element: '#header', popover: { title: 'Welcome to GeoPulse', description: 'This tour will guide you through the app.' } },
+        { element: '#productHuntBadge', popover: { title: 'We are launched ', description: 'You can visit our product hunt page and upvote us.' } },
+        { element: '#tour_step_1', popover: { title: `An example won't hurt` , description: 'Lets start with a asian pair.' } },
         {
-          element: "#header",
-          popover: {
-            title: "Welcome to GeoPulse",
-            description: "This tour will guide you through the app.",
-          },
-        },
-        {
-          element: "#productHuntBadge",
-          popover: {
-            title: "We are launched ",
-            description: "You can visit our product hunt page and upvote us.",
-          },
-        },
-        {
-          element: "#tour_step_1",
-          popover: {
-            title: `An example won't hurt`,
-            description: "Lets start with a asian pair.",
-          },
-        },
-        {
-          element: "#tour_step_2",
-          popover: {
-            title: "Select a country",
-            description: "Select first country to compare.",
+          element: '#tour_step_2', popover: {
+            title: 'Select a country', description: 'Select first country to compare.',
             onNextClick: () => {
               form.setValue("country1", "India");
               driverObj.moveNext();
             },
-          },
+          }
         },
         {
-          element: "#tour_step_3",
-          popover: {
-            title: "Select another country",
-            description: "Select second country to compare.",
+          element: '#tour_step_3', popover: {
+            title: 'Select another country', description: 'Select second country to compare.',
             onNextClick: () => {
               form.setValue("country2", "China");
               driverObj.moveNext();
             },
-          },
+          }
         },
         {
-          element: "#measure-button",
-          popover: {
-            title: "Measure",
-            description: 'Click the "Measure" button to get the score.',
+          element: '#measure-button', popover: {
+            title: 'Measure', description: 'Click the "Measure" button to get the score.',
             onNextClick: () => {
               document.getElementById("measure-button")?.click();
               driverObj.moveNext();
             },
-          },
+          }
         },
         {
-          element: "#tour_step_4",
-          popover: {
-            title: "Report will be shown here",
-            description: "Please wait while we process your request...",
+          element: '#tour_step_4', popover: {
+            title: 'Report will be shown here', description: 'Please wait while we process your request...',
             onNextClick: () => {
               driverObj.moveNext();
               localStorage.setItem("firstTimers", "false");
             },
-          },
+          }
         },
       ],
       onCloseClick: () => {
         localStorage.setItem("firstTimers", "false");
-      },
+      }
     });
 
     driverObj.drive();
-  };
+  }
 
   useEffect(() => {
     const firstTimers = localStorage.getItem("firstTimers");
@@ -268,32 +222,30 @@ export default function HomePage() {
 
   return (
     <main className="flex min-h-screen w-screen flex-col items-center justify-start p-6 transition">
-      <div className="h-full w-full max-w-2xl space-y-8">
+      <div className="max-w-2xl space-y-8 h-full w-full">
         <Header />
-        <div
-          id="tour_step_1"
-          className="mt-6 flex flex-col items-center justify-start rounded-md border-[1px] border-solid border-gray-100 bg-gray-50 p-4 shadow-md transition"
-        >
+        <div id="tour_step_1" className="mt-6 p-4 flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 transition">
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(handleSubmit)}
-              className="space-y-8"
-            >
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
               <CountrySelectComponent form={form} />
-              <div className="flex flex-col items-center justify-center gap-2 transition md:flex-row">
+              <div className="flex flex-col md:flex-row gap-2 items-center justify-center transition">
                 <Button
-                  size="sm"
+                  size='sm'
                   id="measure-button"
                   type="submit"
-                  className="w-[120px] rounded-md bg-blue-500 py-2 text-white transition hover:bg-blue-600"
+                  className="w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? <Spinner /> : "Measure"}
+                  {isSubmitting ? (
+                    <Spinner />
+                  ) : (
+                    "Measure"
+                  )}
                 </Button>
                 <Button
-                  size="sm"
+                  size='sm'
                   type="reset"
-                  className="w-[120px] rounded-md bg-blue-400 py-2 text-white transition hover:bg-blue-600"
+                  className="w-[120px] bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 transition"
                   onClick={() => {
                     form.reset();
                     setOutput(null);
@@ -306,29 +258,25 @@ export default function HomePage() {
           </Form>
         </div>
         <div className="flex flex-col items-center justify-start rounded-sm transition">
-          <h2 id="tour_step_4" className="mb-4 text-xl font-semibold">
-            Output
-          </h2>
+          <h2 id="tour_step_4" className="text-xl font-semibold mb-4">Output</h2>
           <OutputArea output={output} />
           <Alert className={output ? "mb-4" : "hidden"}>
             <RocketIcon className="h-4 w-4" />
             <AlertTitle>Heads up!</AlertTitle>
-            <AlertDescription className="flex items-center justify-between gap-2">
-              <p className="w-[70%] text-sm">
-                We noticed few mistake in the data.{" "}
-                <span className="font-medium">If it seems wrong to you</span>,
-                Please report those mistakes to us.
-              </p>
+            <AlertDescription className="flex gap-2 justify-between items-center">
+              <p className="text-sm w-[70%]">We noticed few mistake in the data. <span className="font-medium">If it seems wrong to you</span>, Please report those mistakes to us.</p>
               <Button
-                size="sm"
+                size='sm'
                 type="button"
                 disabled={isReporting}
-                className={cn(
-                  "rounded-md bg-red-500 py-2 text-white transition hover:bg-red-200",
-                )}
+                className={cn("bg-red-500 text-white py-2 rounded-md hover:bg-red-200 transition")}
                 onClick={handleReport}
               >
-                {isReporting ? <Spinner /> : "Report Wrong Score"}
+                {isReporting ? (
+                  <Spinner />
+                ) : (
+                  "Report Wrong Score"
+                )}
               </Button>
             </AlertDescription>
           </Alert>
