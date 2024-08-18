@@ -33,3 +33,17 @@ export async function insertWrongReport(row: TWrongReport) {
 
     return true;
 }
+
+export async function insertFeedback(row: any) {
+    const supabase = createClient();
+    const { error } = await supabase
+        .from('feedback_table')
+        .insert([row]);
+
+    if (error) {
+        console.error('Error inserting row:', error.message);
+        throw new Error('Failed to insert row');
+    }
+
+    return true;
+}
