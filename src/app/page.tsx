@@ -259,6 +259,7 @@ export default function HomePage() {
         </div>
         <div className="flex flex-col items-center justify-start rounded-sm transition">
           <h2 id="tour_step_4" className="text-xl font-semibold mb-4">Output</h2>
+          <OutputArea output={output} />
           <Alert className={output ? "mb-4" : "hidden"}>
             <RocketIcon className="h-4 w-4" />
             <AlertTitle>Heads up!</AlertTitle>
@@ -279,7 +280,6 @@ export default function HomePage() {
               </Button>
             </AlertDescription>
           </Alert>
-          <OutputArea output={output} />
         </div>
       </div>
       <TsxBadge />
