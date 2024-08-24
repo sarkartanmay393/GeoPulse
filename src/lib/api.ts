@@ -31,3 +31,13 @@ export async function insertGeoPulse(row: ITableRow, id: string = "", update: bo
 
     return true;
 }
+
+export async function fetchWikipediaHtml (countries: string[]) {
+    const url = `https://en.wikipedia.org/w/rest.php/v1/page/${countries[0]}%E2%80%93${countries[1]}_relations/html`;
+    const response = await fetch(url);
+    if (response.status !== 200) {
+        return '';
+    }
+    const html = await response.text();
+    return html;
+}

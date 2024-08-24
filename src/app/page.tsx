@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { IGeopoliticalAnalysis, ITableRow } from "~/lib/types";
-import { geopoliticalAnalysisToTableRow, generateCountryPairId } from "~/lib/utils";
+import { geopoliticalAnalysisToTableRow, generateCountryPairId, getWikipediaUrl } from "~/lib/utils";
 import { insertGeoPulse } from "~/lib/api";
 import { insertWrongReport } from "~/lib/clientApi";
 import { createClient } from "~/lib/supabase/client";
@@ -21,6 +21,7 @@ import FeedbackCard from "~/components/FeedbackCard";
 import ReportCard from "~/components/ReportCard";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
+import Link from "next/link";
 
 const FormSchema = z.object({
   country1: z.string().min(1),
@@ -81,7 +82,7 @@ export default function HomePage() {
       }
 
       const oneWeekAgo = new Date();
-      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 14);
 
       if (existingData && new Date(existingData.last_updated) > oneWeekAgo) {
         setOutput(existingData);
@@ -167,7 +168,7 @@ export default function HomePage() {
       steps: [
         { element: '#header', popover: { title: 'Welcome to GeoPulse', description: 'This tour will guide you through the app.' } },
         { element: '#productHuntBadge', popover: { title: 'We are launched ', description: 'You can visit our product hunt page and upvote us.' } },
-        { element: '#tour_step_1', popover: { title: `An example won't hurt` , description: 'Lets start with a asian pair.' } },
+        { element: '#tour_step_1', popover: { title: `An example won't hurt`, description: 'Lets start with a asian pair.' } },
         {
           element: '#tour_step_2', popover: {
             title: 'Select a country', description: 'Select first country to compare.',
@@ -191,6 +192,14 @@ export default function HomePage() {
             title: 'Measure', description: 'Click the "Measure" button to get the score.',
             onNextClick: () => {
               document.getElementById("measure-button")?.click();
+              driverObj.moveNext();
+            },
+          }
+        },
+        {
+          element: '#pediaLink', popover: {
+            title: 'Click here to see the Wikipedia page', description: 'We try to use the latest Wikipedia data to generate the score.',
+            onNextClick: () => {
               driverObj.moveNext();
             },
           }
@@ -222,6 +231,13 @@ export default function HomePage() {
       startTour();
     }
   }, []);
+
+  const [showWikipediaUrl, setShowWikipediaUrl] = useState(false);
+  useEffect(() => {
+    if (form.getValues("country1") && form.getValues("country2")) {
+      setShowWikipediaUrl(true);
+    }
+  }, [form.getValues("country1"), form.getValues("country2")]);
 
   return (
     <main className="flex min-h-screen w-screen flex-col items-center justify-start p-6 transition">
@@ -267,7 +283,13 @@ export default function HomePage() {
           <FeedbackCard />
         </div>
       </div>
+      <div className="mt-4 flex flex-col items-center justify-center gap-2 rounded-md bg-gray-50 px-4 py-1 transition mb-[-8px]">
+        <span className="text-xs font-normal text-gray-500">For more accurate results, if possible we are adding the latest 
+          {showWikipediaUrl ? <Link id="pediaLink" className="font-semibold" href={getWikipediaUrl(Object.values(form.getValues()))}> Wikipedia </Link> : ' Wikipedia '}
+        data.</span>
+      </div>
       <TsxBadge />
     </main>
   );
 }
+

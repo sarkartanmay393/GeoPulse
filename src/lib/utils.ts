@@ -86,3 +86,14 @@ export function hasMoreThanOneDecimalPlaces(number: number): boolean {
 
   return false;
 }
+
+export function extractTextFromHtml(html: string) {
+  const cheerio = require('cheerio');
+  const $ = cheerio.load(html);
+  $('style, script').remove();
+  return $.text();
+}
+
+export function getWikipediaUrl(countries: string[]) {
+  return `https://en.wikipedia.org/w/rest.php/v1/page/${countries[0]}%E2%80%93${countries[1]}_relations/html`;
+}

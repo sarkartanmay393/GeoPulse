@@ -18,7 +18,7 @@ const ReportCard = ({ output, isReporting, handleReport }: ReportCardProps) => {
   return (
     <Alert className={output ? "mb-4" : "hidden"}>
     <RocketIcon className="h-4 w-4" />
-    <AlertTitle>Heads up!</AlertTitle>
+    <AlertTitle>Mistake?</AlertTitle>
     <AlertDescription className="flex gap-2 justify-between items-center">
       <p className="text-sm w-[70%]">We noticed few mistake in the data. <span className="font-medium">If it seems wrong to you</span>, Please report those mistakes to us.</p>
       <Button

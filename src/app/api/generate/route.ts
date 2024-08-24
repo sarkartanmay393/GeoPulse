@@ -1,6 +1,8 @@
 import { openai } from '@ai-sdk/openai';
 import { generateObject } from 'ai';
 import { z } from 'zod';
+import { fetchWikipediaHtml } from '~/lib/api';
+import { extractTextFromHtml } from '~/lib/utils';
 // import { Browserbase, BrowserbaseAISDK } from '@browserbasehq/sdk'
 
 export const maxDuration = 30;
@@ -11,39 +13,10 @@ export const maxDuration = 30;
 export async function POST(req: Request) {
   const { country1, country2 } = await req.json();
 
-  const result = await generateObject({
-    model: openai('gpt-4o-2024-08-06'),
-    schema: z.object({
-        diplomatic_relations: z.object({
-          score: z.number(),
-          explanation: z.string(),
-        }),
-        economic_ties: z.object({
-          score: z.number(),
-          explanation: z.string(),
-        }),
-        military_relations: z.object({
-          score: z.number(),
-          explanation: z.string(),
-        }),
-        political_alignments: z.object({
-          score: z.number(),
-          explanation: z.string(),
-        }),
-        cultural_social_ties: z.object({
-          score: z.number(),
-          explanation: z.string(),
-        }),
-        historical_context: z.object({
-          score: z.number(),
-          explanation: z.string(),
-        }),
-        overall_score: z.object({
-          score: z.number(),
-          explanation: z.string(),
-        }),
-    }),
-    prompt: `
+  const wikipediaHtml = await fetchWikipediaHtml([country1, country2]);
+  const wikipediaText = extractTextFromHtml(wikipediaHtml);
+
+  const formattedPrompt = `
       You are a geopolitical analyst. Given the two countries ${country1} and ${country2}, analyze their relationship based on the following six key factors using the most recent and latest data available from the internet:
 
       1. Diplomatic Relations: Assess the presence of embassies, consulates, and other diplomatic missions, the frequency of high-level diplomatic visits, and any significant treaties or agreements. Provide the number and locations of embassies in both countries, and include any notable diplomatic engagements. Pull the latest diplomatic events and treaties from current news sources.
@@ -75,7 +48,44 @@ export async function POST(req: Request) {
          - Explanation: Briefly summarize why this score was assigned, ensuring that it is an average and well-balanced reflection of the individual scores provided above.
 
       Scoring must be objective and based solely on the analysis and data provided, without being influenced by personal opinions or external factors.
-    `,
+
+      Use the text below to make the analysis more accurate.
+      ${wikipediaText}
+    `;
+
+  const result = await generateObject({
+    model: openai('gpt-4o-2024-08-06'),
+    schema: z.object({
+      diplomatic_relations: z.object({
+        score: z.number(),
+        explanation: z.string(),
+      }),
+      economic_ties: z.object({
+        score: z.number(),
+        explanation: z.string(),
+      }),
+      military_relations: z.object({
+        score: z.number(),
+        explanation: z.string(),
+      }),
+      political_alignments: z.object({
+        score: z.number(),
+        explanation: z.string(),
+      }),
+      cultural_social_ties: z.object({
+        score: z.number(),
+        explanation: z.string(),
+      }),
+      historical_context: z.object({
+        score: z.number(),
+        explanation: z.string(),
+      }),
+      overall_score: z.object({
+        score: z.number(),
+        explanation: z.string(),
+      }),
+    }),
+    prompt: formattedPrompt.slice(0, 15000),
   });
 
   return new Response(JSON.stringify(result.object), {
