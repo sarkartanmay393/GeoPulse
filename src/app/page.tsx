@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { IGeopoliticalAnalysis, ITableRow } from "~/lib/types";
-import { geopoliticalAnalysisToTableRow, generateCountryPairId, getWikipediaUrl } from "~/lib/utils";
+import { geopoliticalAnalysisToTableRow, generateCountryPairId, getWikipediaUrl, scrollByAmount } from "~/lib/utils";
 import { insertGeoPulse } from "~/lib/api";
 import { insertWrongReport } from "~/lib/clientApi";
 import { createClient } from "~/lib/supabase/client";
@@ -238,6 +238,12 @@ export default function HomePage() {
       setShowWikipediaUrl(true);
     }
   }, [form.getValues("country1"), form.getValues("country2")]);
+
+  useEffect(() => {
+    if (output) {
+      scrollByAmount(424.5);
+    }
+  }, [output]);
 
   return (
     <main className="flex min-h-screen w-screen flex-col items-center justify-start p-6 transition">

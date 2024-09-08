@@ -97,3 +97,12 @@ export function extractTextFromHtml(html: string) {
 export function getWikipediaUrl(countries: string[]) {
   return `https://en.wikipedia.org/w/rest.php/v1/page/${countries[0]}%E2%80%93${countries[1]}_relations/html`;
 }
+
+export function scrollByAmount(pixels: number) {
+  'use client';
+  window.scrollBy({
+    top: pixels,
+    left: 0,
+    behavior: 'smooth'
+  });
+}
