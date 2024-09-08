@@ -70,7 +70,6 @@ const Combobox = ({ name, label, options, form }: any) => {
                                     aria-expanded={open}
                                     className={cn(
                                         "w-[300px] justify-between text-wrap",
-                                        field.value ? "" : "cursor-not-allowed",
                                         !field.value && "text-muted-foreground"
                                     )}
                                 >
