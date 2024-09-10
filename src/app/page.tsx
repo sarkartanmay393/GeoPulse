@@ -199,14 +199,6 @@ export default function HomePage() {
           }
         },
         {
-          element: '#pediaLink', popover: {
-            title: 'Click here to see the Wikipedia page', description: 'We try to use the latest Wikipedia data to generate the score.',
-            onNextClick: () => {
-              driverObj.moveNext();
-            },
-          }
-        },
-        {
           element: '#tour_step_4', popover: {
             title: 'Report will be shown here', description: 'Please wait while we process your request...',
             onNextClick: () => {
@@ -221,7 +213,7 @@ export default function HomePage() {
       },
       onCloseClick: () => {
         localStorage.setItem("firstTimers", "false");
-      }
+      },
     });
 
     driverObj.drive();

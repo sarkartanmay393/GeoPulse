@@ -83,7 +83,7 @@ export default function OutputAccordion({ output }: TProps) {
                         <AccordionTrigger className="p-4 hover:no-underline flex items-center justify-between gap-4 leading-none no-underline">
                             <div className="w-full flex flex-col sm:flex-row sm:items-center justify-start gap-2">
                                 <h3 className="text-left text-[16px] sm:text-lg font-medium">{factor}</h3>
-                                <span className="text-left text-xs font-thin block sm:hidden">{Factors[factor as keyof typeof Factors].info}</span>
+                                <span className="text-left text-xs font-[200] block sm:hidden">{Factors[factor as keyof typeof Factors].info}</span>
                                 <Tooltip disableHoverableContent>
                                     <TooltipTrigger asChild className="hidden sm:inline-block">
                                         <InfoCircledIcon className="w-4 h-4 text-gray-400 hover:text-gray-500 transition" />
