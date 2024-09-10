@@ -144,13 +144,13 @@ export default function HomePage() {
         pulse_id: generateCountryPairId(form.getValues("country1") ?? '', form.getValues("country2") ?? ''),
         report_corrected: false,
       });
-      setOutput(null);
+      // setOutput(null);
       toast({
         title: "Reported!",
-        description: "Thank you for reporting!",
+        description: "Thank you for reporting! We will be resolving this very soon.",
         duration: 3000,
       });
-      document.getElementById("measure-button")?.click();
+      document.getElementById("reset-button")?.click();
     } catch (error: any) {
       console.error("Error:", error);
       toast({
@@ -271,6 +271,7 @@ export default function HomePage() {
                 </Button>
                 <Button
                   size='sm'
+                  id="reset-button"
                   type="reset"
                   className="w-[120px] bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 transition"
                   onClick={() => {
