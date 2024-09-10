@@ -44,8 +44,8 @@ const SourceReferenceCard = ({ countries }: any) => {
             </Button> :
             <TooltipProvider>
               <Tooltip disableHoverableContent>
-                <TooltipTrigger asChild className="hidden sm:inline-block">
-                  <span>gpt-4o-mini</span>
+                <TooltipTrigger asChild className="">
+                  <code>gpt-4o-mini</code>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Last Training Data: Up to Oct 2023</p>
