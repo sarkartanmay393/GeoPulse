@@ -3,14 +3,15 @@
 import type { ITableRow } from "./types";
 import { createClient } from "./supabase/server";
 import { cookies } from "next/headers";
+import { increamentVersion } from "./utils";
 
-export async function insertGeoPulse(row: ITableRow, id: string = "", update: boolean = false) {
+export async function insertGeoPulse(row: ITableRow, id: string = "", update: boolean = false, version: number = 1.0) {
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
     if (update) {
         const { error } = await supabase
             .from('geo_pulses')
-            .update(row)
+            .insert({ ...row, version: increamentVersion(version) })
             .eq('id', id);
 
         if (error) {
@@ -21,7 +22,7 @@ export async function insertGeoPulse(row: ITableRow, id: string = "", update: bo
     } else {
         const { error } = await supabase
             .from('geo_pulses')
-            .insert([row]);
+            .insert([{ ...row, version }]);
 
         if (error) {
             console.error('Error inserting row:', error.message);

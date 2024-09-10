@@ -75,6 +75,8 @@ export default function HomePage() {
         .from('geo_pulses')
         .select('*')
         .eq('id', generatedId)
+        .order('version', { ascending: false })
+        .limit(1)
         .maybeSingle();
 
       if (error) {
@@ -82,7 +84,7 @@ export default function HomePage() {
       }
 
       const oneWeekAgo = new Date();
-      oneWeekAgo.setDate(oneWeekAgo.getDate() - 14);
+      oneWeekAgo.setDate(oneWeekAgo.getDate() - 30);
 
       if (existingData && new Date(existingData.last_updated) > oneWeekAgo) {
         setOutput(existingData);
@@ -113,7 +115,7 @@ export default function HomePage() {
         const geoPulseTableFormat = geopoliticalAnalysisToTableRow(generatedData, generatedId, countries);
 
         setOutput(geoPulseTableFormat);
-        await insertGeoPulse(geoPulseTableFormat, generatedId, Object.keys(existingData ?? {}).length > 0 ? true : false);
+        await insertGeoPulse(geoPulseTableFormat, generatedId, Object.keys(existingData ?? {}).length > 0 ? true : false, existingData?.version);
       }
     } catch (error: any) {
       console.error("Error:", error);

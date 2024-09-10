@@ -106,3 +106,8 @@ export function scrollByAmount(pixels: number) {
     behavior: 'smooth'
   });
 }
+
+export const increamentVersion = (version: number) => {
+  const factor = 0.1;
+  return version + factor;
+}
