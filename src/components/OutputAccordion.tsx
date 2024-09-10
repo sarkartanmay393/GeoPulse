@@ -85,7 +85,7 @@ export default function OutputAccordion({ output }: TProps) {
                                 <h3 className="text-left text-[16px] sm:text-lg font-medium">{factor}</h3>
                                 <span className="text-left text-xs font-thin block sm:hidden">{Factors[factor as keyof typeof Factors].info}</span>
                                 <Tooltip disableHoverableContent>
-                                    <TooltipTrigger className="hidden sm:inline-block">
+                                    <TooltipTrigger asChild className="hidden sm:inline-block">
                                         <InfoCircledIcon className="w-4 h-4 text-gray-400 hover:text-gray-500 transition" />
                                     </TooltipTrigger>
                                     <TooltipContent>

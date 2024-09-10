@@ -21,7 +21,7 @@ import FeedbackCard from "~/components/FeedbackCard";
 import ReportCard from "~/components/ReportCard";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
-import Link from "next/link";
+import SourceReferenceCard from "~/components/SourceRefCard";
 
 const FormSchema = z.object({
   country1: z.string().min(1),
@@ -234,12 +234,15 @@ export default function HomePage() {
     }
   }, []);
 
+  const { country1, country2 } = form.watch();
   const [showWikipediaUrl, setShowWikipediaUrl] = useState(false);
   useEffect(() => {
-    if (form.getValues("country1") && form.getValues("country2")) {
-      setShowWikipediaUrl(true);
+    if (country1 && country2) {
+      !showWikipediaUrl && setShowWikipediaUrl(true);
+    } else {
+      showWikipediaUrl && setShowWikipediaUrl(false);
     }
-  }, [form.getValues("country1"), form.getValues("country2")]);
+  }, [country1, country2]);
 
   useEffect(() => {
     if (output) {
@@ -288,14 +291,10 @@ export default function HomePage() {
         <div className="flex flex-col items-center justify-start rounded-sm transition">
           <h2 id="tour_step_4" className="text-xl font-semibold mb-4">Output</h2>
           <OutputArea output={output} />
+          {showWikipediaUrl ? <SourceReferenceCard countries={[country1, country2]} /> : null}
           <ReportCard output={output} isReporting={isReporting} handleReport={handleReport} />
           <FeedbackCard />
         </div>
-      </div>
-      <div className="mt-4 flex flex-col items-center justify-center gap-2 rounded-md bg-gray-50 px-4 py-1 transition mb-[-8px]">
-        <span className="text-xs font-normal text-gray-500">For more accurate results, if possible we are adding the latest 
-          {showWikipediaUrl ? <Link id="pediaLink" className="font-semibold" href={getWikipediaUrl(Object.values(form.getValues()))}> Wikipedia </Link> : ' Wikipedia '}
-        data.</span>
       </div>
       <TsxBadge />
     </main>
