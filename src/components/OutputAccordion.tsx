@@ -81,10 +81,11 @@ export default function OutputAccordion({ output }: TProps) {
                         'Overall Score' === factor ? "bg-gray-50" : ""
                     )} >
                         <AccordionTrigger className="p-4 hover:no-underline flex items-center justify-between gap-4 leading-none no-underline">
-                            <div className="w-full flex items-center justify-start gap-2">
-                                <h3 className="text-[14px] sm:text-lg font-medium">{factor}</h3>
+                            <div className="w-full flex flex-col sm:flex-row sm:items-center justify-start gap-2">
+                                <h3 className="text-left text-[16px] sm:text-lg font-medium">{factor}</h3>
+                                <span className="text-left text-xs font-thin block sm:hidden">{Factors[factor as keyof typeof Factors].info}</span>
                                 <Tooltip disableHoverableContent>
-                                    <TooltipTrigger>
+                                    <TooltipTrigger className="hidden sm:inline-block">
                                         <InfoCircledIcon className="w-4 h-4 text-gray-400 hover:text-gray-500 transition" />
                                     </TooltipTrigger>
                                     <TooltipContent>

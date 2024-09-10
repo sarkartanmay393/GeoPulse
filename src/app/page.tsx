@@ -260,7 +260,7 @@ export default function HomePage() {
                   size='sm'
                   id="measure-button"
                   type="submit"
-                  className="w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                  className="w-full sm:w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -273,7 +273,7 @@ export default function HomePage() {
                   size='sm'
                   id="reset-button"
                   type="reset"
-                  className="w-[120px] bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                  className="w-full sm:w-[120px] bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 transition"
                   onClick={() => {
                     form.reset();
                     setOutput(null);
