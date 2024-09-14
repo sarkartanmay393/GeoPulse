@@ -220,10 +220,10 @@ export default function HomePage() {
   }
 
   useEffect(() => {
-    const firstTimers = localStorage.getItem("firstTimers");
-    if (!firstTimers) {
-      startTour();
-    }
+    // const firstTimers = localStorage.getItem("firstTimers");
+    // if (!firstTimers) {
+    //   startTour();
+    // }
   }, []);
 
   const { country1, country2 } = form.watch();
