@@ -4,6 +4,10 @@ import { type Metadata } from "next";
 import { Toaster } from "~/components/ui/toaster";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Header from "~/components/Header";
+import CountryInput from "~/components/CountryInput";
+import TsxBadge from "~/components/TsxBadge";
+import ProductHuntBadge from "~/components/ProducthuntBadge";
 
 export const metadata: Metadata = {
   title: "GeoPulse",
@@ -14,10 +18,15 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="relative scrollbar-thin scroll-smooth">
+      <body className="relative scrollbar-thin scroll-smooth flex min-h-screen flex-col items-center justify-center">
+        <ProductHuntBadge className="mb-4" />
+        <Header />
+        <CountryInput />
         {children}
+        <TsxBadge />
         <Toaster />
         <Analytics />
         <SpeedInsights />

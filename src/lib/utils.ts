@@ -72,9 +72,20 @@ export function generateCountryPairId(country1: string, country2: string): strin
   return uniqueId;
 }
 
-// export function reverseCountryPairId(uniqueId: string): string[] {
-//   return uniqueId.split('_').map(country => country.toUpperCase());
-// }
+export function findCountryPairById(reportId: string, countryList: string[]): [string, string] | null {
+  for (let i = 0; i < countryList.length; i++) {
+    for (let j = i + 1; j < countryList.length; j++) {
+      const country1 = countryList[i] ?? '';
+      const country2 = countryList[j] ?? '';
+      const generatedId = generateCountryPairId(country1, country2);
+      
+      if (generatedId === reportId) {
+        return [country1, country2];
+      }
+    }
+  }
+  return null;
+}
 
 export function hasMoreThanOneDecimalPlaces(number: number): boolean {
   const numStr = number.toString();
