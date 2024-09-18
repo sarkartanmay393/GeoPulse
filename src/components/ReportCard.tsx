@@ -7,14 +7,53 @@ import { Button } from "../components/ui/button";
 import { RocketIcon } from "@radix-ui/react-icons";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import "driver.js/dist/driver.css";
+import { useCallback, useState } from "react";
+import { useToast } from "./ui/use-toast";
+import { insertWrongReport } from "~/lib/clientApi";
 
 type ReportCardProps = {
   output: ITableRow | null;
-  isReporting: boolean;
-  handleReport: () => void;
 };
 
-const ReportCard = ({ output, isReporting, handleReport }: ReportCardProps) => {
+const ReportCard = ({ output }: ReportCardProps) => {
+  const { toast } = useToast();
+  const [isReporting, setIsReporting] = useState(false);
+
+  const handleReport = useCallback(async () => {
+    try {
+      setIsReporting(true);
+      toast({
+        title: "Reporting a wrong score...",
+        description: "Please wait while we process your request...",
+        duration: 4000,
+      });
+      await insertWrongReport({
+        created_at: new Date().toUTCString(),
+        country1: output?.countries?.[0] ?? '',
+        country2: output?.countries?.[1] ?? '',
+        pulse_id: output?.id ?? '',
+        report_corrected: false,
+      });
+      // setOutput(null);
+      toast({
+        title: "Reported!",
+        description: "Thank you for reporting! We will be resolving this very soon.",
+        duration: 3000,
+      });
+      document.getElementById("reset-button")?.click();
+    } catch (error: any) {
+      console.error("Error:", error);
+      toast({
+        title: "Error occurred while reporting.",
+        description: error?.message ?? "---",
+        duration: 2000,
+      });
+    } finally {
+      setIsReporting(false);
+    }
+  }, [output]);
+
+
   return (
     <Alert className={output ? "mb-4" : "hidden"}>
     <RocketIcon className="h-4 w-4" />

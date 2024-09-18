@@ -4,12 +4,13 @@ import { v5 as uuidv5 } from 'uuid';
 
 import { IGeopoliticalAnalysis, ITableRow } from "~/lib/types";
 import { UUID_NAMESPACE } from "./constants";
+import useGetCountries from "~/hooks/useGetCountries";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function geopoliticalAnalysisToTableRow(analysis: IGeopoliticalAnalysis, id: string, countries: string[]): ITableRow {
+export function geopoliticalAnalysisToTableRow(analysis: IGeopoliticalAnalysis, id: string, countries: string[], source?: string[]): ITableRow {
   return {
     id,
     last_updated: new Date().toUTCString(),
@@ -28,6 +29,7 @@ export function geopoliticalAnalysisToTableRow(analysis: IGeopoliticalAnalysis, 
     historical_context_explanation: analysis?.historical_context?.explanation,
     overall_score: analysis?.overall_score?.score,
     overall_explanation: analysis?.overall_score?.explanation,
+    source: source,
   };
 }
 
@@ -61,6 +63,7 @@ export function tableRowToGeopoliticalAnalysis(row: ITableRow): IGeopoliticalAna
       score: row.overall_score,
       explanation: row.overall_explanation,
     },
+    source: row.source,
   };
 }
 
@@ -72,9 +75,22 @@ export function generateCountryPairId(country1: string, country2: string): strin
   return uniqueId;
 }
 
-// export function reverseCountryPairId(uniqueId: string): string[] {
-//   return uniqueId.split('_').map(country => country.toUpperCase());
-// }
+export function findCountryPairById(reportId: string): [string, string] | null {
+  const { formattedCountries } = useGetCountries();
+  const countryList = formattedCountries.map((country) => country.value);
+  for (let i = 0; i < countryList.length; i++) {
+    for (let j = i + 1; j < countryList.length; j++) {
+      const country1 = countryList[i] ?? '';
+      const country2 = countryList[j] ?? '';
+      const generatedId = generateCountryPairId(country1, country2);
+      
+      if (generatedId === reportId) {
+        return [country1, country2];
+      }
+    }
+  }
+  return null;
+}
 
 export function hasMoreThanOneDecimalPlaces(number: number): boolean {
   const numStr = number.toString();
@@ -94,8 +110,12 @@ export function extractTextFromHtml(html: string) {
   return $.text();
 }
 
-export function getWikipediaUrl(countries: string[]) {
-  return `https://en.wikipedia.org/w/rest.php/v1/page/${countries[0]}%E2%80%93${countries[1]}_relations/html`;
+export function getWikipediaUrl(countries?: string[], reportId?: string) {
+  if (reportId) {
+    const [country1, country2] = findCountryPairById(reportId) ?? [];
+    return `https://en.wikipedia.org/w/rest.php/v1/page/${country1}%E2%80%93${country2}_relations/html`;
+  }
+  return `https://en.wikipedia.org/w/rest.php/v1/page/${countries?.[0]}%E2%80%93${countries?.[1]}_relations/html`;
 }
 
 export function scrollByAmount(pixels: number) {
