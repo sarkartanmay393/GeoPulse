@@ -8,6 +8,7 @@ import Header from "~/components/Header";
 import CountryInput from "~/components/CountryInput";
 import TsxBadge from "~/components/TsxBadge";
 import ProductHuntBadge from "~/components/ProducthuntBadge";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "GeoPulse",
@@ -25,7 +26,9 @@ export default function RootLayout({
         <ProductHuntBadge className="mb-4" />
         <Header />
         <CountryInput />
-        {children}
+        <Suspense fallback={<div className="flex items-center justify-center">Loading...</div>}>
+          {children}
+        </Suspense>
         <TsxBadge />
         <Toaster />
         <Analytics />

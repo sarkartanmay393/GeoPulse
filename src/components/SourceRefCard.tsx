@@ -1,33 +1,14 @@
 'use client';
 
-import { Alert, AlertDescription } from "~/components/ui/alert";
-import { RocketIcon } from "@radix-ui/react-icons";
-import "driver.js/dist/driver.css";
-import { Button } from "./ui/button";
 import Link from "next/link";
+import { RocketIcon } from "@radix-ui/react-icons";
+
 import { getWikipediaUrl } from "~/lib/utils";
-import { useEffect, useState } from "react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
-import Spinner from "./Spinner";
+import { Button } from "~/components/ui/button";
+import { Alert, AlertDescription } from "~/components/ui/alert";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 
-const SourceReferenceCard = ({ countries }: any) => {
-  const wikipediaUrl = getWikipediaUrl(countries);
-  const [wikipediaUrlWorks, dispatch] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch(wikipediaUrl).then((response) => {
-      if (response.status === 200) {
-        dispatch(true);
-      } else {
-        dispatch(false);
-      }
-    }).finally(() => {
-      setLoading(false);
-    });
-  }, [countries]);
-
+const SourceReferenceCard = ({ source, reportId }: any) => {
   return (
     <Alert className="my-4 flex items-center">
       <AlertDescription className="flex gap-2 justify-between items-center w-full">
@@ -35,10 +16,9 @@ const SourceReferenceCard = ({ countries }: any) => {
         <p className="text-sm flex-1">
           I'm sure you care about source of the knowledge.
         </p>
-        {loading ? <Spinner color="text-black" /> :
-          (wikipediaUrlWorks ?
+        {source?.includes('wikipedia') ?
             <Button asChild variant="link">
-              <Link href={wikipediaUrl}>
+              <Link href={getWikipediaUrl(reportId)}>
                 Wikipedia
               </Link>
             </Button> :
@@ -51,7 +31,7 @@ const SourceReferenceCard = ({ countries }: any) => {
                   <p>Last Training Data: Up to Oct 2023</p>
                 </TooltipContent>
               </Tooltip>
-            </TooltipProvider>)
+            </TooltipProvider>
         }
       </AlertDescription>
     </Alert>

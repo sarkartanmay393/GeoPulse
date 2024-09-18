@@ -4,6 +4,8 @@ import { v5 as uuidv5 } from 'uuid';
 
 import { IGeopoliticalAnalysis, ITableRow } from "~/lib/types";
 import { UUID_NAMESPACE } from "./constants";
+import { report } from "process";
+import useGetCountries from "~/hooks/useGetCountries";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -28,6 +30,7 @@ export function geopoliticalAnalysisToTableRow(analysis: IGeopoliticalAnalysis, 
     historical_context_explanation: analysis?.historical_context?.explanation,
     overall_score: analysis?.overall_score?.score,
     overall_explanation: analysis?.overall_score?.explanation,
+    source: analysis?.source,
   };
 }
 
@@ -61,6 +64,7 @@ export function tableRowToGeopoliticalAnalysis(row: ITableRow): IGeopoliticalAna
       score: row.overall_score,
       explanation: row.overall_explanation,
     },
+    source: row.source,
   };
 }
 
@@ -72,7 +76,9 @@ export function generateCountryPairId(country1: string, country2: string): strin
   return uniqueId;
 }
 
-export function findCountryPairById(reportId: string, countryList: string[]): [string, string] | null {
+export function findCountryPairById(reportId: string): [string, string] | null {
+  const { formattedCountries } = useGetCountries();
+  const countryList = formattedCountries.map((country) => country.value);
   for (let i = 0; i < countryList.length; i++) {
     for (let j = i + 1; j < countryList.length; j++) {
       const country1 = countryList[i] ?? '';
@@ -105,7 +111,12 @@ export function extractTextFromHtml(html: string) {
   return $.text();
 }
 
-export function getWikipediaUrl(countries: string[]) {
+export function getWikipediaUrl(countries?: string[], reportId?: string) {
+  if (reportId) {
+    const { formattedCountries } = useGetCountries();
+    const [country1, country2] = findCountryPairById(reportId, formattedCountries.map((country) => country.value)) ?? [];
+    return `https://en.wikipedia.org/w/rest.php/v1/page/${country1}%E2%80%93${country2}_relations/html`;
+  }
   return `https://en.wikipedia.org/w/rest.php/v1/page/${countries[0]}%E2%80%93${countries[1]}_relations/html`;
 }
 

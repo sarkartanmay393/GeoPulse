@@ -24,6 +24,7 @@ export interface IGeopoliticalAnalysis {
   cultural_social_ties?: IKeyFactor;
   historical_context?: IKeyFactor;
   overall_score?: IKeyFactor;
+  source?: string[];
 }
 
 export interface ITableRow {
@@ -44,6 +45,7 @@ export interface ITableRow {
   historical_context_explanation?: string;
   overall_score?: number;
   overall_explanation?: string;
+  source?: string[];
 }
 
 export type TFormValues = {
