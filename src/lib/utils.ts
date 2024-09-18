@@ -4,7 +4,6 @@ import { v5 as uuidv5 } from 'uuid';
 
 import { IGeopoliticalAnalysis, ITableRow } from "~/lib/types";
 import { UUID_NAMESPACE } from "./constants";
-import { report } from "process";
 import useGetCountries from "~/hooks/useGetCountries";
 
 export function cn(...inputs: ClassValue[]) {
@@ -113,11 +112,10 @@ export function extractTextFromHtml(html: string) {
 
 export function getWikipediaUrl(countries?: string[], reportId?: string) {
   if (reportId) {
-    const { formattedCountries } = useGetCountries();
-    const [country1, country2] = findCountryPairById(reportId, formattedCountries.map((country) => country.value)) ?? [];
+    const [country1, country2] = findCountryPairById(reportId) ?? [];
     return `https://en.wikipedia.org/w/rest.php/v1/page/${country1}%E2%80%93${country2}_relations/html`;
   }
-  return `https://en.wikipedia.org/w/rest.php/v1/page/${countries[0]}%E2%80%93${countries[1]}_relations/html`;
+  return `https://en.wikipedia.org/w/rest.php/v1/page/${countries?.[0]}%E2%80%93${countries?.[1]}_relations/html`;
 }
 
 export function scrollByAmount(pixels: number) {
