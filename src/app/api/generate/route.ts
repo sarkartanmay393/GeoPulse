@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { openai } from '@ai-sdk/openai';
 import { generateObject } from 'ai';
 import { z } from 'zod';
-import { extractTextFromHtml, findCountryPairById } from '~/lib/utils';
+import { extractTextFromHtml, findCountryPairById, geopoliticalAnalysisToTableRow, increamentVersion } from '~/lib/utils';
 import { fetchWikipediaHtml } from '~/lib/serverApi';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -14,7 +14,7 @@ const cacheDurationInDays = 30; // Cache expiry period (in days)
 export async function POST(req: Request) {
   try {
     const { reportId } = await req.json();
-    const [country1, country2] = findCountryPairById(reportId) ?? [];
+    const [country1, country2] = findCountryPairById(reportId) ?? ["", ""];
 
     if (!reportId) {
       return new Response(JSON.stringify({ message: "reportId is required" }), {
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
     const wikipediaText = extractTextFromHtml(wikipediaHtml);
 
     if (cachedData && new Date(cachedData.last_updated) > oneMonthAgo) {
-      return new Response(JSON.stringify({ ...cachedData, source: [wikipediaHtml.length > 0 ? 'wikipedia' : '', 'gpt-4o-mini'] }), {
+      return new Response(JSON.stringify({ ...cachedData, source: cachedData?.source ?? [wikipediaHtml.length > 0 ? 'wikipedia' : '', 'gpt-4o-mini'] }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }
       });
@@ -88,7 +88,7 @@ export async function POST(req: Request) {
       Scoring must be objective and based solely on the analysis and data provided, without being influenced by personal opinions or external factors.
 
       Use the text below to make the analysis more accurate.
-      ${wikipediaText.slice(0, 15000)}
+      ${wikipediaText}
     `;
 
     const result = await generateObject({
@@ -128,25 +128,11 @@ export async function POST(req: Request) {
 
     const generatedData = result.object;
 
-    const newEntry = {
-      id: reportId,
-      country1: countries[0],
-      country2: countries[1],
-      diplomatic_relations: generatedData.diplomatic_relations,
-      economic_ties: generatedData.economic_ties,
-      military_relations: generatedData.military_relations,
-      political_alignments: generatedData.political_alignments,
-      cultural_social_ties: generatedData.cultural_social_ties,
-      historical_context: generatedData.historical_context,
-      overall_score: generatedData.overall_score,
-      last_updated: new Date().toISOString(),
-      version: cachedData ? cachedData.version + 1 : 1,
-      source: [wikipediaHtml.length > 0 ? 'wikipedia' : '', 'gpt-4o-mini'],
-    };
+    const newEntry = geopoliticalAnalysisToTableRow(generatedData, reportId, countries, [wikipediaHtml.length > 0 ? 'wikipedia' : '', 'gpt-4o-mini']);
 
     const { error: insertError } = await supabase
       .from('geo_pulses')
-      .insert([newEntry]);
+      .insert([{ ...newEntry, version: cachedData ? increamentVersion(cachedData.version) : 1 }]);
 
     if (insertError) {
       console.error("Error inserting new data into Supabase:", insertError.message);

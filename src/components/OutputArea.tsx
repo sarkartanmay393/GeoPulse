@@ -4,7 +4,7 @@ import Spinner from "./Spinner";
 import { useStore } from "~/store/useStore";
 
 export default function OutputArea() {
-    const { output, error } = useStore();
+    const { output, error, loading } = useStore();
 
     return (
         <div className={cn("w-screen max-w-full p-2 sm:p-4 md:p-6 shadow-sm border-[1px] border-solid border-gray-100 rounded-md", output && "mb-8")}>
@@ -15,7 +15,7 @@ export default function OutputArea() {
                         {error ??
                             <>
                                 <p className="text-sm text-gray-500">Result will appear here</p>
-                                <Spinner color="text-gray-500" />
+                                {loading ? <Spinner color="text-gray-500 text-sm" /> : <></>}
                             </>
                         }
                     </div>

@@ -36,6 +36,7 @@ export const useStore = create<AnalysisState>((set) => ({
       set({ output: data, loading: false });
     } catch (error: any) {
       set({ error: error.message, loading: false });
+      throw new Error(error.message);
     }
   },
 }));

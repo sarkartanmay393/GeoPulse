@@ -30,7 +30,7 @@ export default function ReportArea({ reportId }: ReportAreaProps) {
         duration: 2000,
       });
     }
-  }, []);
+  }, [reportId]);
 
   useEffect(() => {
     if (output) {

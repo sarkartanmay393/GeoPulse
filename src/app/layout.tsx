@@ -5,7 +5,6 @@ import { Toaster } from "~/components/ui/toaster";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Header from "~/components/Header";
-import CountryInput from "~/components/CountryInput";
 import TsxBadge from "~/components/TsxBadge";
 import ProductHuntBadge from "~/components/ProducthuntBadge";
 import { Suspense } from "react";
@@ -23,9 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body className="relative scrollbar-thin scroll-smooth flex min-h-screen flex-col items-center justify-center">
-        <ProductHuntBadge className="mb-4" />
-        <Header />
-        <CountryInput />
         <Suspense fallback={<div className="flex items-center justify-center">Loading...</div>}>
           {children}
         </Suspense>

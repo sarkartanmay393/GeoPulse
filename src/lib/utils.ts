@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function geopoliticalAnalysisToTableRow(analysis: IGeopoliticalAnalysis, id: string, countries: string[]): ITableRow {
+export function geopoliticalAnalysisToTableRow(analysis: IGeopoliticalAnalysis, id: string, countries: string[], source?: string[]): ITableRow {
   return {
     id,
     last_updated: new Date().toUTCString(),
@@ -29,7 +29,7 @@ export function geopoliticalAnalysisToTableRow(analysis: IGeopoliticalAnalysis, 
     historical_context_explanation: analysis?.historical_context?.explanation,
     overall_score: analysis?.overall_score?.score,
     overall_explanation: analysis?.overall_score?.explanation,
-    source: analysis?.source,
+    source: source,
   };
 }
 

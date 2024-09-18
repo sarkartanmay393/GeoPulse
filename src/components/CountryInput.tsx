@@ -9,8 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useParams, useRouter } from 'next/navigation';
 import { findCountryPairById, generateCountryPairId } from "~/lib/utils";
 import { useEffect } from "react";
-import Image from "next/image";
-import { toast } from "./ui/use-toast";
 import { useStore } from "~/store/useStore";
 
 const FormSchema = z.object({
@@ -34,15 +32,6 @@ export default function CountryInput() {
     router.push(`/report/${reportId}`);
   }
 
-  const handleShare = () => {
-    navigator.clipboard.writeText(`https://geo-pulse.vercel.app/report/${reportId}`);
-    toast({
-      title: "Copied to clipboard!",
-      description: "Share the link with your friends to share the report.",
-      duration: 2000,
-    });
-  }
-
   useEffect(() => {
     if (reportId) {
       const [country1, country2] = findCountryPairById(reportId) ?? [];
@@ -54,61 +43,35 @@ export default function CountryInput() {
   return (
     <div className="flex items-center justify-center transition">
       <div id="tour_step_1" className="w-fit mt-6 p-4 flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 transition">
-        {output === null ?
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
-              <CountrySelectComponent form={form} />
-              <div className="flex flex-col md:flex-row gap-2 items-center justify-center transition">
-                <Button
-                  size='sm'
-                  id="measure-button"
-                  type="submit"
-                  className="w-full sm:w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-                  disabled={output !== null}
-                >
-                  Measure
-                </Button>
-                <Button
-                  size='sm'
-                  id="reset-button"
-                  type="reset"
-                  className="w-full sm:w-[120px] bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 transition"
-                  onClick={() => {
-                    form.reset();
-                    resetOutput();
-                    router.push('/');
-                  }}
-                >
-                  Reset
-                </Button>
-              </div>
-            </form>
-          </Form> :
-          <div className="flex flex-col md:flex-row gap-2 items-center justify-center transition">
-            <Button
-              size='sm'
-              id="share-button"
-              type="button"
-              onClick={handleShare}
-              className="w-full sm:w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-            >
-              <Image src="/share.svg" alt="Share" width={10} height={10} className="mr-1" />
-              <p>Share</p>
-            </Button>
-            <Button
-              size='sm'
-              id="reset-button"
-              type="reset"
-              className="w-full sm:w-[196px] bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 transition"
-              onClick={() => {
-                form.reset();
-                router.push('/');
-                resetOutput();
-              }}
-            >
-              Generate Another Report
-            </Button>
-          </div>}
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+            <CountrySelectComponent form={form} />
+            <div className="flex flex-col md:flex-row gap-2 items-center justify-center transition">
+              <Button
+                size='sm'
+                id="measure-button"
+                type="submit"
+                className="w-full sm:w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                disabled={output !== null}
+              >
+                Measure
+              </Button>
+              <Button
+                size='sm'
+                id="reset-button"
+                type="reset"
+                className="w-full sm:w-[120px] bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                onClick={() => {
+                  form.reset();
+                  resetOutput();
+                  router.push('/');
+                }}
+              >
+                Reset
+              </Button>
+            </div>
+          </form>
+        </Form>
       </div>
     </div>
   );
