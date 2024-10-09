@@ -83,7 +83,7 @@ export function findCountryPairById(reportId: string): [string, string] | null {
       const country1 = countryList[i] ?? '';
       const country2 = countryList[j] ?? '';
       const generatedId = generateCountryPairId(country1, country2);
-      
+
       if (generatedId === reportId) {
         return [country1, country2];
       }
@@ -97,7 +97,7 @@ export function hasMoreThanOneDecimalPlaces(number: number): boolean {
   const parts = numStr.split(".");
 
   if (parts.length === 2 && (parts?.[1]?.length ?? 0) > 1) {
-      return true;
+    return true;
   }
 
   return false;
@@ -110,12 +110,9 @@ export function extractTextFromHtml(html: string) {
   return $.text();
 }
 
-export function getWikipediaUrl(countries?: string[], reportId?: string) {
-  if (reportId) {
-    const [country1, country2] = findCountryPairById(reportId) ?? [];
-    return `https://en.wikipedia.org/w/rest.php/v1/page/${country1}%E2%80%93${country2}_relations/html`;
-  }
-  return `https://en.wikipedia.org/w/rest.php/v1/page/${countries?.[0]}%E2%80%93${countries?.[1]}_relations/html`;
+export function getWikipediaUrl(reportId: string) {
+  const [country1, country2] = findCountryPairById(reportId) ?? [];
+  return `https://en.wikipedia.org/w/rest.php/v1/page/${country1}%E2%80%93${country2}_relations/html`;
 }
 
 export function scrollByAmount(pixels: number) {
