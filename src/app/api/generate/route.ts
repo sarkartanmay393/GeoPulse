@@ -9,7 +9,7 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const cacheDurationInDays = 30; // Cache expiry period (in days)
+const cacheDurationInDays = 7; // Cache expiry period (in days)
 
 export async function POST(req: Request) {
   try {
@@ -35,14 +35,14 @@ export async function POST(req: Request) {
 
     if (fetchError) {
       console.error("Error fetching data from Supabase:", fetchError.message);
-      return new Response(JSON.stringify({ message: "Failed to fetch data from Supabase" }), {
+      return new Response(JSON.stringify({ message: "Failed to fetch data from Supabase", cause: 'GET_FROM_DB_ERROR' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' }
       });
     }
 
     const now = new Date();
-    const oneMonthAgo = new Date(now.getTime() - cacheDurationInDays * 24 * 60 * 60 * 1000);
+    const fewTimeAgo = new Date(now.getTime() - cacheDurationInDays * 24 * 60 * 60 * 1000);
 
     const wikipediaHtml = await fetchWikipediaHtml([country1 ?? '', country2 ?? ''].sort());
     const wikipediaText = extractTextFromHtml(wikipediaHtml);
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     // Fetch recent news articles about the two countries
     const newsArticles = await fetchNewsArticles(country1 ?? '', country2 ?? '');
 
-    if (cachedData && new Date(cachedData.last_updated) > oneMonthAgo) {
+    if (cachedData && new Date(cachedData.last_updated) > fewTimeAgo) {
       return new Response(JSON.stringify(cachedData), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }
@@ -63,6 +63,7 @@ export async function POST(req: Request) {
           `[News ${idx + 1}] Title: ${article.title}\n` +
           `Source: ${article.source.name} (${article.publishedAt})\n` +
           `Description: ${article.description || 'N/A'}\n` +
+          `Content: ${article.description || 'N/A'}` +
           `URL: ${article.url}`
         ).join('\n\n')
       : 'No recent news articles found.';
@@ -107,6 +108,8 @@ export async function POST(req: Request) {
       ${wikipediaText}
     `;
 
+    console.log(formattedPrompt.length); // Log first 500 characters of the prompt for debugging
+
     const result = await generateObject({
       model: openai('gpt-4o-2024-08-06'),
       schema: z.object({
@@ -139,17 +142,17 @@ export async function POST(req: Request) {
           explanation: z.string(),
         }),
       }),
-      prompt: formattedPrompt.slice(0, 15000),
+      prompt: formattedPrompt.slice(0, 50000),
     });
 
     const generatedData = result.object;
     
     // Track sources used for this analysis
-    const sources = [
-      ...(wikipediaHtml.length > 0 ? ['wikipedia'] : []),
-      ...(newsArticles.length > 0 ? ['news-api'] : []),
-      'gpt-4o-2024-08-06'
-    ];
+    const sources = {
+      'wikipedia': wikipediaHtml.length > 0,
+      'news-api': newsArticles.map(na => na.url),
+      'gpt-4o-2024-08-06': true,
+    };
 
     const newEntry = geopoliticalAnalysisToTableRow(generatedData, reportId, countries, sources);
 
@@ -159,7 +162,7 @@ export async function POST(req: Request) {
 
     if (insertError) {
       console.error("Error inserting new data into Supabase:", insertError.message);
-      return new Response(JSON.stringify({ message: "Failed to store generated data in Supabase" }), {
+      return new Response(JSON.stringify({ message: "Failed to store generated data in Supabase", cause: 'INSERT_TO_DB_ERROR' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' }
       });

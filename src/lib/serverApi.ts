@@ -85,7 +85,7 @@ export async function fetchNewsArticles(country1: string, country2: string): Pro
         url.searchParams.append('q', query);
         url.searchParams.append('from', fromDate);
         url.searchParams.append('sortBy', 'relevancy');
-        url.searchParams.append('pageSize', '15');
+        url.searchParams.append('pageSize', '5');
         url.searchParams.append('language', 'en');
         url.searchParams.append('apiKey', apiKey);
 
@@ -97,8 +97,10 @@ export async function fetchNewsArticles(country1: string, country2: string): Pro
         }
 
         const data = await response.json();
+
+        console.log('Fetched news articles:', data || 0);
         
-        return data.articles?.slice(0, 15) ?? [];
+        return data.articles?.slice(0, 5) ?? [];
     } catch (error) {
         console.error('Error fetching news articles:', error);
         return [];
