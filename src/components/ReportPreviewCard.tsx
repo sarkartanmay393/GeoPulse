@@ -16,6 +16,11 @@ export default function ReportPreviewCard({ report }: ReportPreviewCardProps) {
   const flag2 = getCountryFlag(country2);
   const overallScore = report.overall_score ?? 0;
 
+  // Don't render if we don't have both countries
+  if (!country1 || !country2) {
+    return null;
+  }
+
   return (
     <Link href={`/report/${report.id}`} className="block">
       <Card className="hover:shadow-lg transition-shadow cursor-pointer">

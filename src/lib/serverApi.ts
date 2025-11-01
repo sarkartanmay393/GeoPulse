@@ -55,7 +55,7 @@ export async function fetchRecentReports(limit: number = 5): Promise<ITableRow[]
         .limit(limit);
 
     if (error) {
-        console.error('Error fetching recent reports:', error.message);
+        console.error('Failed to fetch recent reports from database:', error.message);
         return [];
     }
 
