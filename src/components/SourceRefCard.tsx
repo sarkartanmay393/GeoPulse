@@ -36,7 +36,7 @@ const SourceReferenceCard = ({ sourceMeta, reportId }: { sourceMeta?: any, repor
       case 'news-api':
         if (!Array.isArray(sourceMeta[key]) || sourceMeta[key].length === 0) return null;
         return (
-          <Tooltip disableHoverableContent>
+          <Tooltip>
             <TooltipTrigger asChild className="">
               <span className="text-gray-500 text-sm flex items-center gap-1 cursor-default px-1">
                 {sourceMeta[key].length === 1 ? 'News source' : 'News sources'} <InfoCircledIcon />
@@ -58,7 +58,7 @@ const SourceReferenceCard = ({ sourceMeta, reportId }: { sourceMeta?: any, repor
 
   return (
     <Alert className="my-4 flex items-center">
-      <AlertDescription className="flex gap-2 justify-between items-center w-full">
+      <AlertDescription className="flex gap-2 justify-between items-center w-full flex-wrap">
         <TooltipProvider>
           <RocketIcon className="h-4 w-4 mr-1" />
           <p className="text-sm flex-1">
