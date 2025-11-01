@@ -31,7 +31,7 @@ GeoPulse provides real-time, AI data-driven insights into the geopolitical relat
 3. Copy env:
 
    ```bash
-   cp .env.example. .env.local
+   cp .env.example .env.local
    ```
 
 ## Contributing
