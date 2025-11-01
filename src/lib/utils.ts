@@ -130,8 +130,8 @@ export const increamentVersion = (version: number) => {
   return version + factor;
 }
 
-export function getCountryFlag(countryName: string): string {
+export function getCountry(countryName: string) {
   const countries = countriesData as TCountryOption[];
   const country = countries.find((c) => c.value === countryName);
-  return country?.flag ?? '🏳️';
+  return country ?? null;
 }

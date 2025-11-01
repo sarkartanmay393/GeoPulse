@@ -47,3 +47,5 @@ yarn-error.log*
 
 # environment files
 .env
+
+*.backup

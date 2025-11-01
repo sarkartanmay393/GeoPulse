@@ -2,1251 +2,1501 @@
     {
         "label": "Afghanistan",
         "value": "Afghanistan",
-        "flag": "🇦🇫"
+        "flag": "🇦🇫",
+        "code": "AF"
     },
     {
         "label": "Åland Islands",
         "value": "Åland Islands",
-        "flag": "🇦🇽"
+        "flag": "🇦🇽",
+        "code": "AX"
     },
     {
         "label": "Albania",
         "value": "Albania",
-        "flag": "🇦🇱"
+        "flag": "🇦🇱",
+        "code": "AL"
     },
     {
         "label": "Algeria",
         "value": "Algeria",
-        "flag": "🇩🇿"
+        "flag": "🇩🇿",
+        "code": "DZ"
     },
     {
         "label": "American Samoa",
         "value": "American Samoa",
-        "flag": "🇦🇸"
+        "flag": "🇦🇸",
+        "code": "AS"
     },
     {
         "label": "Andorra",
         "value": "Andorra",
-        "flag": "🇦🇩"
+        "flag": "🇦🇩",
+        "code": "AD"
     },
     {
         "label": "Angola",
         "value": "Angola",
-        "flag": "🇦🇴"
+        "flag": "🇦🇴",
+        "code": "AO"
     },
     {
         "label": "Anguilla",
         "value": "Anguilla",
-        "flag": "🇦🇮"
+        "flag": "🇦🇮",
+        "code": "AI"
     },
     {
         "label": "Antarctica",
         "value": "Antarctica",
-        "flag": "🇦🇶"
+        "flag": "🇦🇶",
+        "code": "AQ"
     },
     {
         "label": "Antigua and Barbuda",
         "value": "Antigua and Barbuda",
-        "flag": "🇦🇬"
+        "flag": "🇦🇬",
+        "code": "AG"
     },
     {
         "label": "Argentina",
         "value": "Argentina",
-        "flag": "🇦🇷"
+        "flag": "🇦🇷",
+        "code": "AR"
     },
     {
         "label": "Armenia",
         "value": "Armenia",
-        "flag": "🇦🇲"
+        "flag": "🇦🇲",
+        "code": "AM"
     },
     {
         "label": "Aruba",
         "value": "Aruba",
-        "flag": "🇦🇼"
+        "flag": "🇦🇼",
+        "code": "AW"
     },
     {
         "label": "Australia",
         "value": "Australia",
-        "flag": "🇦🇺"
+        "flag": "🇦🇺",
+        "code": "AU"
     },
     {
         "label": "Austria",
         "value": "Austria",
-        "flag": "🇦🇹"
+        "flag": "🇦🇹",
+        "code": "AT"
     },
     {
         "label": "Azerbaijan",
         "value": "Azerbaijan",
-        "flag": "🇦🇿"
+        "flag": "🇦🇿",
+        "code": "AZ"
     },
     {
         "label": "Bahamas",
         "value": "Bahamas",
-        "flag": "🇧🇸"
+        "flag": "🇧🇸",
+        "code": "BS"
     },
     {
         "label": "Bahrain",
         "value": "Bahrain",
-        "flag": "🇧🇭"
+        "flag": "🇧🇭",
+        "code": "BH"
     },
     {
         "label": "Bangladesh",
         "value": "Bangladesh",
-        "flag": "🇧🇩"
+        "flag": "🇧🇩",
+        "code": "BD"
     },
     {
         "label": "Barbados",
         "value": "Barbados",
-        "flag": "🇧🇧"
+        "flag": "🇧🇧",
+        "code": "BB"
     },
     {
         "label": "Belarus",
         "value": "Belarus",
-        "flag": "🇧🇾"
+        "flag": "🇧🇾",
+        "code": "BY"
     },
     {
         "label": "Belgium",
         "value": "Belgium",
-        "flag": "🇧🇪"
+        "flag": "🇧🇪",
+        "code": "BE"
     },
     {
         "label": "Belize",
         "value": "Belize",
-        "flag": "🇧🇿"
+        "flag": "🇧🇿",
+        "code": "BZ"
     },
     {
         "label": "Benin",
         "value": "Benin",
-        "flag": "🇧🇯"
+        "flag": "🇧🇯",
+        "code": "BJ"
     },
     {
         "label": "Bermuda",
         "value": "Bermuda",
-        "flag": "🇧🇲"
+        "flag": "🇧🇲",
+        "code": "BM"
     },
     {
         "label": "Bhutan",
         "value": "Bhutan",
-        "flag": "🇧🇹"
+        "flag": "🇧🇹",
+        "code": "BT"
     },
     {
         "label": "Bolivia",
         "value": "Bolivia",
-        "flag": "🇧🇴"
+        "flag": "🇧🇴",
+        "code": "BO"
     },
     {
         "label": "Bosnia and Herzegovina",
         "value": "Bosnia and Herzegovina",
-        "flag": "🇧🇦"
+        "flag": "🇧🇦",
+        "code": "BA"
     },
     {
         "label": "Botswana",
         "value": "Botswana",
-        "flag": "🇧🇼"
+        "flag": "🇧🇼",
+        "code": "BW"
     },
     {
         "label": "Bouvet Island",
         "value": "Bouvet Island",
-        "flag": "🇧🇻"
+        "flag": "🇧🇻",
+        "code": "BV"
     },
     {
         "label": "Brazil",
         "value": "Brazil",
-        "flag": "🇧🇷"
+        "flag": "🇧🇷",
+        "code": "BR"
     },
     {
         "label": "British Indian Ocean Territory",
         "value": "British Indian Ocean Territory",
-        "flag": "🇮🇴"
+        "flag": "🇮🇴",
+        "code": "IO"
     },
     {
         "label": "British Virgin Islands",
         "value": "British Virgin Islands",
-        "flag": "🇻🇬"
+        "flag": "🇻🇬",
+        "code": "VG"
     },
     {
         "label": "Brunei",
         "value": "Brunei",
-        "flag": "🇧🇳"
+        "flag": "🇧🇳",
+        "code": "BN"
     },
     {
         "label": "Bulgaria",
         "value": "Bulgaria",
-        "flag": "🇧🇬"
+        "flag": "🇧🇬",
+        "code": "BG"
     },
     {
         "label": "Burkina Faso",
         "value": "Burkina Faso",
-        "flag": "🇧🇫"
+        "flag": "🇧🇫",
+        "code": "BF"
     },
     {
         "label": "Burundi",
         "value": "Burundi",
-        "flag": "🇧🇮"
+        "flag": "🇧🇮",
+        "code": "BI"
     },
     {
         "label": "Cambodia",
         "value": "Cambodia",
-        "flag": "🇰🇭"
+        "flag": "🇰🇭",
+        "code": "KH"
     },
     {
         "label": "Cameroon",
         "value": "Cameroon",
-        "flag": "🇨🇲"
+        "flag": "🇨🇲",
+        "code": "CM"
     },
     {
         "label": "Canada",
         "value": "Canada",
-        "flag": "🇨🇦"
+        "flag": "🇨🇦",
+        "code": "CA"
     },
     {
         "label": "Cape Verde",
         "value": "Cape Verde",
-        "flag": "🇨🇻"
+        "flag": "🇨🇻",
+        "code": "CV"
     },
     {
         "label": "Caribbean Netherlands",
         "value": "Caribbean Netherlands",
-        "flag": "🇧🇶"
+        "flag": "🇧🇶",
+        "code": "BQ"
     },
     {
         "label": "Cayman Islands",
         "value": "Cayman Islands",
-        "flag": "🇰🇾"
+        "flag": "🇰🇾",
+        "code": "KY"
     },
     {
         "label": "Central African Republic",
         "value": "Central African Republic",
-        "flag": "🇨🇫"
+        "flag": "🇨🇫",
+        "code": "CF"
     },
     {
         "label": "Chad",
         "value": "Chad",
-        "flag": "🇹🇩"
+        "flag": "🇹🇩",
+        "code": "TD"
     },
     {
         "label": "Chile",
         "value": "Chile",
-        "flag": "🇨🇱"
+        "flag": "🇨🇱",
+        "code": "CL"
     },
     {
         "label": "China",
         "value": "China",
-        "flag": "🇨🇳"
+        "flag": "🇨🇳",
+        "code": "CN"
     },
     {
         "label": "Christmas Island",
         "value": "Christmas Island",
-        "flag": "🇨🇽"
+        "flag": "🇨🇽",
+        "code": "CX"
     },
     {
         "label": "Cocos (Keeling) Islands",
         "value": "Cocos (Keeling) Islands",
-        "flag": "🇨🇨"
+        "flag": "🇨🇨",
+        "code": "CC"
     },
     {
         "label": "Colombia",
         "value": "Colombia",
-        "flag": "🇨🇴"
+        "flag": "🇨🇴",
+        "code": "CO"
     },
     {
         "label": "Comoros",
         "value": "Comoros",
-        "flag": "🇰🇲"
+        "flag": "🇰🇲",
+        "code": "KM"
     },
     {
         "label": "Cook Islands",
         "value": "Cook Islands",
-        "flag": "🇨🇰"
+        "flag": "🇨🇰",
+        "code": "CK"
     },
     {
         "label": "Costa Rica",
         "value": "Costa Rica",
-        "flag": "🇨🇷"
+        "flag": "🇨🇷",
+        "code": "CR"
     },
     {
         "label": "Croatia",
         "value": "Croatia",
-        "flag": "🇭🇷"
+        "flag": "🇭🇷",
+        "code": "HR"
     },
     {
         "label": "Cuba",
         "value": "Cuba",
-        "flag": "🇨🇺"
+        "flag": "🇨🇺",
+        "code": "CU"
     },
     {
         "label": "Curaçao",
         "value": "Curaçao",
-        "flag": "🇨🇼"
+        "flag": "🇨🇼",
+        "code": "CW"
     },
     {
         "label": "Cyprus",
         "value": "Cyprus",
-        "flag": "🇨🇾"
+        "flag": "🇨🇾",
+        "code": "CY"
     },
     {
         "label": "Czechia",
         "value": "Czechia",
-        "flag": "🇨🇿"
+        "flag": "🇨🇿",
+        "code": "CZ"
     },
     {
         "label": "Denmark",
         "value": "Denmark",
-        "flag": "🇩🇰"
+        "flag": "🇩🇰",
+        "code": "DK"
     },
     {
         "label": "Djibouti",
         "value": "Djibouti",
-        "flag": "🇩🇯"
+        "flag": "🇩🇯",
+        "code": "DJ"
     },
     {
         "label": "Dominica",
         "value": "Dominica",
-        "flag": "🇩🇲"
+        "flag": "🇩🇲",
+        "code": "DM"
     },
     {
         "label": "Dominican Republic",
         "value": "Dominican Republic",
-        "flag": "🇩🇴"
+        "flag": "🇩🇴",
+        "code": "DO"
     },
     {
         "label": "DR Congo",
         "value": "DR Congo",
-        "flag": "🇨🇩"
+        "flag": "🇨🇩",
+        "code": "CD"
     },
     {
         "label": "Ecuador",
         "value": "Ecuador",
-        "flag": "🇪🇨"
+        "flag": "🇪🇨",
+        "code": "EC"
     },
     {
         "label": "Egypt",
         "value": "Egypt",
-        "flag": "🇪🇬"
+        "flag": "🇪🇬",
+        "code": "EG"
     },
     {
         "label": "El Salvador",
         "value": "El Salvador",
-        "flag": "🇸🇻"
+        "flag": "🇸🇻",
+        "code": "SV"
     },
     {
         "label": "Equatorial Guinea",
         "value": "Equatorial Guinea",
-        "flag": "🇬🇶"
+        "flag": "🇬🇶",
+        "code": "GQ"
     },
     {
         "label": "Eritrea",
         "value": "Eritrea",
-        "flag": "🇪🇷"
+        "flag": "🇪🇷",
+        "code": "ER"
     },
     {
         "label": "Estonia",
         "value": "Estonia",
-        "flag": "🇪🇪"
+        "flag": "🇪🇪",
+        "code": "EE"
     },
     {
         "label": "Eswatini",
         "value": "Eswatini",
-        "flag": "🇸🇿"
+        "flag": "🇸🇿",
+        "code": "SZ"
     },
     {
         "label": "Ethiopia",
         "value": "Ethiopia",
-        "flag": "🇪🇹"
+        "flag": "🇪🇹",
+        "code": "ET"
     },
     {
         "label": "Falkland Islands",
         "value": "Falkland Islands",
-        "flag": "🇫🇰"
+        "flag": "🇫🇰",
+        "code": "FK"
     },
     {
         "label": "Faroe Islands",
         "value": "Faroe Islands",
-        "flag": "🇫🇴"
+        "flag": "🇫🇴",
+        "code": "FO"
     },
     {
         "label": "Fiji",
         "value": "Fiji",
-        "flag": "🇫🇯"
+        "flag": "🇫🇯",
+        "code": "FJ"
     },
     {
         "label": "Finland",
         "value": "Finland",
-        "flag": "🇫🇮"
+        "flag": "🇫🇮",
+        "code": "FI"
     },
     {
         "label": "France",
         "value": "France",
-        "flag": "🇫🇷"
+        "flag": "🇫🇷",
+        "code": "FR"
     },
     {
         "label": "French Guiana",
         "value": "French Guiana",
-        "flag": "🇬🇫"
+        "flag": "🇬🇫",
+        "code": "GF"
     },
     {
         "label": "French Polynesia",
         "value": "French Polynesia",
-        "flag": "🇵🇫"
+        "flag": "🇵🇫",
+        "code": "PF"
     },
     {
         "label": "French Southern and Antarctic Lands",
         "value": "French Southern and Antarctic Lands",
-        "flag": "🇹🇫"
+        "flag": "🇹🇫",
+        "code": "TF"
     },
     {
         "label": "Gabon",
         "value": "Gabon",
-        "flag": "🇬🇦"
+        "flag": "🇬🇦",
+        "code": "GA"
     },
     {
         "label": "Gambia",
         "value": "Gambia",
-        "flag": "🇬🇲"
+        "flag": "🇬🇲",
+        "code": "GM"
     },
     {
         "label": "Georgia",
         "value": "Georgia",
-        "flag": "🇬🇪"
+        "flag": "🇬🇪",
+        "code": "GE"
     },
     {
         "label": "Germany",
         "value": "Germany",
-        "flag": "🇩🇪"
+        "flag": "🇩🇪",
+        "code": "DE"
     },
     {
         "label": "Ghana",
         "value": "Ghana",
-        "flag": "🇬🇭"
+        "flag": "🇬🇭",
+        "code": "GH"
     },
     {
         "label": "Gibraltar",
         "value": "Gibraltar",
-        "flag": "🇬🇮"
+        "flag": "🇬🇮",
+        "code": "GI"
     },
     {
         "label": "Greece",
         "value": "Greece",
-        "flag": "🇬🇷"
+        "flag": "🇬🇷",
+        "code": "GR"
     },
     {
         "label": "Greenland",
         "value": "Greenland",
-        "flag": "🇬🇱"
+        "flag": "🇬🇱",
+        "code": "GL"
     },
     {
         "label": "Grenada",
         "value": "Grenada",
-        "flag": "🇬🇩"
+        "flag": "🇬🇩",
+        "code": "GD"
     },
     {
         "label": "Guadeloupe",
         "value": "Guadeloupe",
-        "flag": "🇬🇵"
+        "flag": "🇬🇵",
+        "code": "GP"
     },
     {
         "label": "Guam",
         "value": "Guam",
-        "flag": "🇬🇺"
+        "flag": "🇬🇺",
+        "code": "GU"
     },
     {
         "label": "Guatemala",
         "value": "Guatemala",
-        "flag": "🇬🇹"
+        "flag": "🇬🇹",
+        "code": "GT"
     },
     {
         "label": "Guernsey",
         "value": "Guernsey",
-        "flag": "🇬🇬"
+        "flag": "🇬🇬",
+        "code": "GG"
     },
     {
         "label": "Guinea",
         "value": "Guinea",
-        "flag": "🇬🇳"
+        "flag": "🇬🇳",
+        "code": "GN"
     },
     {
         "label": "Guinea-Bissau",
         "value": "Guinea-Bissau",
-        "flag": "🇬🇼"
+        "flag": "🇬🇼",
+        "code": "GW"
     },
     {
         "label": "Guyana",
         "value": "Guyana",
-        "flag": "🇬🇾"
+        "flag": "🇬🇾",
+        "code": "GY"
     },
     {
         "label": "Haiti",
         "value": "Haiti",
-        "flag": "🇭🇹"
+        "flag": "🇭🇹",
+        "code": "HT"
     },
     {
         "label": "Heard Island and McDonald Islands",
         "value": "Heard Island and McDonald Islands",
-        "flag": "🇭🇲"
+        "flag": "🇭🇲",
+        "code": "HM"
     },
     {
         "label": "Honduras",
         "value": "Honduras",
-        "flag": "🇭🇳"
+        "flag": "🇭🇳",
+        "code": "HN"
     },
     {
         "label": "Hong Kong",
         "value": "Hong Kong",
-        "flag": "🇭🇰"
+        "flag": "🇭🇰",
+        "code": "HK"
     },
     {
         "label": "Hungary",
         "value": "Hungary",
-        "flag": "🇭🇺"
+        "flag": "🇭🇺",
+        "code": "HU"
     },
     {
         "label": "Iceland",
         "value": "Iceland",
-        "flag": "🇮🇸"
+        "flag": "🇮🇸",
+        "code": "IS"
     },
     {
         "label": "India",
         "value": "India",
-        "flag": "🇮🇳"
+        "flag": "🇮🇳",
+        "code": "IN"
     },
     {
         "label": "Indonesia",
         "value": "Indonesia",
-        "flag": "🇮🇩"
+        "flag": "🇮🇩",
+        "code": "ID"
     },
     {
         "label": "Iran",
         "value": "Iran",
-        "flag": "🇮🇷"
+        "flag": "🇮🇷",
+        "code": "IR"
     },
     {
         "label": "Iraq",
         "value": "Iraq",
-        "flag": "🇮🇶"
+        "flag": "🇮🇶",
+        "code": "IQ"
     },
     {
         "label": "Ireland",
         "value": "Ireland",
-        "flag": "🇮🇪"
+        "flag": "🇮🇪",
+        "code": "IE"
     },
     {
         "label": "Isle of Man",
         "value": "Isle of Man",
-        "flag": "🇮🇲"
+        "flag": "🇮🇲",
+        "code": "IM"
     },
     {
         "label": "Israel",
         "value": "Israel",
-        "flag": "🇮🇱"
+        "flag": "🇮🇱",
+        "code": "IL"
     },
     {
         "label": "Italy",
         "value": "Italy",
-        "flag": "🇮🇹"
+        "flag": "🇮🇹",
+        "code": "IT"
     },
     {
         "label": "Ivory Coast",
         "value": "Ivory Coast",
-        "flag": "🇨🇮"
+        "flag": "🇨🇮",
+        "code": "CI"
     },
     {
         "label": "Jamaica",
         "value": "Jamaica",
-        "flag": "🇯🇲"
+        "flag": "🇯🇲",
+        "code": "JM"
     },
     {
         "label": "Japan",
         "value": "Japan",
-        "flag": "🇯🇵"
+        "flag": "🇯🇵",
+        "code": "JP"
     },
     {
         "label": "Jersey",
         "value": "Jersey",
-        "flag": "🇯🇪"
+        "flag": "🇯🇪",
+        "code": "JE"
     },
     {
         "label": "Jordan",
         "value": "Jordan",
-        "flag": "🇯🇴"
+        "flag": "🇯🇴",
+        "code": "JO"
     },
     {
         "label": "Kazakhstan",
         "value": "Kazakhstan",
-        "flag": "🇰🇿"
+        "flag": "🇰🇿",
+        "code": "KZ"
     },
     {
         "label": "Kenya",
         "value": "Kenya",
-        "flag": "🇰🇪"
+        "flag": "🇰🇪",
+        "code": "KE"
     },
     {
         "label": "Kiribati",
         "value": "Kiribati",
-        "flag": "🇰🇮"
+        "flag": "🇰🇮",
+        "code": "KI"
     },
     {
         "label": "Kosovo",
         "value": "Kosovo",
-        "flag": "🇽🇰"
+        "flag": "🇽🇰",
+        "code": "XK"
     },
     {
         "label": "Kuwait",
         "value": "Kuwait",
-        "flag": "🇰🇼"
+        "flag": "🇰🇼",
+        "code": "KW"
     },
     {
         "label": "Kyrgyzstan",
         "value": "Kyrgyzstan",
-        "flag": "🇰🇬"
+        "flag": "🇰🇬",
+        "code": "KG"
     },
     {
         "label": "Laos",
         "value": "Laos",
-        "flag": "🇱🇦"
+        "flag": "🇱🇦",
+        "code": "LA"
     },
     {
         "label": "Latvia",
         "value": "Latvia",
-        "flag": "🇱🇻"
+        "flag": "🇱🇻",
+        "code": "LV"
     },
     {
         "label": "Lebanon",
         "value": "Lebanon",
-        "flag": "🇱🇧"
+        "flag": "🇱🇧",
+        "code": "LB"
     },
     {
         "label": "Lesotho",
         "value": "Lesotho",
-        "flag": "🇱🇸"
+        "flag": "🇱🇸",
+        "code": "LS"
     },
     {
         "label": "Liberia",
         "value": "Liberia",
-        "flag": "🇱🇷"
+        "flag": "🇱🇷",
+        "code": "LR"
     },
     {
         "label": "Libya",
         "value": "Libya",
-        "flag": "🇱🇾"
+        "flag": "🇱🇾",
+        "code": "LY"
     },
     {
         "label": "Liechtenstein",
         "value": "Liechtenstein",
-        "flag": "🇱🇮"
+        "flag": "🇱🇮",
+        "code": "LI"
     },
     {
         "label": "Lithuania",
         "value": "Lithuania",
-        "flag": "🇱🇹"
+        "flag": "🇱🇹",
+        "code": "LT"
     },
     {
         "label": "Luxembourg",
         "value": "Luxembourg",
-        "flag": "🇱🇺"
+        "flag": "🇱🇺",
+        "code": "LU"
     },
     {
         "label": "Macau",
         "value": "Macau",
-        "flag": "🇲🇴"
+        "flag": "🇲🇴",
+        "code": "MO"
     },
     {
         "label": "Madagascar",
         "value": "Madagascar",
-        "flag": "🇲🇬"
+        "flag": "🇲🇬",
+        "code": "MG"
     },
     {
         "label": "Malawi",
         "value": "Malawi",
-        "flag": "🇲🇼"
+        "flag": "🇲🇼",
+        "code": "MW"
     },
     {
         "label": "Malaysia",
         "value": "Malaysia",
-        "flag": "🇲🇾"
+        "flag": "🇲🇾",
+        "code": "MY"
     },
     {
         "label": "Maldives",
         "value": "Maldives",
-        "flag": "🇲🇻"
+        "flag": "🇲🇻",
+        "code": "MV"
     },
     {
         "label": "Mali",
         "value": "Mali",
-        "flag": "🇲🇱"
+        "flag": "🇲🇱",
+        "code": "ML"
     },
     {
         "label": "Malta",
         "value": "Malta",
-        "flag": "🇲🇹"
+        "flag": "🇲🇹",
+        "code": "MT"
     },
     {
         "label": "Marshall Islands",
         "value": "Marshall Islands",
-        "flag": "🇲🇭"
+        "flag": "🇲🇭",
+        "code": "MH"
     },
     {
         "label": "Martinique",
         "value": "Martinique",
-        "flag": "🇲🇶"
+        "flag": "🇲🇶",
+        "code": "MQ"
     },
     {
         "label": "Mauritania",
         "value": "Mauritania",
-        "flag": "🇲🇷"
+        "flag": "🇲🇷",
+        "code": "MR"
     },
     {
         "label": "Mauritius",
         "value": "Mauritius",
-        "flag": "🇲🇺"
+        "flag": "🇲🇺",
+        "code": "MU"
     },
     {
         "label": "Mayotte",
         "value": "Mayotte",
-        "flag": "🇾🇹"
+        "flag": "🇾🇹",
+        "code": "YT"
     },
     {
         "label": "Mexico",
         "value": "Mexico",
-        "flag": "🇲🇽"
+        "flag": "🇲🇽",
+        "code": "MX"
     },
     {
         "label": "Micronesia",
         "value": "Micronesia",
-        "flag": "🇫🇲"
+        "flag": "🇫🇲",
+        "code": "FM"
     },
     {
         "label": "Moldova",
         "value": "Moldova",
-        "flag": "🇲🇩"
+        "flag": "🇲🇩",
+        "code": "MD"
     },
     {
         "label": "Monaco",
         "value": "Monaco",
-        "flag": "🇲🇨"
+        "flag": "🇲🇨",
+        "code": "MC"
     },
     {
         "label": "Mongolia",
         "value": "Mongolia",
-        "flag": "🇲🇳"
+        "flag": "🇲🇳",
+        "code": "MN"
     },
     {
         "label": "Montenegro",
         "value": "Montenegro",
-        "flag": "🇲🇪"
+        "flag": "🇲🇪",
+        "code": "ME"
     },
     {
         "label": "Montserrat",
         "value": "Montserrat",
-        "flag": "🇲🇸"
+        "flag": "🇲🇸",
+        "code": "MS"
     },
     {
         "label": "Morocco",
         "value": "Morocco",
-        "flag": "🇲🇦"
+        "flag": "🇲🇦",
+        "code": "MA"
     },
     {
         "label": "Mozambique",
         "value": "Mozambique",
-        "flag": "🇲🇿"
+        "flag": "🇲🇿",
+        "code": "MZ"
     },
     {
         "label": "Myanmar",
         "value": "Myanmar",
-        "flag": "🇲🇲"
+        "flag": "🇲🇲",
+        "code": "MM"
     },
     {
         "label": "Namibia",
         "value": "Namibia",
-        "flag": "🇳🇦"
+        "flag": "🇳🇦",
+        "code": "NA"
     },
     {
         "label": "Nauru",
         "value": "Nauru",
-        "flag": "🇳🇷"
+        "flag": "🇳🇷",
+        "code": "NR"
     },
     {
         "label": "Nepal",
         "value": "Nepal",
-        "flag": "🇳🇵"
+        "flag": "🇳🇵",
+        "code": "NP"
     },
     {
         "label": "Netherlands",
         "value": "Netherlands",
-        "flag": "🇳🇱"
+        "flag": "🇳🇱",
+        "code": "NL"
     },
     {
         "label": "New Caledonia",
         "value": "New Caledonia",
-        "flag": "🇳🇨"
+        "flag": "🇳🇨",
+        "code": "NC"
     },
     {
         "label": "New Zealand",
         "value": "New Zealand",
-        "flag": "🇳🇿"
+        "flag": "🇳🇿",
+        "code": "NZ"
     },
     {
         "label": "Nicaragua",
         "value": "Nicaragua",
-        "flag": "🇳🇮"
+        "flag": "🇳🇮",
+        "code": "NI"
     },
     {
         "label": "Niger",
         "value": "Niger",
-        "flag": "🇳🇪"
+        "flag": "🇳🇪",
+        "code": "NE"
     },
     {
         "label": "Nigeria",
         "value": "Nigeria",
-        "flag": "🇳🇬"
+        "flag": "🇳🇬",
+        "code": "NG"
     },
     {
         "label": "Niue",
         "value": "Niue",
-        "flag": "🇳🇺"
+        "flag": "🇳🇺",
+        "code": "NU"
     },
     {
         "label": "Norfolk Island",
         "value": "Norfolk Island",
-        "flag": "🇳🇫"
+        "flag": "🇳🇫",
+        "code": "NF"
     },
     {
         "label": "North Korea",
         "value": "North Korea",
-        "flag": "🇰🇵"
+        "flag": "🇰🇵",
+        "code": "KP"
     },
     {
         "label": "North Macedonia",
         "value": "North Macedonia",
-        "flag": "🇲🇰"
+        "flag": "🇲🇰",
+        "code": "MK"
     },
     {
         "label": "Northern Mariana Islands",
         "value": "Northern Mariana Islands",
-        "flag": "🇲🇵"
+        "flag": "🇲🇵",
+        "code": "MP"
     },
     {
         "label": "Norway",
         "value": "Norway",
-        "flag": "🇳🇴"
+        "flag": "🇳🇴",
+        "code": "NO"
     },
     {
         "label": "Oman",
         "value": "Oman",
-        "flag": "🇴🇲"
+        "flag": "🇴🇲",
+        "code": "OM"
     },
     {
         "label": "Pakistan",
         "value": "Pakistan",
-        "flag": "🇵🇰"
+        "flag": "🇵🇰",
+        "code": "PK"
     },
     {
         "label": "Palau",
         "value": "Palau",
-        "flag": "🇵🇼"
+        "flag": "🇵🇼",
+        "code": "PW"
     },
     {
         "label": "Palestine",
         "value": "Palestine",
-        "flag": "🇵🇸"
+        "flag": "🇵🇸",
+        "code": "PS"
     },
     {
         "label": "Panama",
         "value": "Panama",
-        "flag": "🇵🇦"
+        "flag": "🇵🇦",
+        "code": "PA"
     },
     {
         "label": "Papua New Guinea",
         "value": "Papua New Guinea",
-        "flag": "🇵🇬"
+        "flag": "🇵🇬",
+        "code": "PG"
     },
     {
         "label": "Paraguay",
         "value": "Paraguay",
-        "flag": "🇵🇾"
+        "flag": "🇵🇾",
+        "code": "PY"
     },
     {
         "label": "Peru",
         "value": "Peru",
-        "flag": "🇵🇪"
+        "flag": "🇵🇪",
+        "code": "PE"
     },
     {
         "label": "Philippines",
         "value": "Philippines",
-        "flag": "🇵🇭"
+        "flag": "🇵🇭",
+        "code": "PH"
     },
     {
         "label": "Pitcairn Islands",
         "value": "Pitcairn Islands",
-        "flag": "🇵🇳"
+        "flag": "🇵🇳",
+        "code": "PN"
     },
     {
         "label": "Poland",
         "value": "Poland",
-        "flag": "🇵🇱"
+        "flag": "🇵🇱",
+        "code": "PL"
     },
     {
         "label": "Portugal",
         "value": "Portugal",
-        "flag": "🇵🇹"
+        "flag": "🇵🇹",
+        "code": "PT"
     },
     {
         "label": "Puerto Rico",
         "value": "Puerto Rico",
-        "flag": "🇵🇷"
+        "flag": "🇵🇷",
+        "code": "PR"
     },
     {
         "label": "Qatar",
         "value": "Qatar",
-        "flag": "🇶🇦"
+        "flag": "🇶🇦",
+        "code": "QA"
     },
     {
         "label": "Republic of the Congo",
         "value": "Republic of the Congo",
-        "flag": "🇨🇬"
+        "flag": "🇨🇬",
+        "code": "CG"
     },
     {
         "label": "Réunion",
         "value": "Réunion",
-        "flag": "🇷🇪"
+        "flag": "🇷🇪",
+        "code": "RE"
     },
     {
         "label": "Romania",
         "value": "Romania",
-        "flag": "🇷🇴"
+        "flag": "🇷🇴",
+        "code": "RO"
     },
     {
         "label": "Russia",
         "value": "Russia",
-        "flag": "🇷🇺"
+        "flag": "🇷🇺",
+        "code": "RU"
     },
     {
         "label": "Rwanda",
         "value": "Rwanda",
-        "flag": "🇷🇼"
+        "flag": "🇷🇼",
+        "code": "RW"
     },
     {
         "label": "Saint Barthélemy",
         "value": "Saint Barthélemy",
-        "flag": "🇧🇱"
+        "flag": "🇧🇱",
+        "code": "BL"
     },
     {
         "label": "Saint Helena, Ascension and Tristan da Cunha",
         "value": "Saint Helena, Ascension and Tristan da Cunha",
-        "flag": "🇸🇭"
+        "flag": "🇸🇭",
+        "code": "SH"
     },
     {
         "label": "Saint Kitts and Nevis",
         "value": "Saint Kitts and Nevis",
-        "flag": "🇰🇳"
+        "flag": "🇰🇳",
+        "code": "KN"
     },
     {
         "label": "Saint Lucia",
         "value": "Saint Lucia",
-        "flag": "🇱🇨"
+        "flag": "🇱🇨",
+        "code": "LC"
     },
     {
         "label": "Saint Martin",
         "value": "Saint Martin",
-        "flag": "🇲🇫"
+        "flag": "🇲🇫",
+        "code": "MF"
     },
     {
         "label": "Saint Pierre and Miquelon",
         "value": "Saint Pierre and Miquelon",
-        "flag": "🇵🇲"
+        "flag": "🇵🇲",
+        "code": "PM"
     },
     {
         "label": "Saint Vincent and the Grenadines",
         "value": "Saint Vincent and the Grenadines",
-        "flag": "🇻🇨"
+        "flag": "🇻🇨",
+        "code": "VC"
     },
     {
         "label": "Samoa",
         "value": "Samoa",
-        "flag": "🇼🇸"
+        "flag": "🇼🇸",
+        "code": "WS"
     },
     {
         "label": "San Marino",
         "value": "San Marino",
-        "flag": "🇸🇲"
+        "flag": "🇸🇲",
+        "code": "SM"
     },
     {
         "label": "São Tomé and Príncipe",
         "value": "São Tomé and Príncipe",
-        "flag": "🇸🇹"
+        "flag": "🇸🇹",
+        "code": "ST"
     },
     {
         "label": "Saudi Arabia",
         "value": "Saudi Arabia",
-        "flag": "🇸🇦"
+        "flag": "🇸🇦",
+        "code": "SA"
     },
     {
         "label": "Senegal",
         "value": "Senegal",
-        "flag": "🇸🇳"
+        "flag": "🇸🇳",
+        "code": "SN"
     },
     {
         "label": "Serbia",
         "value": "Serbia",
-        "flag": "🇷🇸"
+        "flag": "🇷🇸",
+        "code": "RS"
     },
     {
         "label": "Seychelles",
         "value": "Seychelles",
-        "flag": "🇸🇨"
+        "flag": "🇸🇨",
+        "code": "SC"
     },
     {
         "label": "Sierra Leone",
         "value": "Sierra Leone",
-        "flag": "🇸🇱"
+        "flag": "🇸🇱",
+        "code": "SL"
     },
     {
         "label": "Singapore",
         "value": "Singapore",
-        "flag": "🇸🇬"
+        "flag": "🇸🇬",
+        "code": "SG"
     },
     {
         "label": "Sint Maarten",
         "value": "Sint Maarten",
-        "flag": "🇸🇽"
+        "flag": "🇸🇽",
+        "code": "SX"
     },
     {
         "label": "Slovakia",
         "value": "Slovakia",
-        "flag": "🇸🇰"
+        "flag": "🇸🇰",
+        "code": "SK"
     },
     {
         "label": "Slovenia",
         "value": "Slovenia",
-        "flag": "🇸🇮"
+        "flag": "🇸🇮",
+        "code": "SI"
     },
     {
         "label": "Solomon Islands",
         "value": "Solomon Islands",
-        "flag": "🇸🇧"
+        "flag": "🇸🇧",
+        "code": "SB"
     },
     {
         "label": "Somalia",
         "value": "Somalia",
-        "flag": "🇸🇴"
+        "flag": "🇸🇴",
+        "code": "SO"
     },
     {
         "label": "South Africa",
         "value": "South Africa",
-        "flag": "🇿🇦"
+        "flag": "🇿🇦",
+        "code": "ZA"
     },
     {
         "label": "South Georgia",
         "value": "South Georgia",
-        "flag": "🇬🇸"
+        "flag": "🇬🇸",
+        "code": "GS"
     },
     {
         "label": "South Korea",
         "value": "South Korea",
-        "flag": "🇰🇷"
+        "flag": "🇰🇷",
+        "code": "KR"
     },
     {
         "label": "South Sudan",
         "value": "South Sudan",
-        "flag": "🇸🇸"
+        "flag": "🇸🇸",
+        "code": "SS"
     },
     {
         "label": "Spain",
         "value": "Spain",
-        "flag": "🇪🇸"
+        "flag": "🇪🇸",
+        "code": "ES"
     },
     {
         "label": "Sri Lanka",
         "value": "Sri Lanka",
-        "flag": "🇱🇰"
+        "flag": "🇱🇰",
+        "code": "LK"
     },
     {
         "label": "Sudan",
         "value": "Sudan",
-        "flag": "🇸🇩"
+        "flag": "🇸🇩",
+        "code": "SD"
     },
     {
         "label": "Suriname",
         "value": "Suriname",
-        "flag": "🇸🇷"
+        "flag": "🇸🇷",
+        "code": "SR"
     },
     {
         "label": "Svalbard and Jan Mayen",
         "value": "Svalbard and Jan Mayen",
-        "flag": "🇸🇯"
+        "flag": "🇸🇯",
+        "code": "SJ"
     },
     {
         "label": "Sweden",
         "value": "Sweden",
-        "flag": "🇸🇪"
+        "flag": "🇸🇪",
+        "code": "SE"
     },
     {
         "label": "Switzerland",
         "value": "Switzerland",
-        "flag": "🇨🇭"
+        "flag": "🇨🇭",
+        "code": "CH"
     },
     {
         "label": "Syria",
         "value": "Syria",
-        "flag": "🇸🇾"
+        "flag": "🇸🇾",
+        "code": "SY"
     },
     {
         "label": "Taiwan",
         "value": "Taiwan",
-        "flag": "🇹🇼"
+        "flag": "🇹🇼",
+        "code": "TW"
     },
     {
         "label": "Tajikistan",
         "value": "Tajikistan",
-        "flag": "🇹🇯"
+        "flag": "🇹🇯",
+        "code": "TJ"
     },
     {
         "label": "Tanzania",
         "value": "Tanzania",
-        "flag": "🇹🇿"
+        "flag": "🇹🇿",
+        "code": "TZ"
     },
     {
         "label": "Thailand",
         "value": "Thailand",
-        "flag": "🇹🇭"
+        "flag": "🇹🇭",
+        "code": "TH"
     },
     {
         "label": "Timor-Leste",
         "value": "Timor-Leste",
-        "flag": "🇹🇱"
+        "flag": "🇹🇱",
+        "code": "TL"
     },
     {
         "label": "Togo",
         "value": "Togo",
-        "flag": "🇹🇬"
+        "flag": "🇹🇬",
+        "code": "TG"
     },
     {
         "label": "Tokelau",
         "value": "Tokelau",
-        "flag": "🇹🇰"
+        "flag": "🇹🇰",
+        "code": "TK"
     },
     {
         "label": "Tonga",
         "value": "Tonga",
-        "flag": "🇹🇴"
+        "flag": "🇹🇴",
+        "code": "TO"
     },
     {
         "label": "Trinidad and Tobago",
         "value": "Trinidad and Tobago",
-        "flag": "🇹🇹"
+        "flag": "🇹🇹",
+        "code": "TT"
     },
     {
         "label": "Tunisia",
         "value": "Tunisia",
-        "flag": "🇹🇳"
+        "flag": "🇹🇳",
+        "code": "TN"
     },
     {
         "label": "Turkey",
         "value": "Turkey",
-        "flag": "🇹🇷"
+        "flag": "🇹🇷",
+        "code": "TR"
     },
     {
         "label": "Turkmenistan",
         "value": "Turkmenistan",
-        "flag": "🇹🇲"
+        "flag": "🇹🇲",
+        "code": "TM"
     },
     {
         "label": "Turks and Caicos Islands",
         "value": "Turks and Caicos Islands",
-        "flag": "🇹🇨"
+        "flag": "🇹🇨",
+        "code": "TC"
     },
     {
         "label": "Tuvalu",
         "value": "Tuvalu",
-        "flag": "🇹🇻"
+        "flag": "🇹🇻",
+        "code": "TV"
     },
     {
         "label": "Uganda",
         "value": "Uganda",
-        "flag": "🇺🇬"
+        "flag": "🇺🇬",
+        "code": "UG"
     },
     {
         "label": "Ukraine",
         "value": "Ukraine",
-        "flag": "🇺🇦"
+        "flag": "🇺🇦",
+        "code": "UA"
     },
     {
         "label": "United Arab Emirates",
         "value": "United Arab Emirates",
-        "flag": "🇦🇪"
+        "flag": "🇦🇪",
+        "code": "AE"
     },
     {
         "label": "United Kingdom",
         "value": "United Kingdom",
-        "flag": "🇬🇧"
+        "flag": "🇬🇧",
+        "code": "GB"
     },
     {
         "label": "United States",
         "value": "United States",
-        "flag": "🇺🇸"
+        "flag": "🇺🇸",
+        "code": "US"
     },
     {
         "label": "United States Minor Outlying Islands",
         "value": "United States Minor Outlying Islands",
-        "flag": "🇺🇲"
+        "flag": "🇺🇲",
+        "code": "UM"
     },
     {
         "label": "United States Virgin Islands",
         "value": "United States Virgin Islands",
-        "flag": "🇻🇮"
+        "flag": "🇻🇮",
+        "code": "VI"
     },
     {
         "label": "Uruguay",
         "value": "Uruguay",
-        "flag": "🇺🇾"
+        "flag": "🇺🇾",
+        "code": "UY"
     },
     {
         "label": "Uzbekistan",
         "value": "Uzbekistan",
-        "flag": "🇺🇿"
+        "flag": "🇺🇿",
+        "code": "UZ"
     },
     {
         "label": "Vanuatu",
         "value": "Vanuatu",
-        "flag": "🇻🇺"
+        "flag": "🇻🇺",
+        "code": "VU"
     },
     {
         "label": "Vatican City",
         "value": "Vatican City",
-        "flag": "🇻🇦"
+        "flag": "🇻🇦",
+        "code": "VA"
     },
     {
         "label": "Venezuela",
         "value": "Venezuela",
-        "flag": "🇻🇪"
+        "flag": "🇻🇪",
+        "code": "VE"
     },
     {
         "label": "Vietnam",
         "value": "Vietnam",
-        "flag": "🇻🇳"
+        "flag": "🇻🇳",
+        "code": "VN"
     },
     {
         "label": "Wallis and Futuna",
         "value": "Wallis and Futuna",
-        "flag": "🇼🇫"
+        "flag": "🇼🇫",
+        "code": "WF"
     },
     {
         "label": "Western Sahara",
         "value": "Western Sahara",
-        "flag": "🇪🇭"
+        "flag": "🇪🇭",
+        "code": "EH"
     },
     {
         "label": "Yemen",
         "value": "Yemen",
-        "flag": "🇾🇪"
+        "flag": "🇾🇪",
+        "code": "YE"
     },
     {
         "label": "Zambia",
         "value": "Zambia",
-        "flag": "🇿🇲"
+        "flag": "🇿🇲",
+        "code": "ZM"
     },
     {
         "label": "Zimbabwe",
         "value": "Zimbabwe",
-        "flag": "🇿🇼"
+        "flag": "🇿🇼",
+        "code": "ZW"
     }
 ]

@@ -9,9 +9,9 @@ export default async function RecentReports() {
   }
 
   return (
-    <section className="w-full max-w-2xl mx-auto mt-12 mb-8">
+    <section className="w-full max-w-2xl mx-auto mt-12 mb-6 px-4">
       <h2 className="text-2xl font-semibold mb-6 text-center">Recent Reports</h2>
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid md:grid-cols-2 gap-4">
         {recentReports.map((report) => (
           <ReportPreviewCard key={report.id} report={report} />
         ))}

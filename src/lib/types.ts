@@ -9,6 +9,7 @@ export type TCountryOption = {
   label: string;
   value: string;
   flag: string;
+  code: string;
 };
 
 export interface IKeyFactor {
