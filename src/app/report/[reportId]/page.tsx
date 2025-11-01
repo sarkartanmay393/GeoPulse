@@ -8,7 +8,7 @@ export default function ReportPage({ params }: { params: { reportId: string } })
   const reportId = (params?.reportId as string ?? '');
 
   return (
-    <main className="flex min-h-screen w-screen flex-col items-center justify-start p-6 transition">
+    <main className="flex min-h-screen w-screen flex-col items-center justify-start p-6 transition py-12">
       <div className="max-w-2xl space-y-4 h-full w-full">
         <Header />
         <ReportInput />

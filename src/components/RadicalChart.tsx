@@ -39,6 +39,9 @@ type TProps = {
 }
 
 export function RadicalChart({ chartData }: TProps) {
+    const maxScoreAcrossFactors = Math.max(...chartData.map((data) => data.score));
+    const maxDomainInChart = maxScoreAcrossFactors < 100 ? Math.min(100, maxScoreAcrossFactors + 10) : 100;
+
     return (
         <TooltipProvider>
             <Card className="shadow-none border-none space-y-4 bg-transparent">
@@ -71,7 +74,7 @@ export function RadicalChart({ chartData }: TProps) {
                             />
                             <PolarGrid gridType="circle" />
                             <PolarAngleAxis dataKey="keyFactor" tick={window.innerWidth < 600 ? false : true} />
-                            <PolarRadiusAxis className="opacity-35" angle={30} domain={[0, 100]} />
+                            <PolarRadiusAxis className="opacity-85" angle={30} domain={[0, maxDomainInChart]} />
                             <Radar
                                 dataKey="score"
                                 fill="var(--color-score)"
