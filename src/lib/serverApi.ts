@@ -1,9 +1,13 @@
 'use server';
 
-import type { ITableRow, INewsArticle } from "./types";
+import type { ITableRow, INewsArticle, TCountryOption } from "./types";
 import { createClient } from "./supabase/server";
 import { cookies } from "next/headers";
 import { increamentVersion } from "./utils";
+import countriesData from "../../public/countries.json";
+
+// Cache countries data at module level to avoid repeated imports
+const countries = countriesData as TCountryOption[];
 
 export async function insertGeoPulse(row: ITableRow, id: string = "", update: boolean = false, version: number = 1.0) {
     const cookieStore = cookies();
@@ -66,35 +70,30 @@ export async function fetchCountrySpecificReports(countryCode: string, limit: nu
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
     
-    // Fetch reports where the country code matches one of the countries in the pair
-    // The countries field is an array, so we need to check if it contains our country
-    const { data, error } = await supabase
-        .from('geo_pulses')
-        .select('*')
-        .order('last_updated', { ascending: false })
-        .limit(50); // Fetch more to filter client-side
-
-    if (error) {
-        console.error('Failed to fetch country-specific reports from database:', error.message);
-        return [];
-    }
-
-    // Filter reports that include the user's country
-    // We need to import countries data to map country code to country name
-    const countriesData = await import('../../public/countries.json');
-    const countries = countriesData.default;
-    const userCountry = countries.find((c: any) => c.code === countryCode);
+    // Map country code to country name using cached data
+    const userCountry = countries.find((c) => c.code === countryCode);
     
     if (!userCountry) {
         return [];
     }
 
     const userCountryName = userCountry.value;
-    const filteredData = (data ?? []).filter((report) => 
-        report.countries?.includes(userCountryName)
-    );
+    
+    // Fetch reports where the country code matches one of the countries in the pair
+    // The countries field is an array, so we need to check if it contains our country
+    const { data, error } = await supabase
+        .from('geo_pulses')
+        .select('*')
+        .contains('countries', [userCountryName])
+        .order('last_updated', { ascending: false })
+        .limit(limit);
 
-    return filteredData.slice(0, limit);
+    if (error) {
+        console.error('Failed to fetch country-specific reports from database:', error.message);
+        return [];
+    }
+
+    return data ?? [];
 }
 
 export async function fetchNewsArticles(country1: string, country2: string): Promise<INewsArticle[]> {
