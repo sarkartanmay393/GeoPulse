@@ -11,13 +11,10 @@ const CircularPercentage: React.FC<CircularPercentageProps> = ({ percentage }) =
   const hasMoreThanOne = hasMoreThanOneDecimalPlaces(percentage);
 
   const getColor = (percentage: number) => {
-    if (percentage < 40) {
-      return "#FF0000"; // Red for <40%
-    } else if (percentage < 80) {
-      return "#FFA500"; // Yellow for <80%
-    } else {
-      return "#2fee19"; // Green for >=80%
-    }
+    if (percentage >= 85) return "text-emerald-600";
+    if (percentage >= 70) return "text-blue-600";
+    if (percentage >= 50) return "text-amber-600";
+    return "text-rose-600";
   };
 
   return (

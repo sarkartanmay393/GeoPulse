@@ -11,26 +11,28 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function geopoliticalAnalysisToTableRow(analysis: IGeopoliticalAnalysis, id: string, countries: string[], source?: string[]): ITableRow {
+export function geopoliticalAnalysisToTableRow(analysis: IGeopoliticalAnalysis, id: string, countries: string[], source_meta?: any): ITableRow {
+  const toInt = (n?: number) => (typeof n === 'number' ? Math.round(n) : undefined);
+
   return {
     id,
     last_updated: new Date().toUTCString(),
     countries,
-    diplomatic_relations_score: analysis?.diplomatic_relations?.score,
+    diplomatic_relations_score: toInt(analysis?.diplomatic_relations?.score),
     diplomatic_relations_explanation: analysis?.diplomatic_relations?.explanation,
-    economic_ties_score: analysis?.economic_ties?.score,
+    economic_ties_score: toInt(analysis?.economic_ties?.score),
     economic_ties_explanation: analysis?.economic_ties?.explanation,
-    military_relations_score: analysis?.military_relations?.score,
+    military_relations_score: toInt(analysis?.military_relations?.score),
     military_relations_explanation: analysis?.military_relations?.explanation,
-    political_alignments_score: analysis?.political_alignments?.score,
+    political_alignments_score: toInt(analysis?.political_alignments?.score),
     political_alignments_explanation: analysis?.political_alignments?.explanation,
-    cultural_social_ties_score: analysis?.cultural_social_ties?.score,
+    cultural_social_ties_score: toInt(analysis?.cultural_social_ties?.score),
     cultural_social_ties_explanation: analysis?.cultural_social_ties?.explanation,
-    historical_context_score: analysis?.historical_context?.score,
+    historical_context_score: toInt(analysis?.historical_context?.score),
     historical_context_explanation: analysis?.historical_context?.explanation,
-    overall_score: analysis?.overall_score?.score,
+    overall_score: toInt(analysis?.overall_score?.score),
     overall_explanation: analysis?.overall_score?.explanation,
-    source: source,
+    source_meta: source_meta,
   };
 }
 

@@ -46,7 +46,8 @@ export interface ITableRow {
   historical_context_explanation?: string;
   overall_score?: number;
   overall_explanation?: string;
-  source?: string[];
+  source?: any;
+  source_meta?: any;
 }
 
 export type TFormValues = {
@@ -61,4 +62,19 @@ export type TWrongReport = {
   country2: string;
   pulse_id: string;
   report_corrected: boolean
+}
+
+export interface INewsArticle {
+  title: string;
+  description: string;
+  url: string;
+  publishedAt: string;
+  source: {
+    name: string;
+  };
+}
+
+export interface INewsResponse {
+  articles: INewsArticle[];
+  totalResults: number;
 }

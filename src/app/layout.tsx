@@ -4,9 +4,7 @@ import { type Metadata } from "next";
 import { Toaster } from "~/components/ui/toaster";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Header from "~/components/Header";
 import TsxBadge from "~/components/TsxBadge";
-import ProductHuntBadge from "~/components/ProducthuntBadge";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
@@ -20,8 +18,8 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="relative scrollbar-thin scroll-smooth flex min-h-screen flex-col items-center justify-center">
+    <html lang="en" className={`${GeistSans.variable}`} suppressHydrationWarning>
+      <body className="relative scrollbar-thin scroll-smooth flex min-h-screen flex-col items-center justify-center" suppressHydrationWarning>
         <Suspense fallback={<div className="flex items-center justify-center">Loading...</div>}>
           {children}
         </Suspense>
