@@ -78,12 +78,12 @@ export async function fetchNewsArticles(country1: string, country2: string): Pro
         // Calculate date 30 days ago for recent news
         const thirtyDaysAgo = new Date();
         thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-        const fromDate = thirtyDaysAgo.toISOString().split('T')[0];
+        const fromDate = thirtyDaysAgo.toISOString().split('T')[0]!;
         
         // Use NewsAPI's everything endpoint for more comprehensive results
         const url = new URL('https://newsapi.org/v2/everything');
         url.searchParams.append('q', query);
-        url.searchParams.append('from', fromDate ?? '');
+        url.searchParams.append('from', fromDate);
         url.searchParams.append('sortBy', 'relevancy');
         url.searchParams.append('pageSize', '15');
         url.searchParams.append('language', 'en');

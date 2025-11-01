@@ -51,7 +51,7 @@ export async function POST(req: Request) {
     const newsArticles = await fetchNewsArticles(country1 ?? '', country2 ?? '');
 
     if (cachedData && new Date(cachedData.last_updated) > oneMonthAgo) {
-      return new Response(JSON.stringify({ ...cachedData, source: cachedData?.source ?? [wikipediaHtml.length > 0 ? 'wikipedia' : '', 'gpt-4o-mini'] }), {
+      return new Response(JSON.stringify(cachedData), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }
       });
@@ -146,10 +146,10 @@ export async function POST(req: Request) {
     
     // Track sources used for this analysis
     const sources = [
-      wikipediaHtml.length > 0 ? 'wikipedia' : '',
-      newsArticles.length > 0 ? 'news-api' : '',
+      ...(wikipediaHtml.length > 0 ? ['wikipedia'] : []),
+      ...(newsArticles.length > 0 ? ['news-api'] : []),
       'gpt-4o-2024-08-06'
-    ].filter(s => s !== '');
+    ];
 
     const newEntry = geopoliticalAnalysisToTableRow(generatedData, reportId, countries, sources);
 
