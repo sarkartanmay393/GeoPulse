@@ -62,6 +62,41 @@ export async function fetchRecentReports(limit: number = 5): Promise<ITableRow[]
     return data ?? [];
 }
 
+export async function fetchCountrySpecificReports(countryCode: string, limit: number = 5): Promise<ITableRow[]> {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    
+    // Fetch reports where the country code matches one of the countries in the pair
+    // The countries field is an array, so we need to check if it contains our country
+    const { data, error } = await supabase
+        .from('geo_pulses')
+        .select('*')
+        .order('last_updated', { ascending: false })
+        .limit(50); // Fetch more to filter client-side
+
+    if (error) {
+        console.error('Failed to fetch country-specific reports from database:', error.message);
+        return [];
+    }
+
+    // Filter reports that include the user's country
+    // We need to import countries data to map country code to country name
+    const countriesData = await import('../../public/countries.json');
+    const countries = countriesData.default;
+    const userCountry = countries.find((c: any) => c.code === countryCode);
+    
+    if (!userCountry) {
+        return [];
+    }
+
+    const userCountryName = userCountry.value;
+    const filteredData = (data ?? []).filter((report) => 
+        report.countries?.includes(userCountryName)
+    );
+
+    return filteredData.slice(0, limit);
+}
+
 export async function fetchNewsArticles(country1: string, country2: string): Promise<INewsArticle[]> {
     const apiKey = process.env.NEWS_API_KEY;
     
