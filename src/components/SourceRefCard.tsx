@@ -18,7 +18,7 @@ const SourceReferenceCard = ({ source, reportId }: any) => {
         </p>
         {source?.includes('wikipedia') ?
             <Button asChild variant="link">
-              <Link href={getWikipediaUrl(reportId)}>
+              <Link href={getWikipediaUrl(reportId)} target="_blank" rel="noopener noreferrer">
                 Wikipedia
               </Link>
             </Button> :

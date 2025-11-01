@@ -42,3 +42,22 @@ export async function fetchWikipediaHtml (countries: string[]) {
     const html = await response.text();
     return html;
 }
+
+export async function fetchRecentReports(limit: number = 5): Promise<ITableRow[]> {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    
+    // Fetch the last 'limit' reports ordered by last_updated (which is when they were created/updated)
+    const { data, error } = await supabase
+        .from('geo_pulses')
+        .select('*')
+        .order('last_updated', { ascending: false })
+        .limit(limit);
+
+    if (error) {
+        console.error('Failed to fetch recent reports from database:', error.message);
+        return [];
+    }
+
+    return data ?? [];
+}

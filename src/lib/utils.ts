@@ -2,9 +2,10 @@ import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { v5 as uuidv5 } from 'uuid';
 
-import { IGeopoliticalAnalysis, ITableRow } from "~/lib/types";
+import { IGeopoliticalAnalysis, ITableRow, TCountryOption } from "~/lib/types";
 import { UUID_NAMESPACE } from "./constants";
 import useGetCountries from "~/hooks/useGetCountries";
+import countriesData from "../../public/countries.json";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -127,4 +128,10 @@ export function scrollByAmount(pixels: number) {
 export const increamentVersion = (version: number) => {
   const factor = 0.1;
   return version + factor;
+}
+
+export function getCountry(countryName: string) {
+  const countries = countriesData as TCountryOption[];
+  const country = countries.find((c) => c.value === countryName);
+  return country ?? null;
 }
