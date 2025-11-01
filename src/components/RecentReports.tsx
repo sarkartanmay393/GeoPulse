@@ -2,7 +2,7 @@ import { fetchRecentReports } from "~/lib/serverApi";
 import ReportPreviewCard from "~/components/ReportPreviewCard";
 
 export default async function RecentReports() {
-  const recentReports = await fetchRecentReports(5);
+  const recentReports = await fetchRecentReports(4);
 
   if (!recentReports || recentReports.length === 0) {
     return null;
