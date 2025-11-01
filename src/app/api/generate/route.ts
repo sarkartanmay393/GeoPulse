@@ -71,9 +71,6 @@ export async function POST(req: Request) {
     const formattedPrompt = `
       You are a geopolitical analyst. Given the two countries ${country1} and ${country2}, analyze their relationship based on the following six key factors using the most recent and latest data available from the internet:
 
-      RECENT NEWS ARTICLES (Use these for the most current insights):
-      ${newsContext}
-
       1. Diplomatic Relations: Assess the presence of embassies, consulates, and other diplomatic missions, the frequency of high-level diplomatic visits, and any significant treaties or agreements. Provide the number and locations of embassies in both countries, and include any notable diplomatic engagements. Pull the latest diplomatic events and treaties from current news sources.
         - Score: Provide a score out of 100, where 0 indicates very weak diplomatic relations and 100 indicates very strong relations.
         - Explanation: Briefly explain why this score was assigned, citing specific data such as the number of embassies, their locations, and the nature of diplomatic interactions. Ensure that all data is the most up-to-date by incorporating the latest diplomatic news from the internet.
@@ -103,6 +100,9 @@ export async function POST(req: Request) {
         - Explanation: Briefly summarize why this score was assigned, ensuring that it is an average and well-balanced reflection of the individual scores provided above.
 
       Scoring must be objective and based solely on the analysis and data provided, without being influenced by personal opinions or external factors.
+
+      RECENT NEWS ARTICLES (Use these for the most current insights):
+      ${newsContext}
 
       Use the text below to make the analysis more accurate.
       ${wikipediaText}
