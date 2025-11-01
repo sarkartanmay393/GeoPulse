@@ -128,3 +128,9 @@ export const increamentVersion = (version: number) => {
   const factor = 0.1;
   return version + factor;
 }
+
+export function getCountryFlag(countryName: string): string {
+  const countries = require('../../public/countries.json');
+  const country = countries.find((c: any) => c.value === countryName);
+  return country?.flag ?? '🏳️';
+}
