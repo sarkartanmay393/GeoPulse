@@ -3,7 +3,7 @@ import { openai } from '@ai-sdk/openai';
 import { generateObject } from 'ai';
 import { z } from 'zod';
 import { extractTextFromHtml, findCountryPairById, geopoliticalAnalysisToTableRow, increamentVersion } from '~/lib/utils';
-import { fetchWikipediaHtml } from '~/lib/serverApi';
+import { fetchWikipediaHtml, fetchNewsArticles } from '~/lib/serverApi';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
@@ -46,6 +46,9 @@ export async function POST(req: Request) {
 
     const wikipediaHtml = await fetchWikipediaHtml([country1 ?? '', country2 ?? ''].sort());
     const wikipediaText = extractTextFromHtml(wikipediaHtml);
+    
+    // Fetch recent news articles about the two countries
+    const newsArticles = await fetchNewsArticles(country1 ?? '', country2 ?? '');
 
     if (cachedData && new Date(cachedData.last_updated) > oneMonthAgo) {
       return new Response(JSON.stringify({ ...cachedData, source: cachedData?.source ?? [wikipediaHtml.length > 0 ? 'wikipedia' : '', 'gpt-4o-mini'] }), {
@@ -53,9 +56,22 @@ export async function POST(req: Request) {
         headers: { 'Content-Type': 'application/json' }
       });
     }
+    
+    // Format news articles for the prompt
+    const newsContext = newsArticles.length > 0 
+      ? newsArticles.map((article, idx) => 
+          `[News ${idx + 1}] Title: ${article.title}\n` +
+          `Source: ${article.source.name} (${article.publishedAt})\n` +
+          `Description: ${article.description || 'N/A'}\n` +
+          `URL: ${article.url}`
+        ).join('\n\n')
+      : 'No recent news articles found.';
 
     const formattedPrompt = `
       You are a geopolitical analyst. Given the two countries ${country1} and ${country2}, analyze their relationship based on the following six key factors using the most recent and latest data available from the internet:
+
+      RECENT NEWS ARTICLES (Use these for the most current insights):
+      ${newsContext}
 
       1. Diplomatic Relations: Assess the presence of embassies, consulates, and other diplomatic missions, the frequency of high-level diplomatic visits, and any significant treaties or agreements. Provide the number and locations of embassies in both countries, and include any notable diplomatic engagements. Pull the latest diplomatic events and treaties from current news sources.
         - Score: Provide a score out of 100, where 0 indicates very weak diplomatic relations and 100 indicates very strong relations.
@@ -127,8 +143,15 @@ export async function POST(req: Request) {
     });
 
     const generatedData = result.object;
+    
+    // Track sources used for this analysis
+    const sources = [
+      wikipediaHtml.length > 0 ? 'wikipedia' : '',
+      newsArticles.length > 0 ? 'news-api' : '',
+      'gpt-4o-2024-08-06'
+    ].filter(s => s !== '');
 
-    const newEntry = geopoliticalAnalysisToTableRow(generatedData, reportId, countries, [wikipediaHtml.length > 0 ? 'wikipedia' : '', 'gpt-4o-mini']);
+    const newEntry = geopoliticalAnalysisToTableRow(generatedData, reportId, countries, sources);
 
     const { error: insertError } = await supabase
       .from('geo_pulses')

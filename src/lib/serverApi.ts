@@ -1,6 +1,6 @@
 'use server';
 
-import type { ITableRow } from "./types";
+import type { ITableRow, INewsArticle } from "./types";
 import { createClient } from "./supabase/server";
 import { cookies } from "next/headers";
 import { increamentVersion } from "./utils";
@@ -60,4 +60,47 @@ export async function fetchRecentReports(limit: number = 5): Promise<ITableRow[]
     }
 
     return data ?? [];
+}
+
+export async function fetchNewsArticles(country1: string, country2: string): Promise<INewsArticle[]> {
+    const apiKey = process.env.NEWS_API_KEY;
+    
+    // If no API key is provided, return empty array (graceful degradation)
+    if (!apiKey) {
+        console.warn('NEWS_API_KEY not found. News articles will not be fetched.');
+        return [];
+    }
+
+    try {
+        // Build a query that searches for news about both countries
+        const query = `("${country1}" AND "${country2}") OR ("${country1}-${country2} relations")`;
+        
+        // Calculate date 30 days ago for recent news
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        const fromDate = thirtyDaysAgo.toISOString().split('T')[0];
+        
+        // Use NewsAPI's everything endpoint for more comprehensive results
+        const url = new URL('https://newsapi.org/v2/everything');
+        url.searchParams.append('q', query);
+        url.searchParams.append('from', fromDate);
+        url.searchParams.append('sortBy', 'relevancy');
+        url.searchParams.append('pageSize', '15');
+        url.searchParams.append('language', 'en');
+        url.searchParams.append('apiKey', apiKey);
+
+        const response = await fetch(url.toString());
+        
+        if (!response.ok) {
+            console.error(`NewsAPI request failed with status ${response.status}`);
+            return [];
+        }
+
+        const data = await response.json();
+        
+        return data.articles?.slice(0, 15) ?? [];
+    } catch (error) {
+        console.error('Error fetching news articles:', error);
+        return [];
+    }
 }

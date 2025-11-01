@@ -62,3 +62,18 @@ export type TWrongReport = {
   pulse_id: string;
   report_corrected: boolean
 }
+
+export interface INewsArticle {
+  title: string;
+  description: string;
+  url: string;
+  publishedAt: string;
+  source: {
+    name: string;
+  };
+}
+
+export interface INewsResponse {
+  articles: INewsArticle[];
+  totalResults: number;
+}
