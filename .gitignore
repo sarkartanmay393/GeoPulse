@@ -43,4 +43,7 @@ yarn-error.log*
 *.tsbuildinfo
 
 # idea files
-.idea.env
+.idea
+
+# environment files
+.env
