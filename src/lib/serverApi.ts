@@ -83,7 +83,7 @@ export async function fetchNewsArticles(country1: string, country2: string): Pro
         // Use NewsAPI's everything endpoint for more comprehensive results
         const url = new URL('https://newsapi.org/v2/everything');
         url.searchParams.append('q', query);
-        url.searchParams.append('from', fromDate);
+        url.searchParams.append('from', fromDate ?? '');
         url.searchParams.append('sortBy', 'relevancy');
         url.searchParams.append('pageSize', '15');
         url.searchParams.append('language', 'en');
