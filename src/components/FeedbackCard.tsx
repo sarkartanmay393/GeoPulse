@@ -27,11 +27,11 @@ const FeedbackCard = () => {
   };
 
   return (
-    <Alert className={"my-4"}>
-      <RocketIcon className="h-4 w-4" />
-      <AlertTitle>Heads up!</AlertTitle>
-      <AlertDescription className="flex gap-2 justify-between items-center">
-        <p className="text-sm w-[70%]">
+    <Alert className="my-6 border-2 border-purple-200 bg-gradient-to-br from-purple-50 to-white shadow-lg animation-fade-in">
+      <RocketIcon className="h-5 w-5 text-purple-600" />
+      <AlertTitle className="text-base sm:text-lg font-semibold text-purple-900">Heads up!</AlertTitle>
+      <AlertDescription className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-between items-start sm:items-center mt-2">
+        <p className="text-sm sm:text-base w-full sm:w-[70%] text-gray-700">
           We need your feedback to improve the tool. 
           Why not let us know if you have any suggestions or issues?
         </p>

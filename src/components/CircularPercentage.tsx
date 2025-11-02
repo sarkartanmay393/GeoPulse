@@ -11,22 +11,23 @@ const CircularPercentage: React.FC<CircularPercentageProps> = ({ percentage }) =
   const hasMoreThanOne = hasMoreThanOneDecimalPlaces(percentage);
 
   const getColor = (percentage: number) => {
-    if (percentage >= 85) return "text-emerald-600";
-    if (percentage >= 70) return "text-blue-600";
-    if (percentage >= 50) return "text-amber-600";
-    return "text-rose-600";
+    if (percentage >= 85) return "#10b981"; // emerald-500
+    if (percentage >= 70) return "#3b82f6"; // blue-500
+    if (percentage >= 50) return "#f59e0b"; // amber-500
+    return "#ef4444"; // red-500
   };
 
   return (
-    <div className="w-[44px] h-[44px] flex items-center justify-center">
+    <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center flex-shrink-0">
       <CircularProgressbar
         value={hasMoreThanOne ? Number(percentage.toFixed(2)) : percentage}
         text={`${hasMoreThanOne ? percentage.toFixed(2) : percentage}%`}
         styles={buildStyles({
           textColor: getColor(percentage),
           pathColor: getColor(percentage),
-          trailColor: "#d6d6d6",
-          textSize: hasMoreThanOne ? "19px" : "24px",
+          trailColor: "#e5e7eb",
+          textSize: hasMoreThanOne ? "18px" : "22px",
+          pathTransitionDuration: 0.5,
         })}
         className="font-bold"
       />
