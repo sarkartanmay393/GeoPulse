@@ -61,16 +61,18 @@ export default function ReportArea({ reportId }: ReportAreaProps) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-start rounded-sm transition">
-      <h2 id="tour_step_4" className="text-xl font-semibold mb-4">Output</h2>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="text-3xl" title={country1}>{flag1}</span>
-          <span className="text-gray-400">vs</span>
-          <span className="text-3xl" title={country2}>{flag2}</span>
+    <div className="flex flex-col items-center justify-start rounded-sm transition w-full">
+      <h2 id="tour_step_4" className="text-2xl sm:text-3xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+        Output
+      </h2>
+      <div className="flex items-center justify-center mb-4 animation-fade-in">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <span className="text-4xl sm:text-5xl md:text-6xl transition-transform hover:scale-110 duration-300" title={country1}>{flag1}</span>
+          <span className="text-gray-400 font-light text-base sm:text-lg">vs</span>
+          <span className="text-4xl sm:text-5xl md:text-6xl transition-transform hover:scale-110 duration-300" title={country2}>{flag2}</span>
         </div>
       </div>
-      <div className="mt-2 text-xs md:text-sm text-gray-400 flex flex-wrap justify-center gap-1">
+      <div className="mt-2 text-xs sm:text-sm md:text-base text-muted-foreground flex flex-wrap justify-center gap-1 font-medium">
         <span>{getFormattedCountryName(c1)}</span><span> - </span><span>{getFormattedCountryName(c2)}</span>
       </div>
       <OutputArea />

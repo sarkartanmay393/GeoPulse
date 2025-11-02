@@ -73,20 +73,20 @@ export default function OutputAccordion({ output }: TProps) {
 
     return (
         <TooltipProvider>
-            <Accordion value={accordionValue} onValueChange={setAccordionValue} type="single" defaultValue="Overall Score" collapsible className="w-full max-w-2xl space-y-2">
+            <Accordion value={accordionValue} onValueChange={setAccordionValue} type="single" defaultValue="Overall Score" collapsible className="w-full space-y-3 sm:space-y-4">
                 {Object.keys(Factors).map((factor) => (
                     <AccordionItem key={factor} value={factor} className={cn(
-                        "border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 transition",
-                        accordionValue === factor ? "bg-gray-50" : "",
-                        'Overall Score' === factor ? "bg-gray-50" : ""
+                        "border-2 border-gray-200 rounded-xl shadow-md hover:shadow-lg hover:border-primary/30 transition-all duration-300",
+                        accordionValue === factor ? "bg-gradient-to-br from-blue-50 to-white border-primary/40 shadow-lg" : "bg-white",
+                        'Overall Score' === factor ? "ring-2 ring-primary/20" : ""
                     )} >
-                        <AccordionTrigger className="p-4 hover:no-underline flex items-center justify-between gap-4 leading-none no-underline">
+                        <AccordionTrigger className="p-4 sm:p-5 hover:no-underline flex items-center justify-between gap-4 leading-none no-underline group">
                             <div className="w-full flex flex-col sm:flex-row sm:items-center justify-start gap-2">
-                                <h3 className="text-left text-[16px] sm:text-lg font-medium">{factor}</h3>
-                                <span className="text-left text-xs font-[200] block sm:hidden">{Factors[factor as keyof typeof Factors].info}</span>
+                                <h3 className="text-left text-base sm:text-lg md:text-xl font-semibold group-hover:text-primary transition-colors">{factor}</h3>
+                                <span className="text-left text-xs font-[300] text-muted-foreground block sm:hidden">{Factors[factor as keyof typeof Factors].info}</span>
                                 <Tooltip disableHoverableContent>
                                     <TooltipTrigger asChild className="hidden sm:inline-block">
-                                        <InfoCircledIcon className="w-4 h-4 text-gray-400 hover:text-gray-500 transition" />
+                                        <InfoCircledIcon className="w-4 h-4 text-gray-400 hover:text-primary transition-colors" />
                                     </TooltipTrigger>
                                     <TooltipContent>
                                         <p>{Factors[factor as keyof typeof Factors].info}</p>
@@ -95,7 +95,7 @@ export default function OutputAccordion({ output }: TProps) {
                             </div>
                             <CircularPercentage percentage={(Factors[factor as keyof typeof Factors].score ?? 0)} />
                         </AccordionTrigger>
-                        <AccordionContent className="font-[400] text-sm p-4 bg-gray-50 text-gray-600 flex flex-col gap-4">
+                        <AccordionContent className="font-[400] text-sm sm:text-base p-4 sm:p-5 bg-gradient-to-br from-gray-50 to-white text-gray-700 flex flex-col gap-4 rounded-b-xl">
                             {Factors[factor as keyof typeof Factors].explanation}
                             {factor === 'Overall Score' ? <RadicalChart chartData={chartData} /> : null}
                         </AccordionContent>

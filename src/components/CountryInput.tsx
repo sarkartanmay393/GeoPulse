@@ -43,33 +43,34 @@ export default function CountryInput() {
   }, [reportId, formattedCountries, form]);
 
   return (
-    <div className="flex items-center justify-center transition">
-      <div id="tour_step_1" className="w-fit mt-6 p-4 flex flex-col border-[1px] border-solid border-gray-100 items-center justify-start rounded-md shadow-md bg-gray-50 transition">
+    <div className="flex items-center justify-center transition animation-slide-up">
+      <div id="tour_step_1" className="w-full max-w-2xl mt-8 p-6 sm:p-8 flex flex-col border border-gray-200 items-center justify-start rounded-2xl shadow-xl bg-gradient-to-br from-white to-gray-50/50 transition hover:shadow-2xl">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="w-full space-y-6">
             <CountrySelectComponent form={form} />
-            <div className="flex flex-col md:flex-row gap-2 items-center justify-center transition">
+            <div className="flex flex-col sm:flex-row gap-3 items-center justify-center transition">
               <Button
-                size='sm'
+                size='lg'
                 id="measure-button"
                 type="submit"
-                className="w-full sm:w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                className="w-full sm:w-auto sm:min-w-[140px] bg-gradient-to-r from-primary to-blue-600 text-white font-medium py-3 rounded-xl hover:from-primary/90 hover:to-blue-600/90 transition-all shadow-md hover:shadow-lg active:scale-95"
                 disabled={output !== null}
               >
-                Measure
+                ✨ Measure
               </Button>
               <Button
-                size='sm'
+                size='lg'
                 id="reset-button"
                 type="reset"
-                className="w-full sm:w-[120px] bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                variant="outline"
+                className="w-full sm:w-auto sm:min-w-[140px] border-2 font-medium py-3 rounded-xl transition-all hover:bg-gray-100 active:scale-95"
                 onClick={() => {
                   form.reset();
                   resetOutput();
                   router.push('/');
                 }}
               >
-                Reset
+                🔄 Reset
               </Button>
             </div>
           </form>
