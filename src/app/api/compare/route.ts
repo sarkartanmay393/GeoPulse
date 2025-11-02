@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { generateCountryPairId } from '~/lib/utils';
+import { ITableRow } from '~/lib/types';
 
 export const runtime = 'nodejs';
 
@@ -55,11 +56,11 @@ export async function POST(req: Request) {
     }
 
     // Group by id and take the latest version for each
-    const latestData = data?.reduce((acc: any[], current: any) => {
+    const latestData = data?.reduce((acc: ITableRow[], current: ITableRow) => {
       const existing = acc.find(item => item.id === current.id);
       if (!existing) {
         acc.push(current);
-      } else if (current.version > existing.version) {
+      } else if ((current.version || 0) > (existing.version || 0)) {
         const index = acc.indexOf(existing);
         acc[index] = current;
       }
@@ -70,10 +71,11 @@ export async function POST(req: Request) {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
-  } catch (error: any) {
-    console.error("Error processing comparison request:", error.message);
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error("Error processing comparison request:", errorMessage);
     return new Response(
-      JSON.stringify({ message: "Error processing request", error: error.message }),
+      JSON.stringify({ message: "Error processing request", error: errorMessage }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }

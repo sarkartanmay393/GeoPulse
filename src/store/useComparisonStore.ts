@@ -61,8 +61,9 @@ export const useComparisonStore = create<ComparisonState>((set, get) => ({
 
       const data = await response.json();
       set({ comparisonData: data, loading: false });
-    } catch (error: any) {
-      set({ error: error.message, loading: false });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+      set({ error: errorMessage, loading: false });
       throw error;
     }
   },

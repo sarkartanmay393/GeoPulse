@@ -4,6 +4,7 @@ import { useComparisonStore } from '~/store/useComparisonStore';
 import { Line, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
+import { ITableRow } from '~/lib/types';
 import Spinner from './Spinner';
 
 const factorKeys = [
@@ -128,19 +129,23 @@ export default function ComparisonResults() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {factorKeys.map((factor) => (
-                    <div key={factor.key} className="p-3 border rounded-lg">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm font-medium">{factor.label}</span>
-                        <span className="text-lg font-bold text-blue-600">
-                          {(data as any)[factor.key] ?? 'N/A'}
-                        </span>
+                  {factorKeys.map((factor) => {
+                    const scoreKey = factor.key as keyof ITableRow;
+                    const explanationKey = factor.key.replace('_score', '_explanation') as keyof ITableRow;
+                    return (
+                      <div key={factor.key} className="p-3 border rounded-lg">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-sm font-medium">{factor.label}</span>
+                          <span className="text-lg font-bold text-blue-600">
+                            {data[scoreKey] ?? 'N/A'}
+                          </span>
+                        </div>
+                        <p className="text-xs text-gray-600">
+                          {data[explanationKey] ?? 'No explanation available'}
+                        </p>
                       </div>
-                      <p className="text-xs text-gray-600">
-                        {(data as any)[factor.key.replace('_score', '_explanation')] ?? 'No explanation available'}
-                      </p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
                 <div className="p-4 bg-blue-50 rounded-lg">
                   <div className="flex justify-between items-center mb-2">
@@ -160,7 +165,7 @@ export default function ComparisonResults() {
   );
 }
 
-function prepareChartData(comparisonData: any[]) {
+function prepareChartData(comparisonData: ITableRow[]) {
   return comparisonData.map((data) => ({
     name: data.countries.join(' vs '),
     overall_score: data.overall_score ?? 0,

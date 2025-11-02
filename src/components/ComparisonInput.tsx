@@ -35,10 +35,11 @@ export default function ComparisonInput() {
         description: 'Comparison data loaded successfully',
         duration: 2000,
       });
-    } catch (error: any) {
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to fetch comparison data';
       toast({
         title: 'Error',
-        description: error.message || 'Failed to fetch comparison data',
+        description: errorMessage,
         duration: 3000,
       });
     }
