@@ -15,18 +15,6 @@ const config = {
         ],
         dangerouslyAllowSVG: true,
     },
-    eslint: {
-        // Warning: This allows production builds to successfully complete even if
-        // your project has ESLint errors.
-        ignoreDuringBuilds: true,
-    },
-    webpack: (config, { isServer }) => {
-        // Fix for geoip-lite in Next.js
-        if (isServer) {
-            config.externals.push('geoip-lite');
-        }
-        return config;
-    },
 };
 
 export default config;
