@@ -8,15 +8,17 @@ import { Button } from "~/components/ui/button";
 import { Alert, AlertDescription } from "~/components/ui/alert";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import { Fragment } from "react";
+import useGetCountries from "~/hooks/useGetCountries";
 
 const SourceReferenceCard = ({ sourceMeta, reportId }: { sourceMeta?: any, reportId: string }) => {
+  const { formattedCountries } = useGetCountries();
 
   const ele = (key: string) => {
     switch (key) {
       case "wikipedia":
         if (!sourceMeta[key]) return null;
         return (<Button asChild variant="link">
-          <Link href={getWikipediaUrl(reportId)} target="_blank" rel="noopener noreferrer">
+          <Link href={getWikipediaUrl(reportId, formattedCountries)} target="_blank" rel="noopener noreferrer">
             Wikipedia
           </Link>
         </Button>);
@@ -62,7 +64,7 @@ const SourceReferenceCard = ({ sourceMeta, reportId }: { sourceMeta?: any, repor
         <TooltipProvider>
           <RocketIcon className="h-4 w-4 mr-1" />
           <p className="text-sm flex-1">
-            I'm sure you care about source of the knowledge.
+            I&apos;m sure you care about source of the knowledge.
           </p>
           {Object.keys(sourceMeta || {}).map((key) => {
             return (

@@ -51,7 +51,7 @@ const Combobox = ({ name, label, options, form }: any) => {
     const watchedOtherValue = form.watch(getOthersName(name));
     const filteredCountries = React.useMemo(() => {
         return options.filter((c: TCountryOption) => c.value !== watchedOtherValue);
-    }, [watchedOtherValue]);
+    }, [watchedOtherValue, options]);
 
     return (
         <FormField

@@ -51,7 +51,7 @@ const ReportCard = ({ output }: ReportCardProps) => {
     } finally {
       setIsReporting(false);
     }
-  }, [output]);
+  }, [output, toast]);
 
 
   return (

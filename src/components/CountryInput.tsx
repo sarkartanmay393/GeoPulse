@@ -10,6 +10,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { findCountryPairById, generateCountryPairId } from "~/lib/utils";
 import { useEffect } from "react";
 import { useStore } from "~/store/useStore";
+import useGetCountries from "~/hooks/useGetCountries";
 
 const FormSchema = z.object({
   country1: z.string().min(1),
@@ -21,6 +22,7 @@ export default function CountryInput() {
   const params = useParams();
   const reportId = (params?.reportId as string ?? '');
   const { output, resetOutput } = useStore();
+  const { formattedCountries } = useGetCountries();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -34,11 +36,11 @@ export default function CountryInput() {
 
   useEffect(() => {
     if (reportId) {
-      const [country1, country2] = findCountryPairById(reportId) ?? [];
+      const [country1, country2] = findCountryPairById(reportId, formattedCountries) ?? [];
       form.setValue('country1', country1 ?? "");
       form.setValue('country2', country2 ?? "");
     }
-  }, [reportId]);
+  }, [reportId, formattedCountries, form]);
 
   return (
     <div className="flex items-center justify-center transition">

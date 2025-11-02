@@ -31,7 +31,7 @@ export default function ReportArea({ reportId }: ReportAreaProps) {
         duration: 2000,
       });
     }
-  }, [reportId]);
+  }, [reportId, fetchReport, toast]);
 
   useEffect(() => {
     if (output) {
