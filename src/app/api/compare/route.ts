@@ -42,9 +42,6 @@ export async function POST(req: Request) {
       query = query.lte('last_updated', endDate);
     }
 
-    // Get the latest version for each pair
-    query = query.order('version', { ascending: false });
-
     const { data, error } = await query;
 
     if (error) {
@@ -56,16 +53,16 @@ export async function POST(req: Request) {
     }
 
     // Group by id and take the latest version for each
-    const latestData = data?.reduce((acc: ITableRow[], current: ITableRow) => {
-      const existing = acc.find(item => item.id === current.id);
-      if (!existing) {
-        acc.push(current);
-      } else if ((current.version || 0) > (existing.version || 0)) {
-        const index = acc.indexOf(existing);
-        acc[index] = current;
+    const latestDataMap = new Map<string, ITableRow>();
+    
+    data?.forEach((current: ITableRow) => {
+      const existing = latestDataMap.get(current.id);
+      if (!existing || (current.version || 0) > (existing.version || 0)) {
+        latestDataMap.set(current.id, current);
       }
-      return acc;
-    }, []) || [];
+    });
+    
+    const latestData = Array.from(latestDataMap.values());
 
     return new Response(JSON.stringify(latestData), {
       status: 200,
