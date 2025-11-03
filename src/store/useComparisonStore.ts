@@ -8,6 +8,13 @@ export interface ComparisonData {
   data: ITableRow[];
 }
 
+export interface GenerationProgress {
+  pairId: string;
+  countries: [string, string];
+  status: 'pending' | 'generating' | 'completed' | 'error';
+  error?: string;
+}
+
 interface ComparisonState {
   selectedCountries: string[];
   startDate: Date | null;
@@ -15,6 +22,7 @@ interface ComparisonState {
   comparisonData: ITableRow[];
   loading: boolean;
   error: string | null;
+  generationProgress: GenerationProgress[];
   setSelectedCountries: (countries: string[]) => void;
   setDateRange: (start: Date | null, end: Date | null) => void;
   fetchComparisonData: () => Promise<void>;
@@ -28,6 +36,7 @@ export const useComparisonStore = create<ComparisonState>((set, get) => ({
   comparisonData: [],
   loading: false,
   error: null,
+  generationProgress: [],
 
   setSelectedCountries: (countries: string[]) => set({ selectedCountries: countries }),
   
@@ -42,7 +51,7 @@ export const useComparisonStore = create<ComparisonState>((set, get) => ({
       return;
     }
 
-    set({ loading: true, error: null });
+    set({ loading: true, error: null, generationProgress: [] });
 
     try {
       const response = await fetch('/api/compare', {
@@ -59,8 +68,64 @@ export const useComparisonStore = create<ComparisonState>((set, get) => ({
         throw new Error('Failed to fetch comparison data');
       }
 
-      const data = await response.json();
-      set({ comparisonData: data, loading: false });
+      const result = await response.json();
+      
+      // Handle response with progress tracking
+      if (result.missingPairs && result.missingPairs.length > 0) {
+        // Initialize progress for missing pairs
+        const progress: GenerationProgress[] = result.missingPairs.map((pair: any) => ({
+          pairId: pair.pairId,
+          countries: pair.countries,
+          status: 'pending',
+        }));
+        set({ generationProgress: progress });
+
+        // Generate missing pairs one by one
+        const generatedData: ITableRow[] = [...(result.existingData || [])];
+        
+        for (const pair of result.missingPairs) {
+          // Update status to generating
+          set((state) => ({
+            generationProgress: state.generationProgress.map((p) =>
+              p.pairId === pair.pairId ? { ...p, status: 'generating' } : p
+            ),
+          }));
+
+          try {
+            const genResponse = await fetch('/api/generate', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ reportId: pair.pairId }),
+            });
+
+            if (!genResponse.ok) {
+              throw new Error(`Failed to generate report for ${pair.countries.join(' vs ')}`);
+            }
+
+            const generatedReport = await genResponse.json();
+            generatedData.push(generatedReport);
+
+            // Update status to completed
+            set((state) => ({
+              generationProgress: state.generationProgress.map((p) =>
+                p.pairId === pair.pairId ? { ...p, status: 'completed' } : p
+              ),
+            }));
+          } catch (error) {
+            const errorMsg = error instanceof Error ? error.message : 'Unknown error';
+            set((state) => ({
+              generationProgress: state.generationProgress.map((p) =>
+                p.pairId === pair.pairId ? { ...p, status: 'error', error: errorMsg } : p
+              ),
+            }));
+          }
+        }
+
+        set({ comparisonData: generatedData, loading: false });
+      } else {
+        // All data exists, just use it
+        set({ comparisonData: result.existingData || result, loading: false });
+      }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
       set({ error: errorMessage, loading: false });
@@ -75,5 +140,6 @@ export const useComparisonStore = create<ComparisonState>((set, get) => ({
     comparisonData: [],
     loading: false,
     error: null,
+    generationProgress: [],
   }),
 }));

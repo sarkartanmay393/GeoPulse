@@ -20,13 +20,15 @@ export async function POST(req: Request) {
     }
 
     // Generate all possible country pairs from the selected countries
-    const countryPairs: string[] = [];
+    const countryPairsList: Array<{ pairId: string; countries: [string, string] }> = [];
     for (let i = 0; i < countries.length; i++) {
       for (let j = i + 1; j < countries.length; j++) {
         const pairId = generateCountryPairId(countries[i], countries[j]);
-        countryPairs.push(pairId);
+        countryPairsList.push({ pairId, countries: [countries[i], countries[j]] });
       }
     }
+
+    const countryPairs = countryPairsList.map(p => p.pairId);
 
     // Build the query
     let query = supabase
@@ -62,9 +64,20 @@ export async function POST(req: Request) {
       }
     });
     
-    const latestData = Array.from(latestDataMap.values());
+    const existingData = Array.from(latestDataMap.values());
+    const existingPairIds = new Set(existingData.map(d => d.id));
 
-    return new Response(JSON.stringify(latestData), {
+    // Find missing pairs
+    const missingPairs = countryPairsList.filter(pair => !existingPairIds.has(pair.pairId));
+
+    // Return existing data and missing pairs info
+    return new Response(JSON.stringify({
+      existingData,
+      missingPairs,
+      totalPairs: countryPairs.length,
+      existingCount: existingData.length,
+      missingCount: missingPairs.length,
+    }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
