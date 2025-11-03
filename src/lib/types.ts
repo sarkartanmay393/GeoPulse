@@ -32,6 +32,7 @@ export interface ITableRow {
   id: string;
   countries: string[];
   last_updated: string;
+  version?: number;
   diplomatic_relations_score?: number;
   diplomatic_relations_explanation?: string;
   economic_ties_score?: number;
