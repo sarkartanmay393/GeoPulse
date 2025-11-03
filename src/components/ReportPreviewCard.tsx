@@ -41,36 +41,42 @@ export default function ReportPreviewCard({ report }: ReportPreviewCardProps) {
   }
 
   return (
-    <Link href={`/report/${report.id}`} className="block">
-      <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-        <CardContent className="p-4">
+    <Link href={`/report/${report.id}`} className="block group">
+      <Card className="h-full hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-primary/30 bg-gradient-to-br from-white to-gray-50/30 overflow-hidden">
+        <CardContent className="p-5 sm:p-6">
           <TooltipProvider>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3 flex-1 min-w-0">
                 <Tooltip disableHoverableContent>
-                  <TooltipTrigger asChild className="">
-                    <span className="text-3xl" title={country1}>{flag1}</span>
+                  <TooltipTrigger asChild>
+                    <span className="text-4xl sm:text-5xl transition-transform group-hover:scale-110 duration-300" title={country1}>
+                      {flag1}
+                    </span>
                   </TooltipTrigger>
                   <TooltipContent>
                     {flag1} {country1}
                   </TooltipContent>
                 </Tooltip>
-                <span className="text-gray-400">vs</span>
+                <span className="text-gray-400 font-light text-sm sm:text-base">vs</span>
                 <Tooltip disableHoverableContent>
-                  <TooltipTrigger asChild className="">
-                    <span className="text-3xl" title={country2}>{flag2}</span>
+                  <TooltipTrigger asChild>
+                    <span className="text-4xl sm:text-5xl transition-transform group-hover:scale-110 duration-300" title={country2}>
+                      {flag2}
+                    </span>
                   </TooltipTrigger>
                   <TooltipContent>
                     {flag2} {country2}
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <div className="text-right translate-y-3">
-                <div className={cn("text-2xl font-bold", scoreTone)}>{overallScore}</div>
-                <div className="text-xs text-gray-500">Overall Score</div>
+              <div className="text-right flex-shrink-0">
+                <div className={cn("text-3xl sm:text-4xl font-bold transition-transform group-hover:scale-110 duration-300", scoreTone)}>
+                  {overallScore}
+                </div>
+                <div className="text-xs sm:text-sm text-muted-foreground font-medium mt-1">Overall Score</div>
               </div>
             </div>
-            <div className="mt-2 text-xs text-gray-400">
+            <div className="mt-3 sm:mt-4 text-xs sm:text-sm text-muted-foreground font-medium">
                {getFormattedCountryName(c1)} - {getFormattedCountryName(c2)}
             </div>
           </TooltipProvider>

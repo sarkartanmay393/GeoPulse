@@ -45,27 +45,27 @@ export function RadicalChart({ chartData }: TProps) {
     return (
         <TooltipProvider>
             <Card className="shadow-none border-none space-y-4 bg-transparent">
-                <CardHeader className="items-center">
-                    <CardTitle>
+                <CardHeader className="items-center pb-2">
+                    <CardTitle className="text-lg sm:text-xl flex items-center gap-2">
                         Six Key Factors
                         <Tooltip disableHoverableContent>
                             <TooltipTrigger className="ml-2">
-                                <InfoCircledIcon className="w-3.5 h-3.5 text-gray-400 hover:text-gray-500 transition" />
+                                <InfoCircledIcon className="w-4 h-4 text-gray-400 hover:text-primary transition" />
                             </TooltipTrigger>
-                            <TooltipContent>
+                            <TooltipContent className="max-w-sm sm:max-w-3xl">
                                 <Image className="hidden md:block" src="/score-formula.png" alt="Overall score formula" width={800} height={300} />
                                 <Image className="md:hidden" src="/score-formula.png" alt="Overall score formula" width={320} height={180} />
                             </TooltipContent>
                         </Tooltip>
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-xs sm:text-sm text-muted-foreground">
                         Showing scores for various factors
                     </CardDescription>
                 </CardHeader>
-                <CardContent className="pb-0">
+                <CardContent className="pb-0 px-2 sm:px-6">
                     <ChartContainer
                         config={chartConfig}
-                        className="mx-auto w-full max-h-[250px] h-[180px] sm:h-[225px]"
+                        className="mx-auto w-full max-h-[280px] h-[200px] sm:h-[250px]"
                     >
                         <RadarChart data={chartData} outerRadius={90} className="">
                             <ChartTooltip
@@ -87,8 +87,8 @@ export function RadicalChart({ chartData }: TProps) {
                         </RadarChart>
                     </ChartContainer>
                 </CardContent>
-                <CardFooter className="flex-col text-sm">
-                    <div className="flex items-center leading-none text-xs text-muted-foreground pt-2">
+                <CardFooter className="flex-col text-sm pt-2">
+                    <div className="flex items-center leading-none text-xs text-muted-foreground">
                         Data updated every week
                     </div>
                 </CardFooter>

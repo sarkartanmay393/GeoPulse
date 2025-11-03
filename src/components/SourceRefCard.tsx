@@ -8,15 +8,17 @@ import { Button } from "~/components/ui/button";
 import { Alert, AlertDescription } from "~/components/ui/alert";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "~/components/ui/tooltip";
 import { Fragment } from "react";
+import useGetCountries from "~/hooks/useGetCountries";
 
 const SourceReferenceCard = ({ sourceMeta, reportId }: { sourceMeta?: any, reportId: string }) => {
+  const { formattedCountries } = useGetCountries();
 
   const ele = (key: string) => {
     switch (key) {
       case "wikipedia":
         if (!sourceMeta[key]) return null;
         return (<Button asChild variant="link">
-          <Link href={getWikipediaUrl(reportId)} target="_blank" rel="noopener noreferrer">
+          <Link href={getWikipediaUrl(reportId, formattedCountries)} target="_blank" rel="noopener noreferrer">
             Wikipedia
           </Link>
         </Button>);
@@ -57,20 +59,24 @@ const SourceReferenceCard = ({ sourceMeta, reportId }: { sourceMeta?: any, repor
   }
 
   return (
-    <Alert className="my-4 flex items-center">
-      <AlertDescription className="flex gap-2 justify-between items-center w-full flex-wrap">
+    <Alert className="my-6 border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-white shadow-lg animation-fade-in">
+      <AlertDescription className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-between items-start sm:items-center w-full flex-wrap">
         <TooltipProvider>
-          <RocketIcon className="h-4 w-4 mr-1" />
-          <p className="text-sm flex-1">
-            I'm sure you care about source of the knowledge.
-          </p>
-          {Object.keys(sourceMeta || {}).map((key) => {
-            return (
-              <Fragment key={key}>
-                {ele(key)}
-              </Fragment>
-            );
-          })}
+          <div className="flex items-center gap-2">
+            <RocketIcon className="h-5 w-5 text-blue-600 flex-shrink-0" />
+            <p className="text-sm sm:text-base flex-1 font-medium text-gray-700">
+              I&apos;m sure you care about source of the knowledge.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2 sm:gap-3 items-center">
+            {Object.keys(sourceMeta || {}).map((key) => {
+              return (
+                <Fragment key={key}>
+                  {ele(key)}
+                </Fragment>
+              );
+            })}
+          </div>
         </TooltipProvider>
       </AlertDescription>
     </Alert>
