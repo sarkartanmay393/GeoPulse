@@ -158,7 +158,7 @@ export async function POST(req: Request) {
 
     const { error: insertError } = await supabase
       .from('geo_pulses')
-      .insert([{ ...newEntry, version: cachedData ? increamentVersion(cachedData.version) : 1 }]);
+      .upsert([{ ...newEntry, version: cachedData ? increamentVersion(cachedData.version) : 1 }]);
 
     if (insertError) {
       console.error("Error inserting new data into Supabase:", insertError.message);
