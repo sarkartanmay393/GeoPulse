@@ -49,3 +49,4 @@ yarn-error.log*
 .env
 
 *.backup
+.env.local

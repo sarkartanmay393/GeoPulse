@@ -4,6 +4,8 @@ import { generateObject } from 'ai';
 import { z } from 'zod';
 import { extractTextFromHtml, findCountryPairById, geopoliticalAnalysisToTableRow, increamentVersion } from '~/lib/utils';
 import { fetchWikipediaHtml, fetchNewsArticles } from '~/lib/serverApi';
+import Countries from '../../../../public/countries.json';
+import { TCountryOption } from '~/lib/types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_KEY!;
@@ -14,7 +16,8 @@ const cacheDurationInDays = 7; // Cache expiry period (in days)
 export async function POST(req: Request) {
   try {
     const { reportId } = await req.json();
-    const [country1, country2] = findCountryPairById(reportId) ?? ["", ""];
+    const formattedCountries = Countries as TCountryOption[];
+    const [country1, country2] = findCountryPairById(reportId, formattedCountries) ?? ["", ""];
 
     if (!reportId) {
       return new Response(JSON.stringify({ message: "reportId is required" }), {

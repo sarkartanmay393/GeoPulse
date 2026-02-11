@@ -19,8 +19,8 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${GeistSans.variable}`} suppressHydrationWarning>
-      <body className="relative scrollbar-thin scroll-smooth flex min-h-screen flex-col items-center justify-center" suppressHydrationWarning>
-        <Suspense fallback={<div className="flex items-center justify-center">Loading...</div>}>
+      <body className="relative scrollbar-thin scroll-smooth flex min-h-screen flex-col items-center justify-center overflow-x-hidden" suppressHydrationWarning>
+        <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
           {children}
         </Suspense>
         <TsxBadge />

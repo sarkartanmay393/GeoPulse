@@ -51,26 +51,28 @@ const ReportCard = ({ output }: ReportCardProps) => {
     } finally {
       setIsReporting(false);
     }
-  }, [output]);
+  }, [output, toast]);
 
 
   return (
-    <Alert className={output ? "mb-4" : "hidden"}>
-    <RocketIcon className="h-4 w-4" />
-    <AlertTitle>Mistake?</AlertTitle>
-    <AlertDescription className="flex gap-2 justify-between items-center">
-      <p className="text-sm w-[70%]">We noticed few mistake in the data. <span className="font-medium">If it seems wrong to you</span>, Please report those mistakes to us.</p>
+    <Alert className={output ? "mb-6 border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-white shadow-lg animation-fade-in" : "hidden"}>
+    <RocketIcon className="h-5 w-5 text-orange-600" />
+    <AlertTitle className="text-base sm:text-lg font-semibold text-orange-900">Mistake?</AlertTitle>
+    <AlertDescription className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-between items-start sm:items-center mt-2">
+      <p className="text-sm sm:text-base w-full sm:w-[70%] text-gray-700">
+        We noticed few mistakes in the data. <span className="font-semibold text-orange-700">If it seems wrong to you</span>, please report those mistakes to us.
+      </p>
       <Button
-        size='sm'
+        size='default'
         type="button"
         disabled={isReporting}
-        className={cn("bg-red-500 text-white py-2 rounded-md hover:bg-red-200 transition")}
+        className={cn("w-full sm:w-auto bg-gradient-to-r from-red-500 to-red-600 text-white font-medium py-2 px-4 rounded-xl hover:from-red-600 hover:to-red-700 transition-all shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50")}
         onClick={handleReport}
       >
         {isReporting ? (
           <Spinner />
         ) : (
-          "Report Wrong Score"
+          "🚨 Report Wrong Score"
         )}
       </Button>
     </AlertDescription>

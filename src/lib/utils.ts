@@ -78,8 +78,7 @@ export function generateCountryPairId(country1: string, country2: string): strin
   return uniqueId;
 }
 
-export function findCountryPairById(reportId: string): [string, string] | null {
-  const { formattedCountries } = useGetCountries();
+export function findCountryPairById(reportId: string, formattedCountries: TCountryOption[]): [string, string] | null {
   const countryList = formattedCountries.map((country) => country.value);
   for (let i = 0; i < countryList.length; i++) {
     for (let j = i + 1; j < countryList.length; j++) {
@@ -113,8 +112,8 @@ export function extractTextFromHtml(html: string) {
   return $.text();
 }
 
-export function getWikipediaUrl(reportId: string) {
-  const [country1, country2] = findCountryPairById(reportId) ?? [];
+export function getWikipediaUrl(reportId: string, formattedCountries: TCountryOption[]) {
+  const [country1, country2] = findCountryPairById(reportId, formattedCountries) ?? [];
   return `https://en.wikipedia.org/w/rest.php/v1/page/${country1}%E2%80%93${country2}_relations/html`;
 }
 
