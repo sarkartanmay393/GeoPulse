@@ -2,6 +2,7 @@ import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { hasMoreThanOneDecimalPlaces } from "~/lib/utils";
+import { getScoreTone } from "~/lib/scoreTone";
 
 interface CircularPercentageProps {
   percentage: number;
@@ -9,13 +10,7 @@ interface CircularPercentageProps {
 
 const CircularPercentage: React.FC<CircularPercentageProps> = ({ percentage }) => {
   const hasMoreThanOne = hasMoreThanOneDecimalPlaces(percentage);
-
-  const getColor = (percentage: number) => {
-    if (percentage >= 85) return "text-emerald-600";
-    if (percentage >= 70) return "text-blue-600";
-    if (percentage >= 50) return "text-amber-600";
-    return "text-rose-600";
-  };
+  const tone = getScoreTone(percentage);
 
   return (
     <div className="w-[44px] h-[44px] flex items-center justify-center">
@@ -23,8 +18,8 @@ const CircularPercentage: React.FC<CircularPercentageProps> = ({ percentage }) =
         value={hasMoreThanOne ? Number(percentage.toFixed(2)) : percentage}
         text={`${hasMoreThanOne ? percentage.toFixed(2) : percentage}%`}
         styles={buildStyles({
-          textColor: getColor(percentage),
-          pathColor: getColor(percentage),
+          textColor: tone.hex,
+          pathColor: tone.hex,
           trailColor: "#d6d6d6",
           textSize: hasMoreThanOne ? "19px" : "24px",
         })}

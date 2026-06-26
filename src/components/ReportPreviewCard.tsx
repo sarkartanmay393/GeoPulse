@@ -3,9 +3,9 @@
 import { Card, CardContent } from "~/components/ui/card";
 import { TCountryOption, type ITableRow } from "~/lib/types";
 import { cn, getCountry } from "~/lib/utils";
+import { getScoreTone } from "~/lib/scoreTone";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
 
 interface ReportPreviewCardProps {
   report: ITableRow;
@@ -19,14 +19,7 @@ export default function ReportPreviewCard({ report }: ReportPreviewCardProps) {
   const flag1 = c1?.flag ?? '🏳️';
   const flag2 = c2?.flag ?? '🏳️';
   const overallScore = Number(report.overall_score ?? 0);
-
-  const scoreTone = (() => {
-    // Map score ranges to brand-aligned Tailwind colors for quick scanning.
-    if (overallScore >= 85) return "text-emerald-600";
-    if (overallScore >= 70) return "text-blue-600";
-    if (overallScore >= 50) return "text-amber-600";
-    return "text-rose-600";
-  })();
+  const scoreTone = getScoreTone(overallScore).textClass;
 
   const getFormattedCountryName = (country: TCountryOption | null) => {
     if (!country) {
@@ -55,7 +48,7 @@ export default function ReportPreviewCard({ report }: ReportPreviewCardProps) {
                     {flag1} {country1}
                   </TooltipContent>
                 </Tooltip>
-                <span className="text-gray-400">vs</span>
+                <span className="text-gray-500">vs</span>
                 <Tooltip disableHoverableContent>
                   <TooltipTrigger asChild className="">
                     <span className="text-3xl" title={country2}>{flag2}</span>
@@ -70,7 +63,7 @@ export default function ReportPreviewCard({ report }: ReportPreviewCardProps) {
                 <div className="text-xs text-gray-500">Overall Score</div>
               </div>
             </div>
-            <div className="mt-2 text-xs text-gray-400">
+            <div className="mt-2 text-xs text-gray-500">
                {getFormattedCountryName(c1)} - {getFormattedCountryName(c2)}
             </div>
           </TooltipProvider>

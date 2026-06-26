@@ -50,7 +50,7 @@ export function RadicalChart({ chartData }: TProps) {
                         Six Key Factors
                         <Tooltip disableHoverableContent>
                             <TooltipTrigger className="ml-2">
-                                <InfoCircledIcon className="w-3.5 h-3.5 text-gray-400 hover:text-gray-500 transition" />
+                                <InfoCircledIcon className="w-3.5 h-3.5 text-gray-500 hover:text-gray-600 transition" />
                             </TooltipTrigger>
                             <TooltipContent>
                                 <Image className="hidden md:block" src="/score-formula.png" alt="Overall score formula" width={800} height={300} />

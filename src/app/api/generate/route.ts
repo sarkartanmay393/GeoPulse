@@ -150,7 +150,7 @@ export async function POST(req: Request) {
     // Track sources used for this analysis
     const sources = {
       'wikipedia': wikipediaHtml.length > 0,
-      'news-api': newsArticles.map(na => na.url),
+      'news-api': newsArticles.map(na => ({ title: na.title, url: na.url, source: na.source?.name })),
       'gpt-4o-2024-08-06': true,
     };
 

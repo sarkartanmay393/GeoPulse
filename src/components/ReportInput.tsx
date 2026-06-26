@@ -31,16 +31,17 @@ export default function ReportInput() {
             type="button"
             onClick={handleShare}
             disabled={output === null}
-            className="w-full sm:w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+            className="w-full sm:w-[120px]"
           >
-            <Image src="/share.svg" alt="Share" width={10} height={10} className="mr-1" />
-            <p>Share</p>
+            <Image src="/share.svg" alt="" width={16} height={16} className="mr-1.5" />
+            Share
           </Button>
           <Button
             size='sm'
             id="reset-button"
             type="reset"
-            className="w-full sm:w-[196px] bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 transition"
+            variant="outline"
+            className="w-full sm:w-[196px]"
             onClick={() => {
               resetOutput();
               router.push('/');

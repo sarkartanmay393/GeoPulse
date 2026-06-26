@@ -15,7 +15,6 @@ import {
 } from "~/components/ui/tooltip";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
-import { RadicalChart } from "./RadicalChart";
 
 type TProps = {
     output: ITableRow | null;
@@ -26,7 +25,7 @@ export default function OutputAccordion({ output }: TProps) {
         "Overall Score": {
             score: output?.overall_score,
             explanation: output?.overall_explanation,
-            info: `Check for the presence of embassies, frequency of official visits, and existence of treaties.`
+            info: `The average of the six factors below, weighted equally.`
         },
         "Diplomatic Relations": {
             score: output?.diplomatic_relations_score,
@@ -41,7 +40,7 @@ export default function OutputAccordion({ output }: TProps) {
         "Military Relations": {
             score: output?.military_relations_score,
             explanation: output?.military_relations_explanation,
-            info: `Consider defense agreements, joint military exercises, and arms sales.c`
+            info: `Consider defense agreements, joint military exercises, and arms sales.`
         },
         "Political Alignments": {
             score: output?.political_alignments_score,
@@ -62,15 +61,6 @@ export default function OutputAccordion({ output }: TProps) {
 
     const [accordionValue, setAccordionValue] = useState<string>("Overall Score");
 
-    const chartData = [
-        { keyFactor: "Diplomatic Relations", score: (output?.diplomatic_relations_score ?? 0) },
-        { keyFactor: "Economic Ties", score: (output?.economic_ties_score ?? 0) },
-        { keyFactor: "Military Relations", score: (output?.military_relations_score ?? 0) },
-        { keyFactor: "Political Alignments", score: (output?.political_alignments_score ?? 0) },
-        { keyFactor: "Cultural and Social Ties", score: (output?.cultural_social_ties_score ?? 0) },
-        { keyFactor: "Historical Context", score: (output?.historical_context_score ?? 0) },
-    ];
-
     return (
         <TooltipProvider>
             <Accordion value={accordionValue} onValueChange={setAccordionValue} type="single" defaultValue="Overall Score" collapsible className="w-full max-w-2xl space-y-2">
@@ -86,7 +76,7 @@ export default function OutputAccordion({ output }: TProps) {
                                 <span className="text-left text-xs font-[200] block sm:hidden">{Factors[factor as keyof typeof Factors].info}</span>
                                 <Tooltip disableHoverableContent>
                                     <TooltipTrigger asChild className="hidden sm:inline-block">
-                                        <InfoCircledIcon className="w-4 h-4 text-gray-400 hover:text-gray-500 transition" />
+                                        <InfoCircledIcon className="w-4 h-4 text-gray-500 hover:text-gray-600 transition" />
                                     </TooltipTrigger>
                                     <TooltipContent>
                                         <p>{Factors[factor as keyof typeof Factors].info}</p>
@@ -97,7 +87,6 @@ export default function OutputAccordion({ output }: TProps) {
                         </AccordionTrigger>
                         <AccordionContent className="font-[400] text-sm p-4 bg-gray-50 text-gray-600 flex flex-col gap-4">
                             {Factors[factor as keyof typeof Factors].explanation}
-                            {factor === 'Overall Score' ? <RadicalChart chartData={chartData} /> : null}
                         </AccordionContent>
                     </AccordionItem>
                 ))}

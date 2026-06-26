@@ -20,7 +20,7 @@ export default function CountryInput() {
   const router = useRouter();
   const params = useParams();
   const reportId = (params?.reportId as string ?? '');
-  const { output, resetOutput } = useStore();
+  const { resetOutput } = useStore();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -37,6 +37,10 @@ export default function CountryInput() {
       const [country1, country2] = findCountryPairById(reportId) ?? [];
       form.setValue('country1', country1 ?? "");
       form.setValue('country2', country2 ?? "");
+    } else {
+      // CountryInput only renders on the homepage (no reportId); clear any
+      // output left over from a previously viewed report.
+      resetOutput();
     }
   }, [reportId]);
 
@@ -51,8 +55,7 @@ export default function CountryInput() {
                 size='sm'
                 id="measure-button"
                 type="submit"
-                className="w-full sm:w-[120px] bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-                disabled={output !== null}
+                className="w-full sm:w-[120px]"
               >
                 Measure
               </Button>
@@ -60,7 +63,8 @@ export default function CountryInput() {
                 size='sm'
                 id="reset-button"
                 type="reset"
-                className="w-full sm:w-[120px] bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 transition"
+                variant="outline"
+                className="w-full sm:w-[120px]"
                 onClick={() => {
                   form.reset();
                   resetOutput();
